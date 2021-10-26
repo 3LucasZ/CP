@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="9c3c703f-5fee-446a-9354-5d8dc782c14c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/2021-Third-Contest-Bronze/Clockwise_fence.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2021-Third-Contest-Bronze/Comfortable_cows.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2021-Third-Contest-Bronze/Year_of_the_Cow.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2021-US-Open-Bronze/Acowdemia_1.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/2021-US-Open-Bronze/Acowdemia_3.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unsorted/Stuck_in_a_Rut.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unsorted/angryCows.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unsorted/appledivision.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unsorted/balancing.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unsorted/barn1.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unsorted/beads.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unsorted/billboard.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unsorted/blocks.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unsorted/censor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unsorted/circlecross.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unsorted/combo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unsorted/crypt1.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unsorted/dualpal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unsorted/friday.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unsorted/gift1.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unsorted/hoofball.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unsorted/measurement.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unsorted/milk.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unsorted/milk2.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unsorted/namenum.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unsorted/palsquare.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unsorted/ride.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unsorted/shell.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unsorted/taming.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unsorted/tracing.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unsorted/transform.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Unsorted/wormhole.java" beforeDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectConfigurationFiles">
+    <option name="files">
+      <list>
+        <option value="$PROJECT_DIR$/.idea/USACO-Solutions.iml" />
+        <option value="$PROJECT_DIR$/.idea/vcs.xml" />
+        <option value="$PROJECT_DIR$/.idea/modules.xml" />
+        <option value="$PROJECT_DIR$/.idea/.gitignore" />
+        <option value="$PROJECT_DIR$/.idea/misc.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1zba1uRI3SxoISufCFBy9bLkylw" />
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/src" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9c3c703f-5fee-446a-9354-5d8dc782c14c" name="Default Changelist" comment="" />
+      <created>1634419029299</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1634419029299</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
