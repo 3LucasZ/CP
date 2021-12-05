@@ -1,7 +1,9 @@
+package mmm;
+
 import java.io.*;
 import java.util.*;
 
-public class WhereAmI {
+public class FancyTemplate_old_bad {
     //default
     static boolean submission = true;
     static PrintWriter out;
@@ -13,8 +15,8 @@ public class WhereAmI {
     public static void main(String[] args) throws IOException {
         //setup
         if (submission) {
-            f = new BufferedReader(new FileReader("whereami.in"));
-            out = new PrintWriter(new BufferedWriter(new FileWriter("whereami.out")));
+            f = new BufferedReader(new FileReader(".in"));
+            out = new PrintWriter(new BufferedWriter(new FileWriter(".out")));
             n = Integer.parseInt(f.readLine());
             colors = f.readLine();
         }
@@ -23,25 +25,14 @@ public class WhereAmI {
             colors = "ABCDABC";
         }
         //logic
-        int k = 0;
-        int cycles = 100000;
-        Set<String> colorSubsets = new TreeSet<>();
-        while (colorSubsets.size() < cycles) {
-            colorSubsets = new TreeSet<>();
-            k ++ ;
-            cycles = n - k + 1;
-            for (int i=0;i<cycles;i++) {
-                colorSubsets.add(colors.substring(i, i+k));
-            }
-        }
         //print
         if (submission) {
-            out.println(k);
+            out.println();
             f.close();
             out.close();
         }
         else {
-            System.out.println(k);
+            System.out.println();
         }
     }
 }
