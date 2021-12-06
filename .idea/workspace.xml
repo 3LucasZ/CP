@@ -7,6 +7,13 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -44,7 +51,14 @@
       <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.ComfortableCows">
+    <configuration name="ComfortableCows" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ComfortableCows" />
+      <module name="USACO-Solutions" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="RectangularPasture" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="CustomComparatorsAndCoordinateCompression.RectangularPasture" />
       <module name="USACO-Solutions" />
@@ -54,6 +68,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.ComfortableCows" />
         <item itemvalue="Application.RectangularPasture" />
       </list>
     </recent_temporary>
@@ -71,7 +86,7 @@
       <updated>1634419029299</updated>
       <workItem from="1638678882435" duration="403000" />
       <workItem from="1638679320027" duration="583000" />
-      <workItem from="1638679911704" duration="7661000" />
+      <workItem from="1638679911704" duration="16709000" />
     </task>
     <servers />
   </component>
