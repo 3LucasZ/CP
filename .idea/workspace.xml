@@ -51,16 +51,37 @@
       <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ComfortableCows">
-    <configuration name="ComfortableCows" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="ComfortableCows" />
+  <component name="RunManager" selected="Application.MilkVisits">
+    <configuration name="MaximumMedian" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="BinarySearch.MaximumMedian" />
       <module name="USACO-Solutions" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RectangularPasture" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="CustomComparatorsAndCoordinateCompression.RectangularPasture" />
+    <configuration name="MilkVisits" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="IntroToTreeAlgor.MilkVisits" />
+      <module name="USACO-Solutions" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MilkVisitsINCORRECT" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="IntroToTreeAlgor.MilkVisitsINCORRECT" />
+      <module name="USACO-Solutions" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SocialDistancing" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="SocialDistancing" />
+      <module name="USACO-Solutions" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Subordinates" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="IntroToTreeAlgor.Subordinates" />
       <module name="USACO-Solutions" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -68,8 +89,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ComfortableCows" />
-        <item itemvalue="Application.RectangularPasture" />
+        <item itemvalue="Application.MilkVisits" />
+        <item itemvalue="Application.MilkVisitsINCORRECT" />
+        <item itemvalue="Application.Subordinates" />
+        <item itemvalue="Application.SocialDistancing" />
+        <item itemvalue="Application.MaximumMedian" />
       </list>
     </recent_temporary>
   </component>
@@ -86,7 +110,7 @@
       <updated>1634419029299</updated>
       <workItem from="1638678882435" duration="403000" />
       <workItem from="1638679320027" duration="583000" />
-      <workItem from="1638679911704" duration="16709000" />
+      <workItem from="1638679911704" duration="31821000" />
     </task>
     <servers />
   </component>

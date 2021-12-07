@@ -1,4 +1,4 @@
-/*
+package FloodFill;/*
 USACO 2021 February Contest, Silver
 Problem 1. Comfortable Cows
 USACO Guide Silver - Floodfill - Normal
