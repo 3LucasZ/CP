@@ -1,9 +1,9 @@
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.StringTokenizer;
+package Usaco2020_2021_Silver.Silver2020_1;
 
-public class StuckInARut {
+import java.io.*;
+import java.util.*;
+
+public class StuckInARut2 {
     //default
     static PrintWriter out;
     static BufferedReader f;
@@ -42,44 +42,46 @@ public class StuckInARut {
                 int intersectionYLength = ECow.y - NCow.y;
                 if (intersectionXLength >= 0 && intersectionYLength >= 0) {
                     if (intersectionXLength > intersectionYLength) {
-                        ECow.eaten += intersectionXLength;
                         ECow.finished = true;
+                        NCow.stoppedCows.add(ECow);
                         break;
                     }
-                    else if (intersectionXLength == intersectionYLength) {
-                        //ECow.eaten -= 0.5;
-                        //NCow.eaten -= 0.5;
-                    }
+                    else if (intersectionXLength == intersectionYLength) {}
                     else {
-                        NCow.eaten += intersectionYLength;
                         NCow.finished = true;
+                        ECow.stoppedCows.add(NCow);
                     }
                 }
             }
         }
         //turn in answer
         for (int i=0;i<N;i++) {
-            if (original.get(i).eaten == 0) {
-                out.println("Infinity");
-            }
-            else {
-                out.println(original.get(i).eaten);
-            }
+            if (original.get(i).stopped == -1) original.get(i).calcStopped();
+            out.println(original.get(i).stopped);
         }
         out.close();
         f.close();
     }
-}
-class Cow {
-    int x;
-    int y;
-    int eaten = 0;
-    boolean finished = false;
-    public Cow(int x1, int y1) {
-        x = x1;
-        y = y1;
-    }
-    public String toString() {
-        return "(" + x + ", " + y + ")";
+    private static class Cow {
+        int x;
+        int y;
+        boolean finished = false;
+        ArrayList<Cow> stoppedCows = new ArrayList<>();
+        int stopped = -1;
+        public Cow(int x1, int y1) {
+            x = x1;
+            y = y1;
+        }
+        public void calcStopped() {
+            int c = 0;
+            for (Cow s : stoppedCows) {
+                if (s.stopped == -1) s.calcStopped();
+                c += (1 + s.stopped);
+            }
+            stopped = c;
+        }
+        public String toString() {
+            return "(" + x + ", " + y + ")";
+        }
     }
 }
