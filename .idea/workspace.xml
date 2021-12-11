@@ -17,6 +17,14 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -54,37 +62,37 @@
       <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.NoTimeToPaint">
-    <configuration name="Acowdemia" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Usaco2020_2021_Silver.Silver2021_4.Acowdemia" />
+  <component name="RunManager" selected="Application.YearOfTheCow">
+    <configuration name="LoanRepayment" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="LoanRepayment" />
       <module name="USACO-Solutions" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Cowntagion" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Usaco2020_2021_Silver.Silver2020_1.Cowntagion" />
+    <configuration name="MooBuzz" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Silver2019_1.MooBuzz" />
       <module name="USACO-Solutions" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MaximumSubarraySum" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="MaximumSubarraySum" />
+    <configuration name="SubarraySumsI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="SubarraySumsI" />
       <module name="USACO-Solutions" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="NoTimeToPaint" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Usaco2020_2021_Silver.Silver2021_2.NoTimeToPaint" />
+    <configuration name="TheMooParticle" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="TheMooParticle" />
       <module name="USACO-Solutions" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StuckInARut2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Usaco2020_2021_Silver.Silver2020_1.StuckInARut2" />
+    <configuration name="YearOfTheCow" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Usaco2020_2021_Silver.Silver2021_3.YearOfTheCow" />
       <module name="USACO-Solutions" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -92,11 +100,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.NoTimeToPaint" />
-        <item itemvalue="Application.StuckInARut2" />
-        <item itemvalue="Application.Cowntagion" />
-        <item itemvalue="Application.Acowdemia" />
-        <item itemvalue="Application.MaximumSubarraySum" />
+        <item itemvalue="Application.YearOfTheCow" />
+        <item itemvalue="Application.SubarraySumsI" />
+        <item itemvalue="Application.LoanRepayment" />
+        <item itemvalue="Application.MooBuzz" />
+        <item itemvalue="Application.TheMooParticle" />
       </list>
     </recent_temporary>
   </component>
@@ -113,7 +121,7 @@
       <updated>1634419029299</updated>
       <workItem from="1638678882435" duration="403000" />
       <workItem from="1638679320027" duration="583000" />
-      <workItem from="1638679911704" duration="64196000" />
+      <workItem from="1638679911704" duration="80122000" />
     </task>
     <servers />
   </component>
