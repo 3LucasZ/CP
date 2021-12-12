@@ -1,3 +1,5 @@
+package Usaco2020_2021_Bronze.Bronze2020_1;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;

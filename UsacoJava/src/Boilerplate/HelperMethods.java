@@ -1,12 +1,18 @@
 package Boilerplate;
 
-import java.io.BufferedReader;
-import java.io.PrintWriter;
+import java.io.*;
+import java.util.*;
 
 public class HelperMethods {
     static PrintWriter out;
     static BufferedReader f;
     static boolean submission;
+    public static void printArr(int[][] arr) {
+        for (int i=0;i<arr.length;i++) {
+            out.println(Arrays.toString(arr[i]));
+        }
+        out.println();
+    }
     public static void printArr(boolean[] arr) {
         String str = "";
         for (int i=0;i<arr.length;i++) {
