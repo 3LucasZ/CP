@@ -62,37 +62,37 @@
       <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.LemonadeLine">
-    <configuration name="JustGreenEnough" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="JustGreenEnough" />
+  <component name="RunManager" selected="Application.HoofPaperScissors">
+    <configuration name="Convention" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="UsacoGuideSilver.BinarySearch.Convention" />
       <module name="USACO-Solutions" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LemonadeLine" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="UsacoGuideSilver.SilverGreedy.LemonadeLine" />
+    <configuration name="CowDanceShow" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="UsacoGuideSilver.BinarySearch.CowDanceShow" />
       <module name="USACO-Solutions" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MazeTacToe" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="CopyCatSad.MazeTacToe" />
+    <configuration name="HighCardWins" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="UsacoGuideSilver.SilverGreedy.HighCardWins" />
       <module name="USACO-Solutions" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SwapitySwapitySwap" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="CannotSolveNeedHelp.SwapitySwapitySwap" />
+    <configuration name="HoofPaperScissors" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="UsacoGuideSilver.PrefixSums.HoofPaperScissors" />
       <module name="USACO-Solutions" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="YearOfTheCow" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Usaco2020_2021_Silver.Silver2021_3.YearOfTheCow" />
+    <configuration name="WhyDidTheCowCrossTheRoad" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="UsacoGuideSilver.SilverGreedy.WhyDidTheCowCrossTheRoad" />
       <module name="USACO-Solutions" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -100,11 +100,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.LemonadeLine" />
-        <item itemvalue="Application.JustGreenEnough" />
-        <item itemvalue="Application.MazeTacToe" />
-        <item itemvalue="Application.SwapitySwapitySwap" />
-        <item itemvalue="Application.YearOfTheCow" />
+        <item itemvalue="Application.HoofPaperScissors" />
+        <item itemvalue="Application.Convention" />
+        <item itemvalue="Application.CowDanceShow" />
+        <item itemvalue="Application.WhyDidTheCowCrossTheRoad" />
+        <item itemvalue="Application.HighCardWins" />
       </list>
     </recent_temporary>
   </component>
@@ -121,7 +121,7 @@
       <updated>1634419029299</updated>
       <workItem from="1638678882435" duration="403000" />
       <workItem from="1638679320027" duration="583000" />
-      <workItem from="1638679911704" duration="95692000" />
+      <workItem from="1638679911704" duration="113435000" />
     </task>
     <servers />
   </component>
