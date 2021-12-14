@@ -62,16 +62,9 @@
       <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Moocast">
+  <component name="RunManager" selected="Application.MoocastGold">
     <configuration name="ClosingTheFarm" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Silver.UsacoGuideSilver.DFS.ClosingTheFarm" />
-      <module name="USACO-Solutions" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="HoofPaperScissors" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Silver.UsacoGuideSilver.PrefixSums.HoofPaperScissors" />
       <module name="USACO-Solutions" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -91,6 +84,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="MoocastGold" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Silver.UsacoGuideSilver.DFS.MoocastGold" />
+      <module name="USACO-Solutions" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="PairedUp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Silver.UsacoGuideSilver.TwoPointers.PairedUp" />
       <module name="USACO-Solutions" />
@@ -100,11 +100,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.MoocastGold" />
         <item itemvalue="Application.Moocast" />
         <item itemvalue="Application.ClosingTheFarm" />
         <item itemvalue="Application.PairedUp" />
         <item itemvalue="Application.Lifeguards" />
-        <item itemvalue="Application.HoofPaperScissors" />
       </list>
     </recent_temporary>
   </component>
@@ -121,7 +121,7 @@
       <updated>1634419029299</updated>
       <workItem from="1638678882435" duration="403000" />
       <workItem from="1638679320027" duration="583000" />
-      <workItem from="1638679911704" duration="125796000" />
+      <workItem from="1638679911704" duration="128072000" />
     </task>
     <servers />
   </component>
