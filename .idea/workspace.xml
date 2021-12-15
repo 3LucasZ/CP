@@ -62,16 +62,9 @@
       <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.MoocastGold">
-    <configuration name="ClosingTheFarm" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Silver.UsacoGuideSilver.DFS.ClosingTheFarm" />
-      <module name="USACO-Solutions" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Lifeguards" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Silver.UsacoGuideSilver.CustomComparatorsAndCoordinateCompression.Lifeguards" />
+  <component name="RunManager" selected="Application.MooTube">
+    <configuration name="MooTube" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="MooTube" />
       <module name="USACO-Solutions" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -91,8 +84,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PairedUp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Silver.UsacoGuideSilver.TwoPointers.PairedUp" />
+    <configuration name="RestStops" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Silver.UsacoGuideSilver.SilverGreedy.RestStops" />
+      <module name="USACO-Solutions" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SwitchingOnTheLights" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Silver.UsacoGuideSilver.FloodFill.SwitchingOnTheLights" />
       <module name="USACO-Solutions" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -100,11 +100,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.MooTube" />
+        <item itemvalue="Application.RestStops" />
+        <item itemvalue="Application.SwitchingOnTheLights" />
         <item itemvalue="Application.MoocastGold" />
         <item itemvalue="Application.Moocast" />
-        <item itemvalue="Application.ClosingTheFarm" />
-        <item itemvalue="Application.PairedUp" />
-        <item itemvalue="Application.Lifeguards" />
       </list>
     </recent_temporary>
   </component>
@@ -121,7 +121,7 @@
       <updated>1634419029299</updated>
       <workItem from="1638678882435" duration="403000" />
       <workItem from="1638679320027" duration="583000" />
-      <workItem from="1638679911704" duration="128072000" />
+      <workItem from="1638679911704" duration="140088000" />
     </task>
     <servers />
   </component>
