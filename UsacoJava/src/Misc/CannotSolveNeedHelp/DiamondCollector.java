@@ -1,4 +1,4 @@
-package CannotSolveNeedHelp;
+package Misc.CannotSolveNeedHelp;
 
 import java.io.*;
 import java.util.*;

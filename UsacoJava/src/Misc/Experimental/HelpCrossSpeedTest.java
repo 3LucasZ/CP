@@ -1,4 +1,4 @@
-package Experimental;
+package Misc.Experimental;
 
 import java.util.*;
 import java.io.*;

@@ -1,4 +1,4 @@
-package Usaco2019_2020.Usaco2020_4;
+package Bronze.Usaco2019_2020_Bronze.Usaco2020_4;
 
 import java.io.*;
 

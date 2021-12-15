@@ -1,4 +1,4 @@
-package CopyCatSad;
+package Misc.CopyCatSad;
 
 import java.io.*;
 import java.util.*;
