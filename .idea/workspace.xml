@@ -62,7 +62,14 @@
       <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.TheLazyCow">
+  <component name="RunManager" selected="Application.SumOfTwoValues">
+    <configuration name="SumOfTwoValues" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="SumOfTwoValues" />
+      <module name="USACO-Solutions" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="SwapitySwap" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Bronze.Usaco2019_2020_Bronze.Usaco2020_3.SwapitySwap" />
       <module name="USACO-Solutions" />
@@ -78,14 +85,7 @@
       </method>
     </configuration>
     <configuration name="TheLazyCow" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="TheLazyCow" />
-      <module name="USACO-Solutions" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Triangles" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Bronze.Usaco2019_2020_Bronze.Usaco2020_3.Triangles" />
+      <option name="MAIN_CLASS_NAME" value="Silver.UsacoGuideSilver.PrefixSums.TheLazyCow" />
       <module name="USACO-Solutions" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -100,11 +100,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.SumOfTwoValues" />
         <item itemvalue="Application.TheLazyCow" />
         <item itemvalue="Application.WhyDidTheCowCrossTheRoad2" />
         <item itemvalue="Application.SwapitySwapSwap" />
         <item itemvalue="Application.SwapitySwap" />
-        <item itemvalue="Application.Triangles" />
       </list>
     </recent_temporary>
   </component>
@@ -121,7 +121,7 @@
       <updated>1634419029299</updated>
       <workItem from="1638678882435" duration="403000" />
       <workItem from="1638679320027" duration="583000" />
-      <workItem from="1638679911704" duration="156278000" />
+      <workItem from="1638679911704" duration="158238000" />
     </task>
     <servers />
   </component>
