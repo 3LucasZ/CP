@@ -1,4 +1,4 @@
-package Silver.Silver2019_1;
+package Silver.Usaco2019_2020_Silver.Silver2019_1;
 
 import java.io.*;
 
