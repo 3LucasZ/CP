@@ -62,23 +62,9 @@
       <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.MooTube">
+  <component name="RunManager" selected="Application.SwapitySwap">
     <configuration name="MooTube" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="MooTube" />
-      <module name="USACO-Solutions" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Moocast" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Silver.UsacoGuideSilver.DFS.Moocast" />
-      <module name="USACO-Solutions" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="MoocastGold" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Silver.UsacoGuideSilver.DFS.MoocastGold" />
+      <option name="MAIN_CLASS_NAME" value="Silver.UsacoGuideSilver.IntroToTreeAlgor.MooTube" />
       <module name="USACO-Solutions" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -91,6 +77,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="SwapitySwap" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="SwapitySwap" />
+      <module name="USACO-Solutions" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="SwitchingOnTheLights" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Silver.UsacoGuideSilver.FloodFill.SwitchingOnTheLights" />
       <module name="USACO-Solutions" />
@@ -98,13 +91,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Triangles" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Triangles" />
+      <module name="USACO-Solutions" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.SwapitySwap" />
+        <item itemvalue="Application.Triangles" />
         <item itemvalue="Application.MooTube" />
         <item itemvalue="Application.RestStops" />
         <item itemvalue="Application.SwitchingOnTheLights" />
-        <item itemvalue="Application.MoocastGold" />
-        <item itemvalue="Application.Moocast" />
       </list>
     </recent_temporary>
   </component>
@@ -121,7 +121,7 @@
       <updated>1634419029299</updated>
       <workItem from="1638678882435" duration="403000" />
       <workItem from="1638679320027" duration="583000" />
-      <workItem from="1638679911704" duration="140088000" />
+      <workItem from="1638679911704" duration="145782000" />
     </task>
     <servers />
   </component>
