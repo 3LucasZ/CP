@@ -1,4 +1,5 @@
-package Silver.UsacoGuideSilver.TwoPointers;/*
+package Silver.UsacoGuideSilver.TwoPointers;
+/*
 CSES Problem Set
 Subarray Sums I
 USACO Guide - 2 Pointers - Easy
