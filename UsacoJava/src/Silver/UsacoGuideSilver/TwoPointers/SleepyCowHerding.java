@@ -1,3 +1,5 @@
+package Silver.UsacoGuideSilver.TwoPointers;
+
 import java.io.*;
 import java.util.*;
 /*
