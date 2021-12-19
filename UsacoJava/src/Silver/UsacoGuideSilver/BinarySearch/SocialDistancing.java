@@ -1,4 +1,4 @@
-/*
+package Silver.UsacoGuideSilver.BinarySearch;/*
 USACO 2020 US Open Contest, Silver
 Problem 1. Social Distancing
 USACO Guide Silver - Binary Search - Normal

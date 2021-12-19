@@ -1,3 +1,8 @@
+package Bronze.UsacoGuideBronze.adhoc;
+/*
+USACO 2018 US Open Contest, Bronze
+Problem 2. Milking Order
+ */
 import java.io.*;
 import java.util.*;
 

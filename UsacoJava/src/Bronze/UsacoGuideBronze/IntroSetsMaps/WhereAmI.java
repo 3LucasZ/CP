@@ -1,5 +1,12 @@
+package Bronze.UsacoGuideBronze.IntroSetsMaps;
+
 import java.io.*;
 import java.util.*;
+/*
+USACO 2019 December Contest, Bronze
+Problem 2. Where Am I?
+Intro Sets and Maps - Easy - Bronze
+ */
 
 public class WhereAmI {
     //default

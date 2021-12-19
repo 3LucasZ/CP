@@ -1,5 +1,12 @@
+package Bronze.UsacoGuideBronze.IntroGreedy;
+
 import java.io.*;
 import java.util.Arrays;
+/*
+USACO 2018 January Contest, Bronze
+Problem 3. Out of Place
+Greedy - hard- bronze
+ */
 
 public class OutOfPlace {
     //default

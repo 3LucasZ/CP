@@ -1,3 +1,8 @@
+package Bronze.UsacoGuideBronze.IntroSetsMaps;
+/*
+USACO 2017 January Contest, Bronze
+Problem 1. Don't Be Last!
+ */
 import java.io.*;
 import java.util.*;
 

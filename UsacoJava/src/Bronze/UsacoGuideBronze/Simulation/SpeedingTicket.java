@@ -1,3 +1,5 @@
+package Bronze.UsacoGuideBronze.Simulation;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.StringTokenizer;

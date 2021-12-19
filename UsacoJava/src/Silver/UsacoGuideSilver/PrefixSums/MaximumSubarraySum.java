@@ -1,3 +1,5 @@
+package Silver.UsacoGuideSilver.PrefixSums;
+
 import java.io.*;
 import java.util.*;
 /*

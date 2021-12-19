@@ -1,3 +1,5 @@
+package Bronze.UsacoGuideBronze.adhoc;
+
 import java.io.*;
 import java.util.StringTokenizer;
 
