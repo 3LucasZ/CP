@@ -1,5 +1,36 @@
+From most priority to least priority:
+
+USACO 2020 February Contest, Silver
+Problem 3. Clock Tree
+Trees - Normal
+EXTREMELY EXTREMELY STRANGE
+
 USACO 2020 January Contest, Silver
 Problem 1. Berry Picking
+Greedy + sorting - normal
+VERY STRANGE
 
 USACO 2020 February Contest, Silver
 Problem 2. Triangles
+Custom Comparator/Coordination compression - hard
+STRANGE NOT MAKE TOO MUCH SENSE
+
+USACO 2020 US Open Contest, Silver
+Problem 3. The Moo Particle
+Practice
+A LITTLE STRANGE
+
+USACO 2021 February Contest, Silver
+Problem 3. Just Green Enough
+Practice
+HAD TO COPY/A LITTLE STRANGE!
+
+USACO 2020 January Contest, Silver
+Problem 2. Loan Repayment
+Binary Search - very hard
+HAD TO COPY!
+
+USACO 2019 December Contest, Silver
+Problem 2. Meetings
+Custom Comparator/Coordination compression - very hard
+TOO HARD!

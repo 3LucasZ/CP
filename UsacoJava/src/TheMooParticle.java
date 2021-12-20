@@ -1,5 +1,9 @@
 import java.io.*;
 import java.util.*;
+/*
+USACO 2020 US Open Contest, Silver
+Problem 3. The Moo Particle
+ */
 
 public class TheMooParticle {
     //io
