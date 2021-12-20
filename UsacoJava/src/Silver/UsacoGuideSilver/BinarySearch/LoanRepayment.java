@@ -1,3 +1,5 @@
+package Silver.UsacoGuideSilver.BinarySearch;
+
 import java.io.*;
 import java.util.StringTokenizer;
 /*
@@ -6,6 +8,7 @@ Problem 2. Loan Repayment
 USACO Guide Silver - Binary Search - VERY HARD
 Concepts: Optimization on a slow growing function: Ex: 1 1 1 1 2 2 2 2 2 2 3 3 3 3 3 4 4 4 5 5 5 conquer all the ones and then twos instead of individually
 Copy cat sad for the sqrt(N) solution :(
+UNSATISFIED!
  */
 
 public class LoanRepayment {

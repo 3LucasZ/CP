@@ -3,38 +3,60 @@ import java.util.*;
 
 public class TheMooParticle {
     //io
-    static BufferedReader f = new BufferedReader(new InputStreamReader(System.in));
-    static PrintWriter out = new PrintWriter(System.out);
+    static boolean submission = true;
+    static PrintWriter out;
+    static BufferedReader br;
     //param
     static int N;
-    static int[] x, y;
-    static Integer cid[];
-    static int minl[];
-    static int maxr[];
-
+    static Particle[] particles;
+    static ArrayList<Integer> componentY = new ArrayList<>();
     public static void main(String[] args) throws IOException {
+        //io
+        if (submission) {
+            br = new BufferedReader(new FileReader("moop.in"));
+            out = new PrintWriter(new BufferedWriter(new FileWriter("moop.out")));
+        }
+        else {
+            br = new BufferedReader(new InputStreamReader(System.in));
+            out = new PrintWriter(System.out);
+        }
         //parse input
-        N = Integer.parseInt(f.readLine());
-        x = new int[N];
-        y = new int[N];
-        cid = new Integer[N];
-        minl = new int[N];
-        maxr = new int[N];
+        N = Integer.parseInt(br.readLine());
+        particles = new Particle[N];
         for (int i=0;i<N;i++) {
-            StringTokenizer st = new StringTokenizer(f.readLine());
-            int u = Integer.parseInt(st.nextToken());
-            int v = Integer.parseInt(st.nextToken());
-            x[i] = u;
-            y[i] = v;
-            cid[i] = i;
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            particles[i] = new Particle(Integer.parseInt(st.nextToken()),Integer.parseInt(st.nextToken()));
         }
         //logic
-        Arrays.sort(cid, (o1, o2) -> {
-            if (x[o1] == x[o2]) return y[o1] - y[o2];
-            else return x[o1] - x[o2];
-        });
-
+        Arrays.sort(particles, (a,b)->a.x-b.x);
+        int lowest = Integer.MAX_VALUE;
+        for (int i=0;i<N;i++) {
+            if (particles[i].y<lowest) {
+                componentY.add(particles[i].y);
+                lowest = particles[i].y;
+            }
+            else {
+                ArrayList<Integer> toRemove = new ArrayList<>();
+                for (int y : componentY) {
+                    if (y<=particles[i].y && y!=lowest){
+                        toRemove.add(y);
+                    }
+                }
+                for (Integer y: toRemove) {
+                    componentY.remove(y);
+                }
+            }
+        }
+        //turn in answer
+        out.println(componentY.size());
         out.close();
-        f.close();
+    }
+    private static class Particle{
+        int x;
+        int y;
+        public Particle(int x1, int y1){
+            x=x1;
+            y=y1;
+        }
     }
 }

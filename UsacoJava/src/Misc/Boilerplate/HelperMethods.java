@@ -32,4 +32,23 @@ public class HelperMethods {
             System.out.println(str);
         }
     }
+    private static class MultiSet {
+        TreeMap<Integer, Integer> ms = new TreeMap<>();
+        public MultiSet(){}
+        public void add(int e){
+            if (!ms.containsKey(e)) {
+                ms.put(e,1);
+            }
+            else {
+                ms.put(e, ms.get(e) + 1);
+            }
+        }
+        public void remove(int e){
+            if (ms.get(e)==1) ms.remove(e);
+            else ms.put(e,ms.get(e)-1);
+        }
+        public String toString(){
+            return ms.toString();
+        }
+    }
 }
