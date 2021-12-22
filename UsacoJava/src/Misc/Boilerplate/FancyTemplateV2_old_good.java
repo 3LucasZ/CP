@@ -8,7 +8,7 @@ public class FancyTemplateV2_old_good {
     static PrintWriter out;
     static BufferedReader br;
     //param
-    static int n;
+    static int N;
     public static void main(String[] args) throws IOException {
         //io
         if (submission) {
@@ -20,7 +20,7 @@ public class FancyTemplateV2_old_good {
             out = new PrintWriter(System.out);
         }
         //parse input
-        n = Integer.parseInt(br.readLine());
+        N = Integer.parseInt(br.readLine());
         //logic
         //turn in answer
         out.println();
