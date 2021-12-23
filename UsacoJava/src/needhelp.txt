@@ -20,11 +20,6 @@ Problem 3. The Moo Particle
 Practice
 A LITTLE STRANGE
 
-USACO 2021 February Contest, Silver
-Problem 3. Just Green Enough
-Practice
-HAD TO COPY/A LITTLE STRANGE!
-
 USACO 2020 January Contest, Silver
 Problem 2. Loan Repayment
 Binary Search - very hard

@@ -1,0 +1,4 @@
+December 20 2021
+1. Closest Cow Wins 0/333 No idea how to even begin...
+2. Connecting Two Barns 333/333
+3. Convoluted Intervals 83/333 Did O(n^2) solution to at least get a couple points
