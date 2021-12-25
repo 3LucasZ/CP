@@ -1,4 +1,5 @@
-package Silver.Usaco2021_2022_Silver.Silver2021_1;/*
+package Silver.Usaco2021_2022_Silver.Silver2021_1;
+/*
 USACO 2021 December Contest, Silver
 Problem 3. Convoluted Intervals
 In-Contest
