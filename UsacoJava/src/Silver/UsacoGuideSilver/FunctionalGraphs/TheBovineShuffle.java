@@ -1,11 +1,11 @@
-package Silver.UsacoGuideSilver.Extra;
+package Silver.UsacoGuideSilver.FunctionalGraphs;
 
 import java.io.*;
 import java.util.*;
 /*
 USACO 2017 December Contest, Silver
 Problem 3. The Bovine Shuffle
-USACO Silver Practice
+USACO Silver Practice && USACO Silver Guide - Functional Graphs - Easy
  */
 public class TheBovineShuffle {
     //io
