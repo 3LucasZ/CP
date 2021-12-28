@@ -4,7 +4,7 @@ import java.util.*;
 import java.io.*;
 /*
 USACO 2020 February Contest, Bronze
-Problem 1. Triangles
+Problem 1. Silver.UsacoGuideSilver.CustomComparatorsAndCoordinateCompression.Triangles
 Speedrun
  */
 public class Triangles {

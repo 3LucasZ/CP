@@ -11,7 +11,7 @@ Greedy + sorting - normal
 VERY STRANGE
 
 USACO 2020 February Contest, Silver
-Problem 2. Triangles
+Problem 2. Silver.UsacoGuideSilver.CustomComparatorsAndCoordinateCompression.Triangles
 Custom Comparator/Coordination compression - hard
 STRANGE NOT MAKE TOO MUCH SENSE
 
