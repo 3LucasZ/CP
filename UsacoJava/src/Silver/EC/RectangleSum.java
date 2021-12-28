@@ -1,4 +1,4 @@
-package StarLeague;
+package Silver.EC;
 
 import java.io.*;
 import java.util.*;
@@ -11,7 +11,7 @@ public class RectangleSum {
     static int K;
     static int[][] rect;
     static long[][] preSum;
-    static boolean submission = true;
+    static boolean submission = false;
     public static void main(String[] args) throws IOException {
         if (submission) {
             br = new BufferedReader(new FileReader("rectanglesum.in"));

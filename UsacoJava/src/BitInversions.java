@@ -80,8 +80,8 @@ public class BitInversions {
             //out.println("INDEX IS N CASE");
             checkpoint.remove(index);
             sizes.remove(1);
-            sizes.remove(lower_component);
-            sizes.add(lower_component+1);
+            sizes.remove(lower_component_size);
+            sizes.add(lower_component_size+1);
         }
         //single sized
         else if (size == 1){

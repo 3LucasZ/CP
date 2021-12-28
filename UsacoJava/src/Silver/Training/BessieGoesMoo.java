@@ -1,4 +1,4 @@
-package Silver.Old_Practice;
+package Silver.Training;
 
 import java.util.*;
 import java.io.*;

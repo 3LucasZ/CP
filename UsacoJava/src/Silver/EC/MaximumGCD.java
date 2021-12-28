@@ -1,4 +1,4 @@
-package StarLeague;
+package Silver.EC;
 
 import java.io.*;
 import java.util.*;
