@@ -21,9 +21,20 @@ public class HelperMethods {
         out.println(str);
         out.println();
     }
+    //boolean
     public static void print2DArr(boolean[][] arr) {
         for (int i=0;i<arr.length;i++) {
             printArr(arr[i]);
+        }
+        out.println();
+    }
+    //single char/digit
+    public static void print2DArr(int[][] arr) {
+        for (int r=0;r<arr.length;r++) {
+            for (int c=0;c<arr[r].length;c++) {
+                out.print(arr[r][c]+" ");
+            }
+            out.println();
         }
         out.println();
     }
