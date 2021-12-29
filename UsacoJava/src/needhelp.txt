@@ -10,15 +10,16 @@ Problem 1. Berry Picking
 Greedy + sorting - normal
 VERY STRANGE
 
-USACO 2020 February Contest, Silver
-Problem 2. Silver.UsacoGuideSilver.CustomComparatorsAndCoordinateCompression.Triangles
-Custom Comparator/Coordination compression - hard
-STRANGE NOT MAKE TOO MUCH SENSE
-
 USACO 2020 US Open Contest, Silver
 Problem 3. The Moo Particle
 Practice
 A LITTLE STRANGE
+
+USACO 2019 US Open Contest, Silver
+Problem 2. Cow Steeplechase II
+Practice
+Pure problem solving, adhoc, wacky algorithm
+TOO HARD!
 
 USACO 2020 January Contest, Silver
 Problem 2. Loan Repayment
@@ -29,3 +30,8 @@ USACO 2019 December Contest, Silver
 Problem 2. Meetings
 Custom Comparator/Coordination compression - very hard
 TOO HARD!
+
+USACO 2019 US Open Contest, Silver
+Problem 1. Left Out
+Pure problem solving - crazy
+Explanation kinda makes sense but how did he get there??!?!

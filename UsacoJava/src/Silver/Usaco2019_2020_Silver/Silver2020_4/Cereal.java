@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 /*
 USACO 2020 US Open Contest, Silver
-Problem 2. Silver.Usaco2019_2020_Silver.Silver2020_4.Cereal
+Problem 2. Cereal
 USACO Practice
 Concepts: Propagation
 Copy cat sad :(
