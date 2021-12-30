@@ -3,6 +3,8 @@ import java.util.*;
 /*
 USACO 2018 US Open Contest, Silver
 Problem 3. Multiplayer Moo
+USACO Silver Guide - Floodfill - Hard
+Addiontal Concepts: DFS, linkage dynamic programming
  */
 
 public class MultiplayerMoo {
