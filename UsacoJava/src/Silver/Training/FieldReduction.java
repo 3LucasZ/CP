@@ -1,3 +1,5 @@
+package Silver.Training;
+
 import java.io.*;
 import java.util.*;
 /*
@@ -5,6 +7,7 @@ USACO 2016 US Open Contest, Silver
 Problem 1. Field Reduction
 USACO Silver Training
 Thoughts/Concepts: Permutation building, complete search
+Official solution: Slick and concise with Greedy obtaination -> wheat/chaff separation
  */
 public class FieldReduction {
     //io
