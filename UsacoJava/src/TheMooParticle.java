@@ -4,6 +4,8 @@ import java.util.*;
 USACO 2020 US Open Contest, Silver
 Problem 3. The Moo Particle
 USACO Practice
+Concepts: clever connected components
+Copy cat sad :(
  */
 
 public class TheMooParticle {
@@ -14,7 +16,8 @@ public class TheMooParticle {
     //param
     static int N;
     static Particle[] particles;
-    static ArrayList<Integer> componentY = new ArrayList<>();
+    static int[] minl;
+    static int[] maxr;
     public static void main(String[] args) throws IOException {
         //io
         if (submission) {
@@ -30,13 +33,32 @@ public class TheMooParticle {
         particles = new Particle[N];
         for (int i=0;i<N;i++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
-            particles[i] = new Particle(Integer.parseInt(st.nextToken()),Integer.parseInt(st.nextToken()));
+            int x = Integer.parseInt(st.nextToken());
+            int y = Integer.parseInt(st.nextToken());
+            particles[i] = new Particle(x,y);
         }
         //logic
         Arrays.sort(particles, (a,b)->{
             if (a.x==b.x) return a.y-b.y;
             return a.x-b.x;
         });
+        //out.println(Arrays.toString(particles));
+        minl = new int[N];
+        minl[0] = particles[0].y;
+        for (int i=1;i<N;i++) {
+            minl[i] = Math.min(minl[i-1],particles[i].y);
+        }
+        maxr = new int[N];
+        maxr[N-1] = particles[N-1].y;
+        for (int i=N-2;i>=0;i--){
+            maxr[i] = Math.max(maxr[i+1],particles[i].y);
+        }
+        int ans = 1;
+        for (int i=0;i<N-1;i++) {
+            if (minl[i] > maxr[i+1]) ans++;
+        }
+        out.println(ans);
+        out.close();
     }
     private static class Particle{
         int x;
@@ -44,6 +66,9 @@ public class TheMooParticle {
         public Particle(int x1, int y1){
             x=x1;
             y=y1;
+        }
+        public String toString() {
+            return "["+x+", "+y+"]";
         }
     }
 }
