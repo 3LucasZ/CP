@@ -1,3 +1,5 @@
+package Silver.UsacoGuideSilver.BinarySearch;
+
 import java.io.*;
 import java.util.*;
 
