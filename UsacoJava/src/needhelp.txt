@@ -13,7 +13,7 @@ VERY STRANGE
 USACO 2019 US Open Contest, Silver
 Problem 2. Cow Steeplechase II
 Practice
-Pure problem solving, adhoc, wacky algorithm
+adhoc + linesweep + line intersection
 TOO HARD!
 
 USACO 2020 January Contest, Silver

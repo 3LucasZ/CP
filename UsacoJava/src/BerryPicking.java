@@ -27,8 +27,10 @@ public class BerryPicking {
         }
         //parse input
         StringTokenizer st = new StringTokenizer(br.readLine());
+        //trees
         N = Integer.parseInt(st.nextToken());
         berries = new int[N];
+        //baskets
         K = Integer.parseInt(st.nextToken());
         st = new StringTokenizer(br.readLine());
         for (int i=0;i<N;i++) {
@@ -36,7 +38,9 @@ public class BerryPicking {
         }
         Arrays.sort(berries);
         out.println(Arrays.toString(berries));
-        //tryMin(1);
+//        for (int i=1;i<=5;i++) {
+//            tryMin(i);
+//        }
         //logic
         for (int i=1;i<=1000;i++) {
             tryMin(i);
@@ -47,33 +51,34 @@ public class BerryPicking {
     }
     public static void tryMin(int min){
         ArrayList<Integer> remainder = new ArrayList<>();
-        int left = K;
-        int i = N-1;
-        int cnt = 0;
-        while (left > 0) {
-            int takes = berries[i]/min;
-            if (takes > left) {
-                takes = left;
+        int baskets_left = K;
+        int tree = N-1;
+        int bessie_berries = 0;
+        while (tree > 0) {
+            int baskets = Math.min(baskets_left,berries[tree]/min);
+            out.println("On tree: "+tree+", will take " + baskets + " baskets.");
+            if (baskets == 0) return;
+
+            int rem = berries[tree] - baskets*min;
+            int xtra = rem%baskets;
+            for (int i=0;i<baskets-xtra;i++) {
+                remainder.add(rem/baskets);
             }
-            remainder.add(berries[i]-min*takes);
-            left -= takes;
-            i--;
-            if (i < 0) {
-                out.println("ILLEGAL");
-                return;
+            for (int i=0;i<xtra;i++) {
+                remainder.add(rem/baskets + 1);
             }
+            baskets_left -= baskets;
+            tree--;
+            out.println("Current remainders: "+remainder);
+            if (baskets_left == 0) break;
+            if (tree < 0) return;
         }
-        cnt += min * (K/2);
-        if (left == 0) {
-            Collections.sort(remainder);
-            for (int j=0;j<remainder.size()-(K/2);j++) {
-                cnt += remainder.get(j);
-            }
+        bessie_berries += min * (K/2);
+        Collections.sort(remainder);
+        for (int i=0;i<remainder.size()-K/2;i++) {
+            bessie_berries += remainder.get(i);
         }
-        out.println(min);
-        out.println(remainder);
-        out.println(cnt);
-        out.println();
-        ans = Math.max(ans, cnt);
+        out.println("for min: "+min+", bessie gets: "+bessie_berries);
+        ans = Math.max(ans, bessie_berries);
     }
 }
