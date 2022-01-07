@@ -1,4 +1,4 @@
-package Gold.UsacoGuideGold.IntroDynamicProgramming;
+package Gold.UsacoGuideGold.IntroDP;
 
 import java.io.*;
 import java.util.*;

@@ -40,7 +40,7 @@ public class HelperMethods {
     }
     public static void debugPrintln(String str) {
         if (!submission) {
-            System.out.println(str);
+            out.println(str);
         }
     }
     private static class MultiSet {
