@@ -1,4 +1,4 @@
-package Gold.UsacoGuideGold.IntroDP;
+package Gold.UsacoGuideGold.DP;
 /*
 CSES Problem Set
 Removing Digits

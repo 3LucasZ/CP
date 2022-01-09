@@ -1,4 +1,4 @@
-package Gold.UsacoGuideGold.IntroDP;/*
+package Gold.UsacoGuideGold.DP;/*
 CSES Problem Set
 Dice Combinations
 USACO Gold Guide - DP Series

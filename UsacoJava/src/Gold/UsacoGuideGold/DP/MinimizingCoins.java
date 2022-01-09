@@ -1,4 +1,4 @@
-package Gold.UsacoGuideGold.IntroDP;/*
+package Gold.UsacoGuideGold.DP;/*
 CSES Problem Set
 Minimizing Coins
 USACO Gold Guide - DP Intro Series
