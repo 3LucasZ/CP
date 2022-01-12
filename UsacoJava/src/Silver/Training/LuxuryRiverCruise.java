@@ -1,9 +1,13 @@
+package Silver.Training;
+
 import java.io.*;
 import java.util.*;
 /*
 USACO 2013 US Open, Silver
 Problem 3. Luxury River Cruise
 USACO Silver Training
+Concepts: Noise + cycling, functional graphs
+2 hours of debugging because switched port with onPort on the end :(
  */
 public class LuxuryRiverCruise {
     //io
