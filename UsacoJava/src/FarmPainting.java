@@ -14,7 +14,6 @@ public class FarmPainting {
     static int N;
     static Rectangle[] rectangles;
     static TreeSet<Rectangle> active = new TreeSet<Rectangle>((a, b)->{
-        if (a.y1==b.y1) return a.x1-b.x1;
         return a.y1-b.y1;
     });
     static int ans;
@@ -30,7 +29,6 @@ public class FarmPainting {
         }
         //parse input
         N = Integer.parseInt(br.readLine());
-        ans = 0;
         rectangles = new Rectangle[N];
         for (int i=0;i<N;i++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
@@ -42,19 +40,26 @@ public class FarmPainting {
         }
         //logic
         Arrays.sort(rectangles,(a,b)->{
-            if (a.x1==b.x1) return a.y1-b.y1;
             return a.x1-b.x1;
         });
         //out.println(Arrays.toString(rectangles));
         for (int i=0;i<N;i++) {
             Rectangle lower = active.lower(rectangles[i]);
-            if (lower != null && lower.contains(rectangles[i]));
+            if (lower != null){
+                if (lower.contains(rectangles[i]));
+                else if (rectangles[i].contains(lower)) {
+                    active.add(rectangles[i]);
+                    active.remove(lower);
+                }
+                else {
+                    active.add(rectangles[i]);
+                }
+            }
             else {
                 active.add(rectangles[i]);
-                ans++;
             }
         }
-        out.println(ans);
+        out.println(active.size());
         out.close();
     }
     private static class Rectangle {
