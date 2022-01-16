@@ -49,7 +49,8 @@ public class Marathon {
         out.close();
     }
     public static void calculateTravel(int net, int start, int end, int skips){
-        if (skips > K || start < 0 || start >= N || end < 0 || end >= N) return;
+        //outta bounds
+        if (skips > K || start >= N || end >= N) return;
         net += Math.abs(x[start]-x[end]) + Math.abs(y[start]-y[end]);
         if (travel[end][skips] != 0 && travel[end][skips] < net) return;
         travel[end][skips] = net;
