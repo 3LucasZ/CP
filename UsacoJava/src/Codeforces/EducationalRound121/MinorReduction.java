@@ -1,3 +1,5 @@
+package Codeforces.EducationalRound121;
+
 import java.io.*;
 import java.util.*;
 public class MinorReduction {
