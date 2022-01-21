@@ -6,7 +6,7 @@ Problem 2. Wifi Setup
  */
 public class WifiSetup {
     //io
-    static boolean submission = false;
+    static boolean submission = true;
     static PrintWriter out;
     static BufferedReader br;
     //param
@@ -36,22 +36,8 @@ public class WifiSetup {
         Arrays.sort(loc);
         if (!submission) out.println(Arrays.toString(loc));
         //logic
-        int ans=0;
-        int l=0; int r=0;
-        int cost=0; int prevCost=2*A;
-        for (r=0;r<=N-2;r++){
-            cost = (loc[r+1]-loc[l])/2 * B + 2*A;
-            if (!submission) out.println("[l: "+l+", r: "+r+", cost: "+cost+", prevCost: "+prevCost+"]");
-            if (cost < prevCost + 2*A) {
-                prevCost=cost;
-            }
-            else {
-                ans += prevCost;
-                l=r;
-                prevCost = 2*A;
-            }
-        }
-        ans += prevCost;
+        int ans=2*A;
+        for (int i=1;i<N;i++) ans += Math.min(B*(loc[i]-loc[i-1])/2, 2*A);
         //turn in answer
         out.println(ans/2 + (ans%2==0?"":".5"));
         out.close();
