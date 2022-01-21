@@ -1,8 +1,13 @@
+package Silver.Training;
+
 import java.io.*;
 import java.util.*;
 /*
 USACO 2012 December Contest, Silver
 Problem 2. Wifi Setup
+Notes:
+Trivial 1 liner... lol extremely greedy
+always take the smaller of d/2 * B and A.
  */
 public class WifiSetup {
     //io
