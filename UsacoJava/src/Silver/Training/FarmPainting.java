@@ -1,6 +1,15 @@
+package Silver.Training;
+
 import java.io.*;
 import java.util.*;
-
+/*
+USACO 2013 March Contest, Silver
+Problem 2. Farm Painting
+USACO Silver Training
+- Had to read Solution
+- Beautiful plane sweep algorithm
+- shooting rays
+ */
 public class FarmPainting {
     //io
     static boolean submission = true;
