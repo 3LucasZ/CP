@@ -1,3 +1,5 @@
+package Silver.Training;
+
 import java.io.*;
 import java.util.*;
 /*
@@ -6,6 +8,8 @@ Problem 1. Fair Photography
 USACO Silver Training
 Thoughts:
 Looked at solution :(
+for every right cow find best left cow
+O(Nlog(N))
  */
 public class FairPhotography {
     // io
