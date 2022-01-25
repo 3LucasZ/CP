@@ -1,7 +1,14 @@
-package Silver.Training;/*
+/*
+TASK: wormhole
+LANG: JAVA
+ */
+import java.io.*;
+import java.util.*;
+/*
 USACO 2013 December Contest, Bronze
 Problem 3. Wormholes
 USACO Silver Training
+USACO Training Gateway REVISITED
 USACO Bronze Guide - Recursive Search - Very Hard
 Thoughts:
 After some experimentation, created genPerms, which is an extremely lucky and cool function that generates all pairs of numbers without repetitions
@@ -13,10 +20,7 @@ Very very fun and difficult problem!
 The problem is that a node could be visited while "entry" and be visited while "teleport" and a cycle is not present.
 A node must be visited while "entry" multiple times or by "teleport" multiple times I THINK but this might be overkill
  */
-import java.io.*;
-import java.util.*;
-
-public class Wormholes {
+public class wormhole {
     //io
     static boolean submission = true;
     static PrintWriter out;
