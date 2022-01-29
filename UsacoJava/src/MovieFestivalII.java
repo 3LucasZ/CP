@@ -5,6 +5,11 @@ import java.util.*;
 CSES Problem Set
 Movie Festival II
 USACO Silver Guide - Greedy + Sorting - Normal
+Notes:
+Read Solution once and then understood
+9/11 because TLE from need of FastIO B(
+Thoughts:
+
  */
 public class MovieFestivalII {
     //io
@@ -14,7 +19,7 @@ public class MovieFestivalII {
     static int N;
     static int K;
     static Movie[] movies = new Movie[N];
-    static Queue<Movie> active = new LinkedList<Movie>();
+    static Multiset watchers = new Multiset();
     public static void main(String[] args) throws IOException {
         //parse input
         StringTokenizer st = new StringTokenizer(br.readLine());
@@ -28,32 +33,39 @@ public class MovieFestivalII {
             movies[i] = new Movie(a,b);
         }
         //logic
+        //sort movies by end time
         Arrays.sort(movies, (a,b)->{
             if (a.end==b.end) return a.start-b.start;
             return a.end-b.end;
         });
-        active.add(movies[0]);
-        int ans = 1;
-        for (int i=1;i<N;i++) {
-            Movie watching = active.peek();
-            if (movies[i].start < watching.end) {
-                if (active.size() < K) {
-                    active.add(movies[i]);
-                    ans++;
-                }
-                else {
-
-                }
-            }
-            else {
-                active.poll();
-                active.add(movies[i]);
-                ans++;
-            }
+        //watchers multiset setup
+        for (int i=0;i<K;i++) watchers.add(0);
+        //loop through the movies (by end time order) and give it to the watcher who can watch it and finished watching earliest
+        int ans = 0;
+        for (int i=0;i<N;i++) {
+            Movie next = movies[i];
+            Integer watcher = watchers.ms.floorKey(next.start);
+            if (watcher == null) continue;
+            watchers.remove(watcher);
+            watchers.add(next.end);
+            ans++;
         }
-        //turn in answer
         out.println(ans);
         out.close();
+    }
+    private static class Multiset {
+        public TreeMap<Integer, Integer> ms;
+        public Multiset(){
+            ms = new TreeMap<>();
+        }
+        public void add(int n){
+            if (!ms.containsKey(n)) ms.put(n, 0);
+            ms.put(n,ms.get(n)+1);
+        }
+        public void remove(int n){
+            ms.put(n,ms.get(n)-1);
+            if (ms.get(n)==0) ms.remove(n);
+        }
     }
     private static class Movie {
         int start;
