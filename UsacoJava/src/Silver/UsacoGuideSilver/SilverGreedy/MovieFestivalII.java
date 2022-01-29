@@ -1,6 +1,7 @@
+package Silver.UsacoGuideSilver.SilverGreedy;
+
 import java.io.*;
 import java.util.*;
-
 /*
 CSES Problem Set
 Movie Festival II
@@ -9,7 +10,8 @@ Notes:
 Read Solution once and then understood
 9/11 because TLE from need of FastIO B(
 Thoughts:
-
+First solve the one watcher problem: sort the movies by end time and assign the ones you can
+Now solve the N watcher problem: sort the movies by end time and assign each to the watcher that finishes last
  */
 public class MovieFestivalII {
     //io

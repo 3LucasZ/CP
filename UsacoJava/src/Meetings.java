@@ -4,6 +4,12 @@ import java.util.*;
 /*
 USACO 2019 December Contest, Silver
 Problem 2. Meetings
+USACO Silver Training
+USACO Custom Comparators + Coordinate Compression - VERY HARD (but I think it's hard, not very)
+Notes:
+Looked at solution (not code) multiple times until finally understood
+each cow is a left or right vector, this vector changes weights as it intersects but it reaches the end at time Q
+Diagram on Notability
  */
 public class Meetings {
     //io
