@@ -1,4 +1,4 @@
-/*
+package Gold.EC.DP2;/*
 Talent Show
 Gold Advanced B 2
 DP - Knapsack DP

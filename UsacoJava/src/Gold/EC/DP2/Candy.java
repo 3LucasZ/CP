@@ -1,3 +1,5 @@
+package Gold.EC.DP2;
+
 import java.io.*;
 import java.util.*;
 
@@ -12,7 +14,7 @@ public class Candy {
         int F = Integer.parseInt(st.nextToken());
         int M = Integer.parseInt(st.nextToken());
         int[] choice = new int[Opt];
-        boolean[] favorite = new boolean[N+1];
+        boolean[] favorite = new boolean[N+M+1];
         for (int i=0;i<Opt;i++) {
             choice[i] = Integer.parseInt(br.readLine());
         }
@@ -22,8 +24,8 @@ public class Candy {
         //dp -> iteration
         int start = N;
         if (favorite[start]) start += M;
-        int[] dp = new int[start+1];
-        int[] cnt = new int[start+1];
+        int[] dp = new int[start+2];
+        int[] cnt = new int[start+2];
         Arrays.fill(dp, -1);
         dp[start]=0;
         int ans = 0;
