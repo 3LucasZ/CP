@@ -3,7 +3,7 @@ import java.util.*;
 
 public class Cereal3 {
     //io
-    static boolean debug = true;
+    static boolean debug = false;
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static PrintWriter out = new PrintWriter(System.out);
     //param
