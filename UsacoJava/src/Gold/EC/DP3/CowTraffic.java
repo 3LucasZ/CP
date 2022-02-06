@@ -1,5 +1,18 @@
+package Gold.EC.DP3;
+
 import java.io.*;
 import java.util.*;
+/*
+Cow Traffic
+Gold Advanced B 3
+DP - extended topological sort
+Notes:
+Best crossover point problem
+for each trail the number of paths that go through it is node1.in * node2.out
+we calculate node in by calculating node in for node1, node2,...N topological style
+we calculate node out similarly
+elegant solution
+ */
 public class CowTraffic {
     //io
     static boolean submission = false;
