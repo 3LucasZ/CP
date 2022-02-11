@@ -2,7 +2,11 @@ package Misc.Boilerplate;
 
 import java.io.*;
 
-public class FancyTemplateV2_old_good {
+/*
+LANG: JAVA
+TASK: prob
+ */
+public class TrainingGatewayTemplate {
     //io
     static boolean submission = false;
     static PrintWriter out;

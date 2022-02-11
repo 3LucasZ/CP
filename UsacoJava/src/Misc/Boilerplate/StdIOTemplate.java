@@ -2,7 +2,7 @@ package Misc.Boilerplate;
 
 import java.io.*;
 
-public class FancyTemplateV2_new {
+public class StdIOTemplate {
     //io
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static PrintWriter out = new PrintWriter(System.out);
