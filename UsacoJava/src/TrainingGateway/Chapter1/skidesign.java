@@ -1,7 +1,7 @@
-package Bronze.TrainingGateway;
+package TrainingGateway.Chapter1;
 
 import java.io.*;
-import java.util.*;
+
 /*
 LANG: JAVA
 TASK: skidesign
