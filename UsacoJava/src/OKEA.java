@@ -1,8 +1,21 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
+/*
+Codeforces #770
+C. OKEA
+USACO Silver Training: constructive
+Thoughts:
+Used hint: for which shelf number is this never going to work in the case that shelf length is > 1?
+Lemma: let shelves be odd, since for a shelf each price is same parity, we will have too many of a single parity
+Solution:
+greedily construct
+1 3 5 ...
+2 4 6 ...
+tsf = taken so far
+tsf+1, +3, ...
+tsf+2, +4, ...
+by modulus rules this will ALWAYS work (AMC10 modulus logic)
+ */
 
 public class OKEA {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
