@@ -1,6 +1,21 @@
+package Codeforces.Round770;
+
 import java.io.*;
 import java.util.StringTokenizer;
-
+/*
+Codeforces Round #770
+B. Fortune Telling
+Thoughs:
+Looked at hint #1
+don't over complicate problems with low rating B)
+parity problem
+a and b have different parity
+xor and + have the same effect on parity
+ending has constant parity
+each operation does the same thing to a and b's parity
+apply the togglers to each of a and b
+which equals the end parity?
+ */
 public class FortuneTelling {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static PrintWriter out = new PrintWriter(System.out);
