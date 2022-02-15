@@ -1,6 +1,16 @@
+package Gold.EC.DP5;
+
 import java.io.*;
 import java.util.*;
-
+/*
+The Lazy Cow
+Gold Advanced B 5
+Notes:
+rotate array by 45 degrees to get slanted square presums
+finding this mapping equation takes a litle of trial and error on graph paper
+make a 2d presum
+O(1) time for a range query on grass
+ */
 public class TheLazyCow {
     //io
     static boolean debug = true;
