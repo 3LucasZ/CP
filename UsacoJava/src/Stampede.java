@@ -1,23 +1,29 @@
-
-
 import java.io.*;
 import java.util.*;
 /*
 USACO 2015 January Contest, Silver
 Problem 1. Stampede
 USACO Silver Training
-INCOMPLETE
+Thoughts:
+Read solution :(
+Interval processing
+Plane sweep with points
+each point denotes the time to process it and its priority
+its mode (start vs end) is encoded by its sign (very smart technique)
+sweeping through these points sorted by time
+if point is a start -> add it to active
+if point is a end -> delete interval from active
+what is the smallest y value in active? add it to seen
+very elegant and concise solution!
+Another observation: only process "interesting points" (start and end points)
  */
 public class Stampede {
     //io
-    static boolean submission = false;
+    static boolean submission = true;
     static PrintWriter out;
     static BufferedReader br;
     //param
     static int N;
-    static Cow[] cows;
-    static Interval[] intervals;
-    static TreeSet<Interval> intervals2 = new TreeSet<>((a,b)->a.t1-b.t1);
     public static void main(String[] args) throws IOException {
         //io
         if (submission) {
@@ -30,70 +36,47 @@ public class Stampede {
         }
         //parse input
         N = Integer.parseInt(br.readLine());
-        cows = new Cow[N];
-        intervals = new Interval[N];
-        for (int i=0;i<N;i++) {
+        Point[] events = new Point[2*N];
+        for (int i=0;i<2*N;i+=2){
             StringTokenizer st = new StringTokenizer(br.readLine());
-            int x = Integer.parseInt(st.nextToken());
+            int x = -1*Integer.parseInt(st.nextToken());
             int y = Integer.parseInt(st.nextToken());
             int r = Integer.parseInt(st.nextToken());
-            cows[i] = new Cow(x,y,r);
+            events[i]=new Point((x-1)*r,y);
+            events[i+1]=new Point(x*r,-y);
         }
-        //sort by priority
-        Arrays.sort(cows, (a,b)->a.y-b.y);
-        //out.println(Arrays.toString(cows));
-        //calculate all intervals
-        for (int i=0;i<N;i++) {
-            int distance = -1 * cows[i].x;
-            int t2 = distance * cows[i].r;
-            int t1 = t2 - cows[i].r;
-            Interval add = new Interval(t1, t2, i);
-            intervals[i] = add;
-        }
-        //calculate all disjoint intervals
-        Arrays.sort(intervals, (a,b)->{
-            if (a.t1==b.t1) return a.priority-b.priority;
-            return a.t1-b.t1;
+        //sort events by time
+        Arrays.sort(events,(a,b)->{
+            return a.x-b.x;
         });
-        PriorityQueue<Interval> active = new PriorityQueue<Interval>((a, b)->a.priority-b.priority);
-        HashSet<Interval> seen = new HashSet<>();
+        if (!submission) System.out.println(Arrays.toString(events));
 
-        int ans = 1;
-        active.add(intervals[0]);
-        seen.add(intervals[0]);
-        int i=1;
-//        while (true){
-//            active.add(intervals[i]);
-//
-//        }
-        //turn in answer
-        out.println(ans);
+        //plane sweep
+        HashSet<Integer> seen = new HashSet<>();
+        TreeSet<Integer> active = new TreeSet<>();
+
+        for (int i=0;i<events.length-1;i++){
+            //process
+            if (events[i].y>0) active.add(events[i].y);
+            else active.remove(-1*events[i].y);
+            //interpret active
+            if (!submission) System.out.println(active);
+            //** mistake: remember to use the Math.abs(events[i].x)!=Math.abs(events[i+1].x)
+            // in the if statement so that we process all t=x events before interpreting active
+            if (!active.isEmpty() && Math.abs(events[i].x)!=Math.abs(events[i+1].x))seen.add(active.first());
+        }
+        out.println(seen.size());
         out.close();
     }
-    private static class Interval{
-        int t1;
-        int t2;
-        int priority;
-        public Interval(int ti, int te, int p){
-            t1=ti;
-            t2=te;
-            priority = p;
-        }
-        public String toString() {
-            return "["+t1+", "+t2+"]";
-        }
-    }
-    private static class Cow{
+    private static class Point{
         int x;
         int y;
-        int r;
-        public Cow(int x1, int y1, int r1){
-            x=x1;
-            y=y1;
-            r=r1;
+        public Point(int x, int y){
+            this.x=x;
+            this.y=y;
         }
         public String toString(){
-            return "["+x+", "+y+", "+r+"]";
+            return "["+x+", "+y+"]";
         }
     }
 }
