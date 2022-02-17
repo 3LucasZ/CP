@@ -1,0 +1,6 @@
+January something 2022
+1. Crazy ad hoc, pure experimentation and desperation. get u -> v using *2, /2, +1  333/333
+2. Needs a drawing, then makes sense. Convert to tree set , O(nlogn) operations. frisbee throwing diagram op. 333/333
+3. Cereal 2: convert to directed graph and solve components individually. Crazy hard. 0/333, got pretty close.
+
+667/750/1000
