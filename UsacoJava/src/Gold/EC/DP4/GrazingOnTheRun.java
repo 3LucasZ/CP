@@ -5,6 +5,7 @@ import java.util.*;
 /*
 Grazing On The Run
 Gold Advanced B 4
+***EXACT SAME AS USACO 2013 March Contest, Silver***
 DP - incremental/range dp
 loop through dp size
 loop through left indice
@@ -15,8 +16,8 @@ not that hard to understand!
  */
 public class GrazingOnTheRun {
     //io
-    static boolean submission = false;
-    static boolean debug = true;
+    static boolean submission = true;
+    static boolean debug = false;
     static PrintWriter out;
     static BufferedReader br;
     //param
@@ -28,17 +29,23 @@ public class GrazingOnTheRun {
     public static void main(String[] args) throws IOException {
         //io
         if (submission) {
-            br = new BufferedReader(new FileReader(".in"));
-            out = new PrintWriter(new BufferedWriter(new FileWriter(".out")));
+            br = new BufferedReader(new FileReader("cowrun.in"));
+            out = new PrintWriter(new BufferedWriter(new FileWriter("cowrun.out")));
         }
         else {
             br = new BufferedReader(new InputStreamReader(System.in));
             out = new PrintWriter(System.out);
         }
         //parse input
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        N = Integer.parseInt(st.nextToken());
-        L = Integer.parseInt(st.nextToken());
+        if (!submission){
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            N = Integer.parseInt(st.nextToken());
+            L = Integer.parseInt(st.nextToken());
+        }
+        else {
+            N = Integer.parseInt(br.readLine());
+            L = 0;
+        }
         loc = new int[N+1];
         loc[0]=L;
         for (int i=1;i<=N;i++) {
