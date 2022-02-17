@@ -1,4 +1,4 @@
-/*
+package TrainingGateway.Chapter1;/*
 TASK: wormhole
 LANG: JAVA
  */

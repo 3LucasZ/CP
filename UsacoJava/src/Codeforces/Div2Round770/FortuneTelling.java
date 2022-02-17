@@ -1,4 +1,4 @@
-package Codeforces.Round770;
+package Codeforces.Div2Round770;
 
 import java.io.*;
 import java.util.StringTokenizer;
