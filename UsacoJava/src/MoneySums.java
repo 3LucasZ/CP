@@ -4,6 +4,15 @@ import java.util.*;
 CSES Problem Set
 Money Sums
 USACO Gold Guide - Knapsack DP Series - Easy
+Thoughts:
+dp arr:
+dp[current coin][value] = true/false
+
+propagation:
+if (dp[onCoin][val]) {
+   dp[1 + onCoin][val] = true;
+   dp[1 + onCoin][val+coins[onCoin]] = true;
+}
  */
 
 public class MoneySums {
@@ -11,7 +20,8 @@ public class MoneySums {
     static PrintWriter out = new PrintWriter(System.out);
     static int N;
     static int coins[];
-    static boolean reachable[];
+    //dp[last coin][sum]
+    static boolean dp[][];
     public static void main(String[] args) throws IOException {
         //parse input
         N = Integer.parseInt(br.readLine());
@@ -20,26 +30,28 @@ public class MoneySums {
         for (int i=0;i<N;i++) {
             coins[i] = Integer.parseInt(st.nextToken());
         }
-        reachable = new boolean[100001];
-        reachable[0] = true;
+        dp = new boolean[N+1][N*1000+1];
+        dp[0][0]=true;
         //dp
-        for (int i=1;i<=100000;i++) {
-            boolean canReach = false;
-            for (int j=0;j<N;j++) {
-                if (i-coins[j] < 0) continue;
-                if (reachable[i-coins[j]]) canReach = true;
+        for (int onCoin=0;onCoin<N;onCoin++){
+            for (int val=0;val<=N*1000;val++){
+                if (dp[onCoin][val]) {
+                    dp[1 + onCoin][val] = true;
+                    dp[1 + onCoin][val+coins[onCoin]] = true;
+                }
             }
-            reachable[i] = canReach;
         }
         //print answer
-        int cnt = 0;
-        for (int i=1;i<=100000;i++) {
-            if (reachable[i]) cnt++;
+        StringBuilder chain = new StringBuilder();
+        int cnt=0;
+        for (int i=1;i<=N*1000;i++){
+            if (dp[N][i]){
+                cnt++;
+                chain.append(i+" ");
+            }
         }
         out.println(cnt);
-        for (int i=1;i<=100000;i++) {
-            if (reachable[i]) out.print(i+" ");
-        }
+        out.println(chain);
         out.close();
     }
 }
