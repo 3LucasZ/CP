@@ -1,11 +1,7 @@
 package Codeforces.Div2Round771;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.util.StringTokenizer;
-import java.util.TreeSet;
+import java.io.*;
+import java.util.*;
 /*
 Codeforces Round #771 (Div. 2)
 C. Inversion Graph
