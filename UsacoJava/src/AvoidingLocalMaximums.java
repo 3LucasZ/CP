@@ -5,7 +5,7 @@ public class AvoidingLocalMaximums {
     //io
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static PrintWriter out = new PrintWriter(System.out);
-    static boolean debug = true;
+    static boolean debug = false;
 
     public static void main(String[] args) throws IOException {
         int T = Integer.parseInt(br.readLine());
