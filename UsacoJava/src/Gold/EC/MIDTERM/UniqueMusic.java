@@ -1,6 +1,14 @@
+package Gold.EC.MIDTERM;
+
 import java.io.*;
 import java.util.*;
-
+/*
+Unique Music
+Gold Advanced B - DP
+Midterm
+basic dp stuff...
+O(logN) exponentiation is crazy!!!
+ */
 public class UniqueMusic {
     //io
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -17,6 +25,7 @@ public class UniqueMusic {
     //dp
     static long[] dpSyllable;
     static long[] dpRhyme;
+
     //helper
     static final long MOD = (long)1e9+7;
     public static void main(String[] args) throws IOException {
@@ -55,26 +64,31 @@ public class UniqueMusic {
         }
         if (debug) System.out.println(Arrays.toString(dpRhyme));
 
-        //get ans
-        long[] powerSum = new long[M+1];
-        long[] toPower = new long[M+1];
-        for (int i=1;i<=N;i++){
-            toPower[0]=1;
-            for (int p=1;p<=M;p++){
-                toPower[p]=(toPower[p-1]*dpRhyme[i])%MOD;
-                powerSum[p]=(powerSum[p]+toPower[p])%MOD;
-            }
-        }
-        //if (debug) for (int i=System.out.println(Arrays.toString(toPower));
-        if (debug) System.out.println(Arrays.toString(powerSum));
+
+
 
         long ans = 1;
         //turn in answer
         for (Integer val : pattern.ms.values()) {
-            ans=(ans*powerSum[val])%MOD;
+            ans=(ans*powerSum(val))%MOD;
         }
         out.println(ans);
         out.close();
+    }
+    private static long powerSum(int power){
+        long sum = 0;
+        for (long val : dpRhyme){
+            sum = (sum + exp(val,power))%MOD;
+        }
+        return sum;
+    }
+    private static long exp(long base, int power){
+        if (power==0) return 1;
+        if (power==1) return base%MOD;
+        long ans = exp(base,power/2);
+        ans = (ans*ans)%MOD;
+        if (power%2==1) ans=(ans*base)%MOD;
+        return ans%MOD;
     }
     private static class Multiset {
         HashMap<Character, Integer> ms = new HashMap<>();

@@ -7,6 +7,10 @@ public class HelperMethods {
     static PrintWriter out;
     static BufferedReader f;
     static boolean submission;
+    static long MOD = (long)1e9+7;
+    public static void main(String[] args){
+        System.out.println(exp(5,7));
+    }
     public static void printArr(int[][] arr) {
         for (int i=0;i<arr.length;i++) {
             out.println(Arrays.toString(arr[i]));
@@ -61,5 +65,14 @@ public class HelperMethods {
         public String toString(){
             return ms.toString();
         }
+    }
+    //O(log(power)) exponentiation
+    private static long exp(long base, int power){
+        if (power==0) return 1;
+        if (power==1) return base%MOD;
+        long ans = exp(base,power/2);
+        ans = (ans*ans)%MOD;
+        if (power%2==1) ans=(ans*base)%MOD;
+        return ans%MOD;
     }
 }
