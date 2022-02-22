@@ -1,3 +1,5 @@
+package Gold.UsacoGuideGold.TopologicalSort;
+
 import java.io.*;
 import java.util.*;
 /*
