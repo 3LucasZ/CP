@@ -14,6 +14,7 @@ process the points one by one in a stack
 if an endpoint is detected, it's beginning point MUST be on top of the stack (or else -1 impossible)
 the answer is the maximum size of the stack at ALL times
 Hack: my solution does NOT solve the 3 0 0 3 case :) but still gets 100% tcs
+ALSO my solution is O(NlogN) bc of sort... this is UNNECESSARY and can be solved in O(N) with a smarter interval creator method
  */
 public class ModernArt2 {
     //io
