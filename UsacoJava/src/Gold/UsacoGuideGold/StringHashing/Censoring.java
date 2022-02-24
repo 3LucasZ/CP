@@ -1,3 +1,5 @@
+package Gold.UsacoGuideGold.StringHashing;
+
 import java.io.*;
 import java.util.*;
 /*

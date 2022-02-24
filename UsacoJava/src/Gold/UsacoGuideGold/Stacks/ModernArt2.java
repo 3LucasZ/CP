@@ -1,3 +1,5 @@
+package Gold.UsacoGuideGold.Stacks;
+
 import java.io.*;
 import java.util.*;
 /*
