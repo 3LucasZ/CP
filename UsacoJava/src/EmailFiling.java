@@ -21,6 +21,11 @@ public class EmailFiling {
         int M = Integer.parseInt(st.nextToken());
         int N = Integer.parseInt(st.nextToken());
         int K = Integer.parseInt(st.nextToken());
+        if (K>=M || K>=N) {
+            out.println("YES");
+            out.close();
+            return;
+        }
         int[] toFolder = new int[N+1];
         int[] lastIndex = new int[M+1];
 
@@ -35,12 +40,19 @@ public class EmailFiling {
         Multiset lastEmails = new Multiset();
         for (int i=1;i<=N;i++) lastEmails.add(toFolder[i]);
 
+        Multiset activeEmails = new Multiset();
         int emailPointer = 1;
         for (int foldersPointer = 1;foldersPointer<=M-K;foldersPointer++){
-            if (emailPointer > lastIndex[foldersPointer]) continue;
-            emailPointer=Math.max(1, emailPointer-K+1);
             for (;emailPointer<=lastIndex[foldersPointer];emailPointer++) {
-                if (toFolder[emailPointer]<foldersPointer+K) lastEmails.remove(toFolder[emailPointer]);
+                if (emailPointer-K>=1) activeEmails.remove(toFolder[emailPointer-K]);
+                activeEmails.add(toFolder[emailPointer]);
+
+                while (true) {
+                    Integer nextGood = activeEmails.ms.lowerKey(foldersPointer + K);
+                    if (nextGood == null) break;
+                    activeEmails.remove(nextGood);
+                    lastEmails.remove(nextGood);
+                }
             }
         }
 

@@ -1,3 +1,5 @@
+package TrainingGateway.Chapter2;
+
 import java.io.*;
 import java.util.*;
 /*

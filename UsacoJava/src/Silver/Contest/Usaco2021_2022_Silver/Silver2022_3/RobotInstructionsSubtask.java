@@ -1,3 +1,5 @@
+package Silver.Contest.Usaco2021_2022_Silver.Silver2022_3;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -5,11 +7,11 @@ import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class RobotInstructions1 {
+public class RobotInstructionsSubtask {
     //io
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static PrintWriter out = new PrintWriter(System.out);
-    static boolean debug = false;
+    static boolean debug = true;
 
     //param
     static int N;

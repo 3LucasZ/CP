@@ -1,0 +1,7 @@
+Real Contest #3, End of Feb. 320 points.
+Cutoff 650
+1. Gift exchange (???)
+2. Robot instructions (Meet in the middle - CSES ripoff)
+3. Email filing (Greedy)
+
+Bad results. Could of won if worked harder!

@@ -1,3 +1,5 @@
+package Gold.EC.DP6;
+
 import java.io.*;
 import java.util.*;
 /*
