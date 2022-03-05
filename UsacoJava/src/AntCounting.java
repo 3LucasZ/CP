@@ -1,6 +1,15 @@
 import java.io.*;
 import java.util.StringTokenizer;
-
+/*
+Ant Counting
+Gold Advanced B 6
+DP - counting
+thoughts:
+extremely easy dp
+base case: dp[size=0][family=any] = 1
+transition:
+dp[size][family]=sum(dp[size][family-1], ..., dp[size-famsize][family-1])
+ */
 public class AntCounting {
     //io
     static boolean submission = false;
@@ -18,6 +27,7 @@ public class AntCounting {
 
     //helper
     static long MOD=(long)1e6;
+
     public static void main(String[] args) throws IOException {
         //io
         if (submission) {
@@ -39,14 +49,27 @@ public class AntCounting {
             int fam = Integer.parseInt(br.readLine());
             famSize[fam]++;
         }
-        //logic: dp[last fam][set size]
-        dp = new long[F+1][B+1];
-        for (int i=1;i<=F;i++){
-            //for (int j=)
+
+        //logic: dp[set size][last fam]
+        dp = new long[B+1][F+1];
+        for (int f=0;f<=F;f++) dp[0][f] = 1;
+        for (int size=1;size<=B;size++){
+            for (int cur=1;cur<=F;cur++){
+                long tot = 0;
+                for (int prevSize=size-famSize[cur];prevSize<=size;prevSize++){
+                    if (prevSize < 0) continue;
+                    tot=(tot+dp[prevSize][cur-1])%MOD;
+                }
+                dp[size][cur]=tot;
+            }
         }
 
         //turn in answer
-        out.println();
+        long ans = 0;
+        for (int i=S;i<=B;i++){
+            ans=(ans+dp[i][F])%MOD;
+        }
+        out.println(ans);
         out.close();
     }
 }
