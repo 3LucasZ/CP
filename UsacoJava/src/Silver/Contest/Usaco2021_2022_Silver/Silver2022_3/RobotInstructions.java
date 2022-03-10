@@ -1,3 +1,5 @@
+package Silver.Contest.Usaco2021_2022_Silver.Silver2022_3;
+
 import java.io.*;
 import java.util.*;
 /*
