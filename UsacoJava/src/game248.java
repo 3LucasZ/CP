@@ -1,21 +1,13 @@
-package Misc.Boilerplate;
-
 import java.io.*;
 
-/*
-LANG: JAVA
-TASK: prob
- */
-
-public class TrainingGatewayTemplate {
+public class game248 {
     //io
     static boolean submission = false;
     static PrintWriter out;
     static BufferedReader br;
-
+    static boolean debug=true;
     //param
     static int N;
-
     public static void main(String[] args) throws IOException {
         //io
         if (submission) {
@@ -26,12 +18,9 @@ public class TrainingGatewayTemplate {
             br = new BufferedReader(new InputStreamReader(System.in));
             out = new PrintWriter(System.out);
         }
-
         //parse input
         N = Integer.parseInt(br.readLine());
-
         //logic
-
         //turn in answer
         out.println();
         out.close();

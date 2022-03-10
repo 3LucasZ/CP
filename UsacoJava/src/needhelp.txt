@@ -5,11 +5,6 @@ Problem 3. Clock Tree
 Trees - Normal
 EXTREMELY EXTREMELY STRANGE
 
-USACO 2020 January Contest, Silver
-Problem 1. Berry Picking
-Greedy + sorting - normal
-VERY STRANGE
-
 USACO 2019 US Open Contest, Silver
 Problem 2. Cow Steeplechase II
 Practice
@@ -21,11 +16,6 @@ Problem 2. Loan Repayment
 Binary Search - very hard
 HAD TO COPY!
 
-USACO 2019 December Contest, Silver
-Problem 2. Meetings
-Custom Comparator/Coordination compression - very hard
-TOO HARD!
-
 USACO 2019 US Open Contest, Silver
 Problem 1. Left Out
 Pure problem solving - crazy
@@ -35,3 +25,10 @@ USACO 2020 US Open Contest, Silver
 Problem 3. The Moo Particle
 Practice
 A LITTLE STRANGE
+
+ROBOT INSTRUCTIONS (Implementation)
+
+PAINTING THE BARN (GOLD, implementation)
+
+CEREAL 2 (logic)
+
