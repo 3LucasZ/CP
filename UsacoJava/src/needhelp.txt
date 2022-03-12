@@ -26,8 +26,6 @@ Problem 3. The Moo Particle
 Practice
 A LITTLE STRANGE
 
-ROBOT INSTRUCTIONS (Implementation)
-
 PAINTING THE BARN (GOLD, implementation)
 
 CEREAL 2 (logic)
