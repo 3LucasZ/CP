@@ -1,9 +1,16 @@
+package Gold.UsacoGuideGold.MST;
+
 import java.io.*;
 import java.util.*;
 /*
 CSES Problem Set
 Road Preparation
-USACO Gold Guide - MST
+USACO Gold Guide - MST - Easy Example
+Thoughts:
+FIRST ever MST algorithm using Prim:
+start with vertex (arbitrary)
+greedily add nodes based on closest to current MST
+O(ElogE) time
  */
 public class RoadPreparationPrim {
     //io
