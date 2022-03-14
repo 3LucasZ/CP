@@ -1,3 +1,5 @@
+package Procrastinate;
+
 import java.io.*;
 import java.util.*;
 
@@ -59,19 +61,38 @@ public class Odometer {
     }
 
     public static long G1(int[] arr, int tar){
+        //dp[dig][und][freq][is0]
         int N = arr.length;
-        //dp[dig][freq][leq][fir]
-        long dp[][][][] = new long[N+1][50][2][2];
+        long dp[][][][] = new long[N+1][2][50][2];
         dp[0][25][0][1] = 1;
         for (int dig=0;dig<N;dig++){
             for (int freq=0;freq<=49;freq++){
-                for (int add=0;add<10;add++){
-                    if (add==tar){
+                for (int nxt=0;nxt<10;nxt++){
+                    for (int und=0;und<2;und++){
+                        for (int is0=0;is0<2;is0++){
+                            //not under, next > cap
+                            if (und==0 && nxt > arr[dig+1]) continue;
 
+                            //adding zero to already zero
+                            if (is0==1 && nxt == 0) {
+                                dp[dig+1][und][freq][is0]+=dp[dig][und][freq][is0];
+                                continue;
+                            }
+
+                            //not under, next < cap
+                            if (und==0 && nxt<arr[dig]) {
+                                //tar add
+                                if (nxt==tar) dp[dig+1][1][freq+1][is0]+=dp[dig][0][freq][is0];
+                                else dp[dig+1][1][freq][is0]+=dp[dig][0][freq][is0];
+                            }
+
+                            // under
+                            if (und==1){
+                                //tar add
+                                //if (nxt==tar) dp[dig+1][1][freq+1][is0]+=dp[dig][1]
+                            }
+                        }
                     }
-                    //freq+1, leq, fir
-                    dp[dig+1][freq+1][1][1] += dp[dig][freq][1][0];
-                   // dp[dig+1][freq+1][1][1] += dp[dig][freq+1][]
                 }
             }
         }
