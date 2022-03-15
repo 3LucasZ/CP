@@ -13,6 +13,11 @@ Solved during downtime (ez)
 add initial string to queue
 keep popping queue and adding new strings based off of that (with string hashing)
 once 100 new strings found, print ops used :)
+
+REMARK:
+logic and everything was spot on, but string hashing and hash set not needed.
+We can check with O(K) time if a string has been visited yet ._., takes O(N) for hashing per string btw so this is
+simpler implementation and same runtime... welp you win some you lose some :)
  */
 public class SubsequencesEasy1 {
     //io
