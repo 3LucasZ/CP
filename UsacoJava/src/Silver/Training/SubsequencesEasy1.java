@@ -1,3 +1,5 @@
+package Silver.Training;
+
 import java.io.*;
 import java.util.*;
 
