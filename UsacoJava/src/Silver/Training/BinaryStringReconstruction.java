@@ -10,6 +10,11 @@ Tags: 1500, greedy, constructive, brute force, 2-sat
 Thoughts:
 casing for str[i] = 0 or 1 and also dummy variables for 1...X and N..X+N
 contradiction -> -1
+
+alt:
+greedy make everything 1
+solve for forced 0's
+ret -1 or str if determinant
  */
 public class BinaryStringReconstruction {
     //io
