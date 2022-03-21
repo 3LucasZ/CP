@@ -1,3 +1,5 @@
+package Procrastinate;
+
 public class LongestCommonSubsequence {
     private static class Solution {
         int[][] longestDP;

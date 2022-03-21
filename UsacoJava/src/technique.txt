@@ -1,0 +1,12 @@
+
+
+Interval Problems
+- process by point
+
+Sweep Line
+- define line by rightmost included element on the left side
+
+Order
+- order[1..N] and use (a,b)->arr[a]-arr[b]
+
+

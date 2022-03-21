@@ -1,3 +1,5 @@
+package Procrastinate;
+
 import java.io.*;
 import java.util.StringTokenizer;
 

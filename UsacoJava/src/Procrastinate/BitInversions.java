@@ -1,4 +1,4 @@
-/*
+package Procrastinate;/*
 CSES Problem Set
 Bit Inversions
 USACO Silver Guide - More Ops on Sorted Sets - Hard Example

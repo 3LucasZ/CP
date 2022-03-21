@@ -1,3 +1,5 @@
+package Procrastinate;
+
 import java.io.*;
 /*
 USACO 2012 November Contest, Silver

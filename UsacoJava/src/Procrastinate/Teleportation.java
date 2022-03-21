@@ -1,4 +1,4 @@
-/*
+package Procrastinate;/*
 USACO 2018 February Contest, Silver
 Problem 3. Teleportation
 USACO Silver Practice
