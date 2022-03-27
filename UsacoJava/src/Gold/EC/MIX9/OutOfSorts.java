@@ -13,8 +13,8 @@ ans > 0
  */
 public class OutOfSorts {
     //io
-    static boolean submission = true;
-    static boolean debug = false;
+    static boolean submission = false;
+    static boolean debug = true;
     static PrintWriter out;
     static BufferedReader br;
 

@@ -1,5 +1,3 @@
-package Procrastinate;
-
 import java.io.*;
 import java.util.*;
 /*
@@ -11,8 +9,10 @@ public class zerosum {
     static boolean submission = false;
     static PrintWriter out;
     static BufferedReader br;
+
     //param
     static int N;
+    static int[] arr;
 
     public static void main(String[] args) throws IOException {
         //io
@@ -23,19 +23,36 @@ public class zerosum {
             br = new BufferedReader(new InputStreamReader(System.in));
             out = new PrintWriter(System.out);
         }
+
         //parse input
         N = Integer.parseInt(br.readLine());
-        int[] temp = new int[2 * N];
-        for (int i = 0; i < 2 * N; i += 2) {
-            temp[i] = i;
-            //temp[i+1]=
+        arr = new int[2*N-1];
+        for (int i=0;i<2*N-1;i+=2) {
+            arr[i] = (i+2)/2;
         }
+
         //logic
         for (int i = 0; i < Math.pow(3, N - 1); i++) {
-
+            out.println(Arrays.toString(gen(i)));
         }
-        //turn in answer
-        out.println();
+
+
         out.close();
+    }
+
+    public static int[] gen(int num){
+        int[] ret=Arrays.copyOf(arr, 2*N-1);
+        for (int i=0;i<N-1;i++){
+            int op = num%3;
+            ret[2*N-2*i-3]=op;
+            num/=3;
+        }
+        return ret;
+    }
+
+    public static int res(int[] arr){
+        ArrayList<Integer> arr2 = new ArrayList<>();
+        //for (int i=0;i)
+        return 0;
     }
 }
