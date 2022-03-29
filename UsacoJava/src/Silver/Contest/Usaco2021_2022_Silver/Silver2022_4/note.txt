@@ -1,0 +1,7 @@
+WELP... 4TH TIMES THE CHARM!
+1000/1000 insta promote, 1 hr 30 min left
+1. Visits (Fancy graph observations + techniques)
+2. Subset Equality (Filtering using transitivity, preprocessing, hashset)
+3. COW Operations (1-subcase & 2-full mark) (inverse function, bijection, greedy, compression, prefix compression, 1-index)
+
+Extremely fun and difficult problems, who puts this stuff on silver??
