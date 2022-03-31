@@ -1,11 +1,16 @@
+package TrainingGateway.Chapter2;
+
 import java.io.*;
 import java.text.DecimalFormat;
 import java.util.StringTokenizer;
-
+/*
+PROB: cowtour
+LANG: JAVA
+ */
 public class cowtour {
     //io
-    static boolean debug = true;
-    static boolean submission = false;
+    static boolean debug = false;
+    static boolean submission = true;
     static PrintWriter out;
     static BufferedReader br;
 
@@ -22,8 +27,8 @@ public class cowtour {
     public static void main(String[] args) throws IOException {
         //io
         if (submission) {
-            br = new BufferedReader(new FileReader(".in"));
-            out = new PrintWriter(new BufferedWriter(new FileWriter(".out")));
+            br = new BufferedReader(new FileReader("cowtour.in"));
+            out = new PrintWriter(new BufferedWriter(new FileWriter("cowtour.out")));
         }
         else {
             br = new BufferedReader(new InputStreamReader(System.in));
@@ -43,6 +48,7 @@ public class cowtour {
             String str = br.readLine();
             for (int v=0;v<N;v++){
                 connected[u][v]=str.charAt(v)=='1';
+                if (u==v) connected[u][v]=true;
             }
         }
 
@@ -52,10 +58,16 @@ public class cowtour {
         for (int u=0;u<N;u++) for (int v=0;v<N;v++) if (connected[u][v]) dist[u][v]=getDistance(u,v);
         if (debug) print(dist);
         for (int m=0;m<N;m++) for (int u=0;u<N;u++) for (int v=0;v<N;v++) dist[u][v]=Math.min(dist[u][v],dist[u][m]+dist[m][v]);
-
+        if (debug) print(dist);
 
         //bash edges
         double ans = Double.MAX_VALUE;
+        double edgeCase = 0;
+        for (int u=0;u<N;u++){
+            for (int v=0;v<N;v++){
+                if (!equals(dist[u][v],INF)) edgeCase = Math.max(edgeCase,dist[u][v]);
+            }
+        }
         for (int u=0;u<N;u++){
             for (int v=0;v<N;v++){
                 if (!equals(dist[u][v],INF)) continue;
@@ -63,12 +75,13 @@ public class cowtour {
                 for (int m=0;m<N;m++) if (!equals(dist[u][m],INF)) uMAX = Math.max(dist[u][m],uMAX);
                 double vMAX = 0;
                 for (int m=0;m<N;m++) if (!equals(dist[v][m],INF)) vMAX = Math.max(dist[v][m],vMAX);
+                if (debug) System.out.println(u+", "+v+" "+(getDistance(u,v)+uMAX+vMAX));
                 ans = Math.min(ans, getDistance(u,v)+uMAX+vMAX);
             }
         }
 
         //turn in answer
-        out.println(ans);
+        out.println(new DecimalFormat(".000000").format(Math.max(edgeCase,ans)));
         out.close();
     }
 
