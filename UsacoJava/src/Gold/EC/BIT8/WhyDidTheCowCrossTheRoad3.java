@@ -18,7 +18,7 @@ nice, kinda simple problem :)
  */
 public class WhyDidTheCowCrossTheRoad3 {
     //io
-    static boolean submission = false;
+    static boolean submission = true;
     static PrintWriter out;
     static BufferedReader br;
     static boolean debug = false;
@@ -33,8 +33,8 @@ public class WhyDidTheCowCrossTheRoad3 {
     public static void main(String[] args) throws IOException {
         //io
         if (submission) {
-            br = new BufferedReader(new FileReader(".in"));
-            out = new PrintWriter(new BufferedWriter(new FileWriter(".out")));
+            br = new BufferedReader(new FileReader("circlecross.in"));
+            out = new PrintWriter(new BufferedWriter(new FileWriter("circlecross.out")));
         }
         else {
             br = new BufferedReader(new InputStreamReader(System.in));
