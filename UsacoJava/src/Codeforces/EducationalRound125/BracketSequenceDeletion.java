@@ -1,4 +1,4 @@
-package EducationalRound125;
+package Codeforces.EducationalRound125;
 
 import java.io.*;
 import java.util.*;
