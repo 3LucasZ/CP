@@ -1,6 +1,7 @@
-package Misc.Boilerplate.Helper;
+package Helper;
 
 public class BIT {
+    //must be 1 indexed
     int K;
     int[] bit;
 

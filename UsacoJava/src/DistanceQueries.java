@@ -1,39 +1,66 @@
 import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.StringTokenizer;
 
-public class CompanyQueries2 {
+public class DistanceQueries {
     static boolean submission = false;
-    static boolean debug = false;
+    static boolean debug = true;
 
     public static void main(String[] args) throws IOException {
         setup("");
         StringTokenizer st = new StringTokenizer(br.readLine());
         int N = Integer.parseInt(st.nextToken());
         int Q = Integer.parseInt(st.nextToken());
-
         ArrayList<Integer>[] tree = new ArrayList[N+1]; for (int i=1;i<=N;i++) tree[i] = new ArrayList<>();
-
-        st = new StringTokenizer(br.readLine());
-        for (int i=2;i<=N;i++){
-            int u = i;
+        for (int i=0;i<N-1;i++){
+            st = new StringTokenizer(br.readLine());
+            int u = Integer.parseInt(st.nextToken());
             int v = Integer.parseInt(st.nextToken());
             tree[u].add(v);
             tree[v].add(u);
         }
-
         LCA lca = new LCA(tree, 1);
-        if (debug) {
-            for (int node=1;node<=N;node++)System.out.println(Arrays.toString(lca.ancestor[node]));
-            System.out.println(lca.getAncestor(5,1));
-        }
 
         for (int i=0;i<Q;i++){
             st = new StringTokenizer(br.readLine());
             int u = Integer.parseInt(st.nextToken());
             int v = Integer.parseInt(st.nextToken());
-            out.println(lca.getLCA(u,v));
+            int m = lca.getLCA(u,v);
+            out.println(lca.height[u]-lca.height[m]+lca.height[v]-lca.height[m]);
         }
         out.close();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    static BufferedReader br;
+    static PrintWriter out;
+    public static void setup(String fileName) throws IOException {
+        if (submission) {
+            br = new BufferedReader(new FileReader(fileName+".in"));
+            out = new PrintWriter(new BufferedWriter(new FileWriter(fileName+".out")));
+        }
+        else {
+            br = new BufferedReader(new InputStreamReader(System.in));
+            out = new PrintWriter(System.out);
+        }
     }
     private static class LCA {
         //precondition: 1-indexed parTree
@@ -107,37 +134,6 @@ public class CompanyQueries2 {
             for (int child : tree[node]){
                 if (child!=par)DFS_ancestor(child,node);
             }
-        }
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    static BufferedReader br;
-    static PrintWriter out;
-    public static void setup(String fileName) throws IOException {
-        if (submission) {
-            br = new BufferedReader(new FileReader(fileName+".in"));
-            out = new PrintWriter(new BufferedWriter(new FileWriter(fileName+".out")));
-        }
-        else {
-            br = new BufferedReader(new InputStreamReader(System.in));
-            out = new PrintWriter(System.out);
         }
     }
 }

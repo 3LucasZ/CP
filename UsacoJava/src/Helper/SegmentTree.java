@@ -1,4 +1,4 @@
-package Misc.Boilerplate.Helper;
+package Helper;
 
 import java.io.*;
 import java.util.*;

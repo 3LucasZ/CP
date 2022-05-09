@@ -1,4 +1,4 @@
-package Misc.Boilerplate.Helper;
+package Helper;
 
 public class SqrtDecomposition {
     private static class RangeQuery {
