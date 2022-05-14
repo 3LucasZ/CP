@@ -15,6 +15,8 @@ public class LCABinaryLifting {
         int[] height;
         int maxHeight = 0;
 
+        int lg = (int) (Math.log(maxHeight)/Math.log(2));
+
         public LCA(ArrayList<Integer>[] tree, int root){
             this.size=tree.length-1;
             this.root=root;
@@ -49,8 +51,8 @@ public class LCABinaryLifting {
             if (u==v) return u;
 
             //p2 binary lifting
-            int log = (int) (Math.log(height[u])/Math.log(2));
-            for (;log>=0;log--){
+
+            for (int log=lg;log>=0;log--){
                 if (ancestor[u][log]!=ancestor[v][log]){
                     u=ancestor[u][log];
                     v=ancestor[v][log];

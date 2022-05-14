@@ -1,16 +1,12 @@
-package Gold.UsacoGuideGold.PointUpdateRangeSum;
+package Helper;
+/*
+Best Segment Tree Implementation (RUPS)
+Test using: CSES Range Update Queries
+ */
 import java.io.*;
 import java.util.*;
-/*
-CSES Problem Set
-Range Update Queries
-USACO Gold Guide - PURS - Easy
-Thoughts:
-point get value
-range update +
-very nice problem!!
- */
-public class RangeUpdateQueries {
+
+public class SegmentTreeRUPS {
     //io
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static PrintWriter out = new PrintWriter(System.out);
