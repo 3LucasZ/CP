@@ -33,3 +33,10 @@ Fractions/Decimals
 - epsilon
 - rounding
 - fraction class
+
+Dynamic Programming
+* Range
+    - calc dp[start][len] (messy)
+        - for (len), for (start)
+    - calc dp[l][r]
+        - for (r=N,r--) for (l=r,l++)

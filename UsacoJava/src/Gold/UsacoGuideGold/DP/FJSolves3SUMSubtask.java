@@ -1,9 +1,9 @@
-import java.io.*;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.StringTokenizer;
+package Gold.UsacoGuideGold.DP;
 
-public class FJSolves3SUMComplete {
+import java.io.*;
+import java.util.*;
+
+public class FJSolves3SUMSubtask {
     static boolean submission = true;
     static boolean debug = false;
 
