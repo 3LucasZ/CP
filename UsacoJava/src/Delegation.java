@@ -1,6 +1,18 @@
 import java.io.*;
 import java.util.*;
+/*
+USACO 2020 February Contest, Gold
+Problem 3. Delegation
+USACO Gold Training
+- old EC problem mix11 FINALLY solved, thanks to epic usaco editorial
+beautiful tree problem, gosh, tree dp solve roots first
+tree partition into paths
+path pairing using global array, efficient array cleanup
+arbitrary root - tree dangle
 
+weird debug:
+30 min debug :) haha to find out that unpair was calculated incorrectly - causing 2 tcs wrong - dont give up!
+ */
 public class Delegation {
     static boolean submission = true;
     static boolean debug = false;
