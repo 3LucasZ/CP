@@ -2,14 +2,12 @@ import java.io.*;
 import java.util.*;
 
 public class Delegation {
-    static boolean submission = false;
-    static boolean debug = true;
+    static boolean submission = true;
+    static boolean debug = false;
 
     static int N;
     static ArrayList<Integer>[] tree;
 
-    static boolean[] ans = new boolean[N];
-    static int K = 0;
     static int[] stemLengths;
 
     public static void main(String[] args) throws IOException {
@@ -26,47 +24,60 @@ public class Delegation {
 
         stemLengths = new int[N+1];
 
-        for (K=1;K<=N-1;K++){
-            if ((N-1)%K==0 && tryPartition(K)) out.print(1);
-            else out.print(0);
+        HashSet<Integer> bad = new HashSet<>();
+        for (int K=1;K<=N-1;K++){
+            if (!bad.contains(K)&&(N-1)%K==0 && tryPartition(K)) out.print(1);
+            else {
+                for (int j=1;K*j<=N;j++){
+                    bad.add(K*j);
+                }
+                out.print(0);
+            }
         }
         out.close();
     }
-    public static boolean tryPartition(int l){
-        return DFS(1,0)==0;
+    public static boolean tryPartition(int len){
+        return DFS(1,0, len)==0;
     }
 
-    public static int DFS(int node, int par){
-        int unPaired = 0;
+    public static int DFS(int node, int par, int len){
         ArrayList<Integer> stems = new ArrayList<>();
-
         for (int child : tree[node]){
             if (child!=par) {
-                //get root stem len, if its bad, return -1 all the way to root
-                int stem = DFS(child,node);
+                //get stem
+                int stem = DFS(child,node,len);
+                //propagate bad stem
                 if (stem==-1) return -1;
-                stem++;
-                stems.add(stem);
+                //process
+                stem=(stem+1)%len;
+                if (stem!=0) stems.add(stem);
+            }
+        }
 
-                //if root stem conjugate is available
-                if (stemLengths[len-stem]>0){
-                    unPaired--;
-                    stemLengths[len-stem]--;
-                }
-                //root stem conjugate unavailable
-                else {
-                    unPaired++;
-                    stemLengths[stem]++;
-                }
+        int unPaired = 0;
+        //all children finished processing, final process
+        for (int stem : stems) {
+            //if root stem conjugate is available
+            if (stemLengths[len - stem] > 0) {
+                unPaired--;
+                stemLengths[len - stem]--;
+            }
+            //root stem conjugate unavailable
+            else {
+                unPaired++;
+                stemLengths[stem]++;
             }
         }
+
+        //clean up
+        int ret = 0;
+        for (int stem : stems){
+            if (stemLengths[stem]!=0) ret = stem;
+            stemLengths[stem]=0;
+        }
+
         //return based on stems
-        if (unPaired == 0) return 0;
-        if (unPaired == 1) {
-            for (int stem : stems){
-                if (stemLengths[stem]!=0) return stem%len;
-            }
-        }
+        if (unPaired <= 1) return ret;
         return -1;
     }
 
@@ -101,3 +112,12 @@ public class Delegation {
         }
     }
 }
+/*
+diff:
+me: 11011000010000000001
+comp: 1100100001
+
+problemo?
+me: 11101
+comp: 11001
+ */
