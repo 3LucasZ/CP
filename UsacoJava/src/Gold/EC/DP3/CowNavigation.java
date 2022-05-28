@@ -15,7 +15,7 @@ Query, visited, state, bfs to track states
  */
 public class CowNavigation {
     //io
-    static boolean submission = false;
+    static boolean submission = true;
     static boolean debug=false;
     static PrintWriter out;
     static BufferedReader br;
@@ -32,8 +32,8 @@ public class CowNavigation {
     public static void main(String[] args) throws IOException {
         //io
         if (submission) {
-            br = new BufferedReader(new FileReader(".in"));
-            out = new PrintWriter(new BufferedWriter(new FileWriter(".out")));
+            br = new BufferedReader(new FileReader("cownav.in"));
+            out = new PrintWriter(new BufferedWriter(new FileWriter("cownav.out")));
         }
         else {
             br = new BufferedReader(new InputStreamReader(System.in));

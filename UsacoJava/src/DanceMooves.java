@@ -13,7 +13,7 @@ Inspiration from:
 Disjoint Cycles problem
   - solve cycles independently, visited tracker
   - add mini moves O(2K) using a position arrayList
-  - use a union multiset for sliding window O(2K+N) algorithm 
+  - use a union multiset for sliding window O(2K+N) algorithm
  */
 public class DanceMooves {
     static boolean submission = false;
