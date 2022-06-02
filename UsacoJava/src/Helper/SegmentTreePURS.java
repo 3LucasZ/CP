@@ -16,7 +16,22 @@ public class SegmentTreePURS {
     static int Q;
 
     public static void main(String[] args) throws IOException {
+        //submission();
+        test();
+        out.close();
+    }
+    public static void test(){
+        N = 8;
+        int[] arr = {0, 7, 9, 6, 2, 3, 3, 5, 7};
+        SegTree segTree = new SegTree(N, arr);
 
+        for (int i=1;i<=N;i++){
+            for (int j=i;j<=N;j++){
+                out.println("["+i+", "+j+"]: "+segTree.sum(i,j));
+            }
+        }
+    }
+    public static void submission() throws IOException{
         StringTokenizer st = new StringTokenizer(br.readLine());
         N = Integer.parseInt(st.nextToken());
         Q = Integer.parseInt(st.nextToken());
@@ -35,7 +50,6 @@ public class SegmentTreePURS {
             if (op==1)seg.set(a, b);
             else out.println(seg.sum(a, b));
         }
-        out.close();
     }
     private static class SegTree {
         //1-indexed
@@ -43,6 +57,18 @@ public class SegmentTreePURS {
         int size;
         long[] tree;
         public SegTree(int n){
+            init(n);
+        }
+        public SegTree(int n, int[] arr){
+            init(n);
+            for (int i=1;i<=n;i++){
+                tree[i+size-1]=arr[i];
+            }
+            for (int i=size-1;i>=1;i--){
+                tree[i]=tree[i*2]+tree[i*2+1];
+            }
+        }
+        public void init(int n){
             size = 1;
             while (size < n) size *= 2;
             tree = new long[2*size+1];
