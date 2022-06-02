@@ -1,4 +1,4 @@
-Interval Problems
+Interval/Segment Problems
 - process by point
 
 Sweep Line
@@ -35,6 +35,8 @@ Fractions/Decimals
 - fraction class
 
 Dynamic Programming
+* Standard
+    - base case, transition, states
 * Range
     - calc dp[start][len] (messy)
         - for (len), for (start)
