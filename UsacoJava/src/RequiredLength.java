@@ -37,7 +37,7 @@ public class RequiredLength {
                 }
             }
             if (win) break;
-            
+
             if (debug){
                 System.out.println(curr);
             }
