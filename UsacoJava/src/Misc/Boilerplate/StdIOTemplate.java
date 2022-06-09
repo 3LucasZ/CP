@@ -3,7 +3,6 @@ package Misc.Boilerplate;
 import java.io.*;
 
 public class StdIOTemplate {
-    //io
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static PrintWriter out = new PrintWriter(System.out);
     static boolean debug = true;
