@@ -1,3 +1,5 @@
+package Gold.EC.MIX10;
+
 import java.io.*;
 import java.util.*;
 /*

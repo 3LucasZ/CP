@@ -1,3 +1,5 @@
+package Gold.UsacoGuideGold.PointUpdateRangeSum;
+
 import java.io.*;
 import java.util.*;
 

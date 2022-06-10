@@ -1,3 +1,5 @@
+package Gold.UsacoGuideGold.MST;
+
 import java.io.*;
 import java.util.*;
 public class MooNetwork {
