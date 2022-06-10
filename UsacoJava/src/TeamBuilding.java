@@ -1,6 +1,15 @@
 import java.io.*;
 import java.util.*;
-
+/*
+CodeCraft-20 (Div. 2)
+E. Team Building
+tags: bitmask dp, greedy, sortings, 2300 difficulty
+thoughts:
+looked at answer :(
+for the people with the top audValue, add them as audience (if space left) or player (if optimal)
+conventional bitmask dp mixed with greedy sorting
+nice problem!
+ */
 public class TeamBuilding {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static PrintWriter out = new PrintWriter(System.out);
