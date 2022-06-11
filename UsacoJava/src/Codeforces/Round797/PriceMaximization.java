@@ -1,3 +1,5 @@
+package Codeforces.Round797;
+
 import java.io.*;
 import java.util.*;
 
@@ -22,16 +24,19 @@ public class PriceMaximization {
         ArrayList<Integer> mod = new ArrayList<>();
         for (int i=0;i<N;i++) {
             int next = Integer.parseInt(st.nextToken());
-            if (next%K!=0) mod.add(next%K);
+            mod.add(next%K);
             ret+=next/K;
         }
 
         Collections.sort(mod);
+        int l=0;
+        int r=N-1;
         for (int i=0;i<mod.size()/2;i++){
-            int l = mod.get(i);
-            int r = mod.get(mod.size()-1-l);
-            if (l+r>=K){
+            if (mod.get(l)+mod.get(r)>=K){
                 ret++;
+                l++;r--;
+            } else {
+                l+=2;
             }
         }
 
