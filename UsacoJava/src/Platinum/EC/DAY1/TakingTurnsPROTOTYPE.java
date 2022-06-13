@@ -1,3 +1,5 @@
+package Platinum.EC.DAY1;
+
 import java.io.*;
 
 public class TakingTurnsPROTOTYPE {

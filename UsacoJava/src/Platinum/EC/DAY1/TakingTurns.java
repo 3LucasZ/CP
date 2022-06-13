@@ -1,3 +1,5 @@
+package Platinum.EC.DAY1;
+
 import java.io.*;
 /*
 USACO 2010 Gold January P1
