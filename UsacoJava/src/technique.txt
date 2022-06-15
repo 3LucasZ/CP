@@ -13,8 +13,8 @@ Query for ancestor-descendant relationship in a tree O(N+Q)
 - ancestor_in < child_in && ancestor_out > child_out
 
 LCA
-- Method1: Binary Lifting
-- Method2: Euler Tour
+* Binary Lifting
+* Euler Tour
 
 Online queries
 - BIT
@@ -27,7 +27,18 @@ Offline queries
 - Sparse Table
 
 Geometry
-- :( its just hard
+- 3 points ccw:
+    - based on Area(triangle): -1, 0, 1
+- 2 lines intersection:
+    for each line, the 2 other points are opposites in direction
+- theta:
+    dy/(dy+dx) is extremely different to an angle but has same ordering properties, returns a number [0,360]
+- convex hull:
+    package wrap O(NH)
+    Graham Scan O(NlogN)
+        find point with lowest y
+        compute theta to all other points and sort by least
+        add so that perimeter is always ccw
 
 Fractions/Decimals
 - epsilon
@@ -42,3 +53,10 @@ Dynamic Programming
         - for (len), for (start)
     - calc dp[l][r]
         - for (r=N,r--) for (l=r,l++)
+* Sets
+    - Usually N*2^N complexity
+    - every subset is a state
+    - transition example: 110111001 -> 111111001
+
+Meet in the Middle
+- splitting 2^N to N*2^(N/2)
