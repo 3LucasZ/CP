@@ -60,3 +60,9 @@ Dynamic Programming
 
 Meet in the Middle
 - splitting 2^N to N*2^(N/2)
+
+Fast Powers O(logN)
+pow(base,exp):
+    if(exp==0): ret 1
+    if(exp%2==1): ret base*pow(base,exp-1)
+    if (exp%2==0): ret pow(base*base,exp/2)

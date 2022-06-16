@@ -1,3 +1,5 @@
+package Codeforces.EduRound130;
+
 import java.io.*;
 import java.util.*;
 

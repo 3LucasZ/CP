@@ -1,3 +1,5 @@
+package Platinum.EC.DAY2;
+
 import java.io.*;
 import java.util.Arrays;
 import java.util.StringTokenizer;
