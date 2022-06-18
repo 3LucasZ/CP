@@ -1,4 +1,4 @@
-package Misc.Boilerplate;
+package Misc.Template;
 
 import java.io.*;
 import java.util.*;

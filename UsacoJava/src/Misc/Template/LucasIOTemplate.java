@@ -1,27 +1,12 @@
-package Misc.Boilerplate;
-
+package Misc.Template;
 import java.io.*;
-import java.util.StringTokenizer;
 
-public class MaximumSubarraySum {
+public class LucasIOTemplate {
     static boolean submission = false;
     static boolean debug = true;
 
     public static void main(String[] args) throws IOException {
         setup("");
-        int N = Integer.parseInt(br.readLine());
-        int[] A = new int[N];
-        long sum = 0;
-        long ans = Long.MIN_VALUE;
-
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        for (int i=0;i<N;i++){
-            A[i] = Integer.parseInt(st.nextToken());
-            sum = Math.max(A[i],sum+A[i]);
-            ans = Math.max(ans,sum);
-        }
-        out.println(ans);
-        out.close();
     }
 
 
