@@ -1,4 +1,4 @@
-package Platinum.EC.DAY1;
+package Platinum.EC.WARM1;
 
 import java.io.*;
 

@@ -1,76 +1,62 @@
-package Platinum.EC.DAY1;
+package Platinum.EC.WARM1;
 
 import java.io.*;
 import java.util.*;
 
-public class PromotionCounting {
+public class PromotionCountingPROTOTYPE {
     static boolean submission = false;
-    static boolean debug = false;
+    static boolean debug = true;
 
     //cow
     static int N;
     static int[] p;
 
-    //tree: euler tour
+    //tree traversal
     static ArrayList<Integer>[] tree;
-    static int timer = 0;
-    static int[] start;
-    static int[] end;
-    static int[] pos;
-
-    //greedy processing
     static BIT bit;
     static int[] ans;
 
     public static void main(String[] args) throws IOException {
-        //parse
+        //parse O(N)
         setup("promote");
         N = Integer.parseInt(br.readLine());
-        p = new int[N+1];
-        for (int i=1;i<=N;i++) p[i]=Integer.parseInt(br.readLine());
-        tree = new ArrayList[N+1]; for (int i=1;i<=N;i++) tree[i] = new ArrayList<>();
+        int A[] = new int[N+1];
+        for (int i=1;i<=N;i++)A[i]=Integer.parseInt(br.readLine());
+        tree = new ArrayList[N+1];for (int i=1;i<=N;i++) tree[i] = new ArrayList<>();
         for (int i=2;i<=N;i++){
-            int u = i;
-            int v = Integer.parseInt(br.readLine());
+            int u = Integer.parseInt(br.readLine());
+            int v = i;
             tree[u].add(v);
             tree[v].add(u);
         }
 
-        //euler tour
-        start = new int[N+1];
-        end = new int[N+1];
-        pos = new int[N+1];
-        DFS(1,0);
-        if (debug) {
-            System.out.println("Start: "+Arrays.toString(start));
-            System.out.println("End: "+Arrays.toString(end));
+        //coordinate compress proficiency ratings O(NlogN)
+        Integer pos[] = new Integer[N+1];
+        for (int i=0;i<=N;i++) pos[i]=i;
+        Arrays.sort(pos,Comparator.comparing(a->A[a]));
+        p = new int[N+1];
+        for (int i=1;i<=N;i++){
+            p[pos[i]]=i;
         }
+        if (debug) System.out.println(Arrays.toString(p));
 
-        //greedy processing
-        Integer[] process = new Integer[N+1]; for (int i=0;i<=N;i++) process[i]=i;
-        Arrays.sort(process, Comparator.comparingInt(a->-p[a]));
-        if (debug) System.out.println("Process order: "+Arrays.toString(process));
+        //running BIT tree DFS O(NlogN)
         bit = new BIT(N);
         ans = new int[N+1];
-        for (int i=0;i<N;i++){
-            ans[process[i]]=bit.rangeSum(start[process[i]],end[process[i]]);
-            bit.set(start[process[i]],1);
-        }
+        DFS(1,0);
 
         //ret
         for (int i=1;i<=N;i++) out.println(ans[i]);
         out.close();
     }
     public static void DFS(int node, int par){
-        timer++;
-        pos[timer]=node;
-        start[node]=timer;
+        bit.set(p[node],1);
+        ans[node]=bit.rangeSum(0,p[node]-1);
         for (int child : tree[node]){
-            if (child!=par) DFS(child, node);
+            if (child!=par) DFS(child,node);
         }
-        end[node]=timer;
+        bit.set(p[node],0);
     }
-
 
 
 

@@ -1,4 +1,4 @@
-package Platinum.EC.DAY2;
+package Platinum.EC.DP2;
 
 import java.io.*;
 import java.util.Arrays;
