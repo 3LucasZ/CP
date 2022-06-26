@@ -12,7 +12,7 @@ public class Geometry {
             return Math.hypot(this.x-o.x,this.y-o.y);
         }
         public static int ccw(Point a, Point b, Point c){
-            double area =  (b.x-a.x)*(c.y-a.y) - (b.y-a.y)*(c.x-a.x);
+            long area = (long) (b.x - a.x) *(c.y-a.y) - (long) (b.y - a.y) *(c.x-a.x);
             if (area < 0) return -1;
             else if (area > 0) return 1;
             else return 0;
