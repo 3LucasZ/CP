@@ -1,8 +1,10 @@
+package Platinum.EC.GEO4;
+
 import java.io.*;
 import java.util.StringTokenizer;
 
 public class LotsOfTriangles {
-    static boolean submission = false;
+    static boolean submission = true;
     static boolean debug = true;
 
     static int N;
