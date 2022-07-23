@@ -3,8 +3,8 @@ package Platinum.EC.WARM1;
 import java.io.*;
 
 public class BalancedCowBreeds {
-    static boolean submission = true;
-    static boolean debug = true;
+    static boolean submission = false;
+    static boolean debug = false;
 
     static int N;
     static String str;

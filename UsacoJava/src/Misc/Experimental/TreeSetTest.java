@@ -16,6 +16,7 @@ public class TreeSetTest {
         pies.add(new Pie(3, 3,5));
 
         System.out.println(pies);
+        System.out.println(pies.higher(new Pie(0,0,0)));
     }
 
     private static class Pie {
