@@ -2,8 +2,8 @@ import java.io.*;
 import java.util.*;
 
 public class SkiCourseRating {
-    static boolean submission = false;
-    static boolean debug = true;
+    static boolean submission = true;
+    static boolean debug = false;
 
     static int R;
     static int C;
@@ -14,8 +14,8 @@ public class SkiCourseRating {
 
     static ArrayList<Edge> edges = new ArrayList<>();
 
-    static int[] dr = {0,0,1,-1};
-    static int[] dc = {1,-1,0,0};
+    static int[] dr = {-1,0};
+    static int[] dc = {0,-1};
 
     static long ans = 0;
 
@@ -45,7 +45,7 @@ public class SkiCourseRating {
         //create edges
         for (int r=0;r<R;r++){
             for (int c=0;c<C;c++){
-                for (int i=0;i<4;i++){
+                for (int i=0;i<2;i++){
                     int r2=r+dr[i];
                     int c2=c+dc[i];
                     if (r2<0||r2>=R||c2<0||c2>=C) continue;
@@ -55,16 +55,16 @@ public class SkiCourseRating {
         }
 
         //Add edges by min weight and use modified DSU
-        Collections.sort(edges,(a,b)->a.cost);
-        if (debug){
-            System.out.println(edges);
-        }
+        edges.sort(Comparator.comparingInt(a -> a.cost));
+//        if (debug)System.out.println(edges);
+
         DSU dsu = new DSU(R*C);
         for (Edge e : edges){
             dsu.union(e.u,e.v);
-            if (dsu.height[dsu.get(e.u)]>=T){
-                ans += (long) e.cost * dsu.skis[dsu.get(e.u)];
-                dsu.skis[dsu.get(e.u)]=0;
+            int parent = dsu.get(e.u);
+            if (dsu.height[parent]>=T){
+                ans += (long)e.cost * dsu.skis[parent];
+                dsu.skis[parent]=0;
             }
         }
 
@@ -112,7 +112,7 @@ public class SkiCourseRating {
             else {
                 parent[v_parent] = u_parent;
                 height[u_parent] += height[v_parent];
-                skis[v_parent] += skis[u_parent];
+                skis[u_parent] += skis[v_parent];
             }
         }
         //check fo connected components
