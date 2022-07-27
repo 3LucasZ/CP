@@ -39,6 +39,8 @@ Geometry
         find point with lowest y
         compute theta to all other points and sort by least
         add so that perimeter is always ccw
+- matrix:
+    45 degree rotation: (x,y) ->
 
 Fractions/Decimals
 - epsilon
@@ -66,3 +68,4 @@ pow(base,exp):
     if(exp==0): ret 1
     if(exp%2==1): ret base*pow(base,exp-1)
     if (exp%2==0): ret pow(base*base,exp/2)
+
