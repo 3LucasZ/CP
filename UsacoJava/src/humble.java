@@ -14,29 +14,31 @@ public class humble {
         StringTokenizer st = new StringTokenizer(br.readLine());
         int K = Integer.parseInt(st.nextToken());
         int N = Integer.parseInt(st.nextToken());
-        int[] ps = new int[K];
+        long[] ps = new long[K];
         st = new StringTokenizer(br.readLine());
-        for (int i=0;i<K;i++){
-            ps[i] = Integer.parseInt(st.nextToken());
-        }
+        for (int i=0;i<K;i++)ps[i] = Integer.parseInt(st.nextToken());
 
-        HashSet<Long> seen = new HashSet<>();
-        PriorityQueue<Long> pq = new PriorityQueue<>();
+        PriorityQueue<Long> min = new PriorityQueue<>(Comparator.comparingLong(a->a));
+        PriorityQueue<Long> max = new PriorityQueue<>(Comparator.comparingLong(a->-a));
+        min.add(1L);
+        max.add(1L);
 
-        pq.add(1L);
-        for (int i=0;i<N;i++){
-            long next = pq.poll();
-            if (debug) System.out.println(next);
-            for (int p : ps){
-                if (seen.contains(next*p));
-                else {
-                    seen.add(next*p);
-                    pq.add(next*p);
+        for (int i=0;i<N;i++) {
+            long next = min.peek();
+            min.remove(next);
+            max.remove(next);
+            for (long p : ps){
+                long add = next*p;
+                min.add(add);
+                max.add(add);
+                if (min.size()>N){
+
                 }
             }
         }
 
-        out.println(pq.poll());
+
+
         out.close();
     }
 
