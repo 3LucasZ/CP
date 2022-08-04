@@ -1,4 +1,4 @@
-package TrainingGateway;/*
+package TrainingGateway.Chapter3;/*
 PROB: agrinet
 LANG: JAVA
  */

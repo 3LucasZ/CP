@@ -31,37 +31,29 @@ public class Djikstra {
         }
 
         //init
-        PriorityQueue<Pair> pq = new PriorityQueue<>((a,b)->a.distance-b.distance);
+        PriorityQueue<Edge> pq = new PriorityQueue<>((a,b)->a.weight-b.weight);
         int[] distance = new int[N+1];
         boolean[] processed = new boolean[N+1];
         Arrays.fill(distance, INF);
         //source node: 1
         distance[1]=0;
-        pq.add(new Pair(0, 1));
+        pq.add(new Edge(1, 0));
 
         //djikstra sssp
         while (!pq.isEmpty()) {
-            Pair next = pq.poll();
+            Edge next = pq.poll();
             if (processed[next.node]) continue;
             processed[next.node]=true;
             for (Edge child : adjList[next.node]) {
                 if (distance[next.node]+child.weight < distance[child.node]){
                     distance[child.node]=distance[next.node]+child.weight;
-                    pq.add(new Pair(distance[child.node], child.node));
+                    pq.add(new Edge(child.node,distance[child.node]));
                 }
             }
         }
 
         out.println(Arrays.toString(distance));
         out.close();
-    }
-    private static class Pair {
-        int distance;
-        int node;
-        public Pair(int d, int n){
-            distance=d;
-            node=n;
-        }
     }
     private static class Edge {
         int node;

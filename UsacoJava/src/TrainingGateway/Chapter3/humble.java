@@ -1,3 +1,5 @@
+package TrainingGateway.Chapter3;
+
 import java.io.*;
 import java.util.*;
 
@@ -10,35 +12,35 @@ public class humble {
     static boolean debug = false;
 
     public static void main(String[] args) throws IOException {
+        //parse
         setup("humble");
         StringTokenizer st = new StringTokenizer(br.readLine());
         int K = Integer.parseInt(st.nextToken());
         int N = Integer.parseInt(st.nextToken());
-        long[] ps = new long[K];
+        int[] primes = new int[K];
         st = new StringTokenizer(br.readLine());
-        for (int i=0;i<K;i++)ps[i] = Integer.parseInt(st.nextToken());
+        for (int i=0;i<K;i++)primes[i] = Integer.parseInt(st.nextToken());
 
-        PriorityQueue<Long> min = new PriorityQueue<>(Comparator.comparingLong(a->a));
-        PriorityQueue<Long> max = new PriorityQueue<>(Comparator.comparingLong(a->-a));
-        min.add(1L);
-        max.add(1L);
-
-        for (int i=0;i<N;i++) {
-            long next = min.peek();
-            min.remove(next);
-            max.remove(next);
-            for (long p : ps){
-                long add = next*p;
-                min.add(add);
-                max.add(add);
-                if (min.size()>N){
-
+        //constructive: humble
+        int[] humble = new int[N+1];
+        int[] primej = new int[K];
+        humble[0]=1;
+        for (int i=1;i<=N;i++){
+            int next = Integer.MAX_VALUE;
+            for (int p=0;p<K;p++){
+                int prime = primes[p];
+                for (;primej[p]<i;primej[p]++) {
+                    if (humble[primej[p]]*prime > humble[i-1]){
+                        next = Math.min(humble[primej[p]]*prime,next);
+                        break;
+                    }
                 }
             }
+            humble[i]=next;
         }
 
-
-
+        //ret
+        out.println(humble[N]);
         out.close();
     }
 
