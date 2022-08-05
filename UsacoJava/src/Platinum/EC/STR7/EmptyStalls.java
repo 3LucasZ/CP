@@ -1,3 +1,5 @@
+package Platinum.EC.STR7;
+
 import java.io.*;
 import java.util.Arrays;
 import java.util.StringTokenizer;
