@@ -1,4 +1,4 @@
-package Misc.Experimental;
+package Experimental;
 
 public class SqrtTesting {
     public static void main(String[] args){

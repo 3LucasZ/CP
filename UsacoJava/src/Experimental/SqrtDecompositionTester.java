@@ -1,4 +1,4 @@
-package Misc.Experimental;
+package Experimental;
 
 public class SqrtDecompositionTester {
     static boolean debug = true;

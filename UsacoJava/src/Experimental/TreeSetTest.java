@@ -1,4 +1,4 @@
-package Misc.Experimental;
+package Experimental;
 
 import java.util.TreeSet;
 
