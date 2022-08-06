@@ -1,3 +1,5 @@
+package TrainingGateway.Chapter3;
+
 import java.io.*;
 import java.util.StringTokenizer;
 /*
@@ -24,11 +26,11 @@ public class fence9 {
 
         Line left = new Line(x0,y0,(double)(y1-y0)/(x1-x0));
         Line right = new Line(x2,y2,(double)(y1-y2)/(x1-x2));
-
+        double e = 0.0000001;
         int ans = 0;
         for (int y=1;y<=y1-1;y++){
-            int lx = (int) Math.ceil(left.getXFromY(y));
-            int rx = (int) Math.floor(right.getXFromY(y));
+            int lx = (int) Math.ceil(left.getXFromY(y)+e);
+            int rx = (int) Math.floor(right.getXFromY(y)-e);
             ans += rx-lx+1;
         }
 
