@@ -1,3 +1,5 @@
+package Gold.UsacoGuideGold.BFS;
+
 import java.io.*;
 import java.util.*;
 

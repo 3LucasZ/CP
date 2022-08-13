@@ -1,6 +1,12 @@
+package Gold.UsacoGuideGold.BFS;
+
 import java.io.*;
 import java.util.*;
-
+/*
+UNFINISHED
+SKIPPED
+(easy logic, hard implementation)
+ */
 public class SwapGame {
     static boolean submission = false;
     static boolean debug = true;
