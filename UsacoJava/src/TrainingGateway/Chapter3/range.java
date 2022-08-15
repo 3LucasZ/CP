@@ -1,7 +1,6 @@
 package TrainingGateway.Chapter3;
 
 import java.io.*;
-import java.util.StringTokenizer;
 
 /*
 PROB: range

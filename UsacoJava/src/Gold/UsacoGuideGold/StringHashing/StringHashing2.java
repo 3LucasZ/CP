@@ -3,8 +3,8 @@ package Gold.UsacoGuideGold.StringHashing;
 public class StringHashing2 {
 
     //hash helpers
-    final static long A = (long)1e9+7;
-    final static long B = (long)1e9+9;
+    static long A = (long)2e9+11;
+    static long B = (long)2e9+33;
     static long[] pow;
     static long[] preHash;
 
