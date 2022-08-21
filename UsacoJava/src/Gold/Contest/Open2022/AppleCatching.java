@@ -1,4 +1,4 @@
-package Gold.Contest;
+package Gold.Contest.Open2022;
 
 import com.sun.source.tree.Tree;
 

@@ -1,19 +1,21 @@
+package Gold.Contest.Jan2022;
+
 import java.io.*;
 import java.util.*;
 /*
 PROB: Drought
 LANG: JAVA
 */
-public class Drought {
+public class Drought2 {
     static boolean submission = false;
-    static boolean debug = true;
+    static boolean debug = false;
 
     static int N;
     static int[] H;
 
     static int MAX_F = Integer.MAX_VALUE;
     static int MAX_H = Integer.MIN_VALUE;
-    static int MOD = (int)(1e9+7);
+    static long MOD = (int)(1e9+7);
 
     public static void main(String[] args) throws IOException {
         //parse
@@ -28,21 +30,22 @@ public class Drought {
         }
 
         //dp
-        int ans = 0;
-        int[][][] dp = new int[MAX_F + 1][N][MAX_H + 1];
+        long ans = 0;
+        long[][][] dp = new long[MAX_F + 1][N][MAX_H + 1];
         for (int F = 0; F <= MAX_F; F++) {
-            dp[F][0][F] = 1;
-            for (int i = 0; i < N-1; i++) {
-                for (int val = F; val <= H[i]; val++) {
-                    for (int add = 0; add <= Math.min(H[i] - val, H[i + 1]-F); add++) {
-                        dp[F][i + 1][F+add] = (dp[F][i + 1][F+add] + dp[F][i][val]) % MOD;
-                    }
+            //base case
+            for (int val=F;val<=H[0];val++) dp[F][0][val] = 1;
+            //transitions
+            for (int i = 1; i < N; i++) {
+                for (int add = 0; add <= H[i]-F; add++) {
+                    if (add!=0) dp[F][i][F+add]=dp[F][i][F+add-1];
+                    if (H[i-1]-add<0) continue;
+                    dp[F][i][F+add]=(dp[F][i][F+add]+dp[F][i-1][H[i-1]-add])%MOD;
                 }
+                if (debug) System.out.println("[F: "+F+", i: "+i+"] "+Arrays.toString(dp[F][i]));
             }
             if (N%2==1 || F==0) {
-                for (int last = 0; last <= H[N - 1]; last++) {
-                    ans = (ans + dp[F][N - 1][last]) % MOD;
-                }
+                ans = (ans + dp[F][N-1][H[N-1]]) % MOD;
             }
         }
 
