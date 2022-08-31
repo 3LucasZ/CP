@@ -20,7 +20,7 @@ really enjoyable problem :)
  */
 public class Haircut {
     //io
-    static boolean submission = false;
+    static boolean submission = true;
     static boolean debug = false;
     static PrintWriter out;
     static BufferedReader br;
@@ -32,8 +32,8 @@ public class Haircut {
     public static void main(String[] args) throws IOException {
         //io
         if (submission) {
-            br = new BufferedReader(new FileReader(".in"));
-            out = new PrintWriter(new BufferedWriter(new FileWriter(".out")));
+            br = new BufferedReader(new FileReader("haircut.in"));
+            out = new PrintWriter(new BufferedWriter(new FileWriter("haircut.out")));
         }
         else {
             br = new BufferedReader(new InputStreamReader(System.in));
