@@ -1,20 +1,11 @@
 # Solutions to CP Problems
-
-ACSL
-- 2022
-
 USACO
-- USACO Guide
-- Past USACO
-- Training Gateway
-- Bronze, Silver, Gold
-
+USACO Guide
+Training Gateway
 Codeforces
-- Practice
+CSES
 
-Codejam/Kickstart
-- Random
-
-Misc
-- Templates
-- stats counter
+# Templates
+Important DS
+Important Techniques
+IO
