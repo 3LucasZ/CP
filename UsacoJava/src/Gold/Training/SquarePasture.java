@@ -67,7 +67,7 @@ public class SquarePasture {
                 //init square as [a.x,b.x] x [lo,lo+len]
                 //square bottom cow
                 int l = 0;
-                while (l<K&&lo>=y[l]+1) l++;
+                while (l<K&&y[l]+1<=lo) l++;
 
                 //square top cow
                 int r = -1;
