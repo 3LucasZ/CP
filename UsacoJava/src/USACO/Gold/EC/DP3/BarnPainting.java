@@ -11,7 +11,7 @@ smart counting N1(c1 + c2) * N2(c1 + c2) ...
  */
 public class BarnPainting {
     //io
-    static boolean submission = false;
+    static boolean submission = true;
     static boolean debug = false;
     static PrintWriter out;
     static BufferedReader br;
