@@ -1,4 +1,5 @@
-package USACO.Gold.EC.DP2;/*
+package USACO.Gold.EC.DP2;
+/*
 Talent Show
 Gold Advanced B 2
 DP - Knapsack DP
@@ -15,10 +16,9 @@ broken with a bit of logic
 import java.io.*;
 import java.util.*;
 public class TalentShow {
-    //io
     static boolean submission = true;
-    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    static PrintWriter out = new PrintWriter(System.out);
+    static boolean debug = true;
+
     //input
     static int N;
     static int W;
@@ -30,6 +30,7 @@ public class TalentShow {
     static int[] dp;
     public static void main(String[] args) throws IOException {
         //parse input
+        setup("talent");
         StringTokenizer st = new StringTokenizer(br.readLine());
         N = Integer.parseInt(st.nextToken());
         weight = new int[N];
@@ -62,5 +63,37 @@ public class TalentShow {
         }
         out.println((int)(answer * 1000));
         out.close();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    static BufferedReader br;
+    static PrintWriter out;
+    public static void setup(String fileName) throws IOException {
+        if (submission) {
+            br = new BufferedReader(new FileReader(fileName+".in"));
+            out = new PrintWriter(new BufferedWriter(new FileWriter(fileName+".out")));
+        }
+        else {
+            br = new BufferedReader(new InputStreamReader(System.in));
+            out = new PrintWriter(System.out);
+        }
     }
 }
