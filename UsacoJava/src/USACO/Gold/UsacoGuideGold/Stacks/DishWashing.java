@@ -1,3 +1,5 @@
+package USACO.Gold.UsacoGuideGold.Stacks;
+
 import com.sun.source.tree.Tree;
 
 import java.io.*;
