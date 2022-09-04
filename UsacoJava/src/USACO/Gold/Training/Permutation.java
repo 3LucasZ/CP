@@ -1,3 +1,5 @@
+package USACO.Gold.Training;
+
 import java.io.*;
 import java.util.*;
 /*
