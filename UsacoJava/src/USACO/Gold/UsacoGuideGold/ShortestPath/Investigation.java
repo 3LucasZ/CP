@@ -1,3 +1,5 @@
+package USACO.Gold.UsacoGuideGold.ShortestPath;
+
 import java.io.*;
 import java.util.*;
 /*
