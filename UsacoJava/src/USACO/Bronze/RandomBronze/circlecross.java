@@ -1,4 +1,5 @@
-package USACO.Bronze.RandomBronze;import java.io.*;
+package USACO.Bronze.RandomBronze;
+import java.io.*;
 import java.util.*;
 import java.lang.*;
 public class circlecross {

@@ -1,1 +1,2 @@
 ls -R | grep TeamBuildingPlat
+find . -print | grep -i MeetInTheMiddle
