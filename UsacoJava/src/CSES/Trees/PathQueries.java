@@ -1,3 +1,5 @@
+package CSES.Trees;
+
 import java.io.*;
 import java.util.*;
 /*
