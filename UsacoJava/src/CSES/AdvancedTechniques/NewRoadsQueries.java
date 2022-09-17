@@ -1,3 +1,5 @@
+package CSES.AdvancedTechniques;
+
 import java.io.*;
 import java.util.*;
 
