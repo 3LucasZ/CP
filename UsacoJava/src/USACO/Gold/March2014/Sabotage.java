@@ -1,3 +1,5 @@
+package USACO.Gold.March2014;
+
 import java.io.*;
 import java.text.DecimalFormat;
 import java.util.*;
