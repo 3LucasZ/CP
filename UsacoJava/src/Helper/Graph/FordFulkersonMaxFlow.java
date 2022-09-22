@@ -1,10 +1,9 @@
+package Helper.Graph;
+
 import java.io.*;
 import java.util.*;
-/*
-LANG: JAVA
-PROB: ditch
- */
-public class ditch {
+
+public class FordFulkersonMaxFlow {
     static boolean submission = true;
     static boolean debug = true;
 
@@ -35,7 +34,6 @@ public class ditch {
         /*
         Conditions:
         directed graph
-        if edge (A,B) exists there is no edge (B,A)
         1 indexed graph
         list storage
         */
@@ -43,7 +41,7 @@ public class ditch {
         int S;
         int T;
 
-        ArrayList<Edge>[] graph;
+        ArrayList<MaxFlow.Edge>[] graph;
         boolean[] visited;
 
         static final int INF = Integer.MAX_VALUE/2;
@@ -56,8 +54,8 @@ public class ditch {
             visited = new boolean[N+1];
         }
         public void addEdge(int u, int v, int c){
-            Edge forward = new Edge(u,v,c);
-            Edge residual = new Edge(v,u,0);
+            MaxFlow.Edge forward = new MaxFlow.Edge(u,v,c);
+            MaxFlow.Edge residual = new MaxFlow.Edge(v,u,0);
             graph[u].add(forward);
             graph[v].add(residual);
             forward.residual=residual;
@@ -94,7 +92,7 @@ public class ditch {
             int u;
             int v;
             int cap;
-            Edge residual;
+            MaxFlow.Edge residual;
 
             public Edge(int u, int v, int c){
                 this.u=u;
@@ -107,12 +105,6 @@ public class ditch {
             }
         }
     }
-
-
-
-
-
-
 
 
 
