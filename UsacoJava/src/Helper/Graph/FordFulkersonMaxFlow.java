@@ -88,6 +88,11 @@ public class FordFulkersonMaxFlow {
             }
             return 0;
         }
+        public void print(){
+            for (int i=1;i<=N;i++){
+                System.out.println(graph[i]);
+            }
+        }
         private static class Edge {
             int u;
             int v;
@@ -103,8 +108,12 @@ public class FordFulkersonMaxFlow {
                 cap-=pathCap;
                 residual.cap+=pathCap;
             }
+            public String toString(){
+                return "["+u+", "+v+" : "+cap+"]";
+            }
         }
     }
+
 
 
 
