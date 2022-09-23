@@ -42,47 +42,35 @@ public class ExplorationPlan {
         for (int m=1;m<=V;m++) for (int u=1;u<=V;u++) for (int v=1;v<=V;v++) dist[u][v]=Math.min(dist[u][v],dist[u][m]+dist[m][v]);
         if (debug) print(dist);
 
-        //Add every possible team -> town cost (N*V)
-        PriorityQueue<Pair> pq = new PriorityQueue<>((a,b)->a.cost-b.cost);
-        for (int i=0;i<N;i++){
-            int team = teams.get(i);
-            for (int j=1;j<=V;j++){
-                if (dist[team][j]!=INF) pq.add(new Pair(i,j,dist[team][j]));
-            }
-        }
-        if (debug) System.out.println(pq);
-
-        //get shortest time to do K trips, if pq is too small -> impossible
-        int ans = 0;
-        int moved = 0;
-        boolean[] foundTeam = new boolean[N];
-        boolean[] foundVertex = new boolean[V+1];
-        while (moved < K && !pq.isEmpty()){
-            Pair next = pq.poll();
-            if (foundTeam[next.team]||foundVertex[next.town]) continue;
-            foundTeam[next.team]=true;
-            foundVertex[next.town]=true;
-            ans=Math.max(ans,next.cost);
-            moved++;
+        //bin search on can(T=time)
+        int lo = 0;int hi=1731312;
+        while (lo<hi){
+            int mid = (lo+hi)/2;
+            if (debug) System.out.println("Trying: "+mid);
+            if (can(mid)) hi=mid;
+            else lo=mid+1;
         }
 
-        //ret
-        if (moved < K) out.println(-1);
-        else out.println(ans);
+        //impossible
+        if (hi==1731312) out.println(-1);
+        //possible
+        else out.println(lo);
         out.close();
     }
-    private static class Pair {
-        int team;
-        int town;
-        int cost;
-        public Pair(int team, int town, int cost){
-            this.team=team;
-            this.town=town;
-            this.cost=cost;
+    public static boolean can(int T){
+        //Create Bipartite graph where team_id -> city if dist[team][city]<=T
+        MaxFlow flow = new MaxFlow(V+N+2,V+N+1,V+N+2);
+        for (int i=1;i<=N;i++){
+            int team = teams.get(i-1);
+            for (int j=1;j<=V;j++){
+                if (dist[team][j]<=T) flow.addEdge(i,N+j,1);
+            }
         }
-        public String toString(){
-            return "["+team+", "+town+", "+cost+"]";
-        }
+        for (int i=1;i<=N;i++) flow.addEdge(V+N+1,i,1);
+        for (int i=1;i<=V;i++) flow.addEdge(N+i,V+N+2,1);
+        if (debug) flow.print();
+        long f = flow.solve();
+        return f>=K;
     }
     public static void print(int[][] arr){
         for (int r=1;r<arr.length;r++){
@@ -99,6 +87,90 @@ public class ExplorationPlan {
         }
         System.out.println();
     }
+    private static class MaxFlow {
+        /*
+        Conditions:
+        directed graph
+        1 indexed graph
+        list storage
+        */
+        int N;
+        int S;
+        int T;
+
+        ArrayList<MaxFlow.Edge>[] graph;
+        boolean[] visited;
+
+        static final int INF = Integer.MAX_VALUE/2;
+
+        public MaxFlow(int N, int S, int T){
+            this.N=N;
+            this.S=S;
+            this.T=T;
+            graph = new ArrayList[N+1]; for (int i=1;i<=N;i++) graph[i] = new ArrayList<>();
+            visited = new boolean[N+1];
+        }
+        public void addEdge(int u, int v, int c){
+            MaxFlow.Edge forward = new MaxFlow.Edge(u,v,c);
+            MaxFlow.Edge residual = new MaxFlow.Edge(v,u,0);
+            graph[u].add(forward);
+            graph[v].add(residual);
+            forward.residual=residual;
+            residual.residual=forward;
+        }
+        public long solve(){
+            long maxFlow = 0;
+            long flow = 0;
+            while (true){
+                visited = new boolean[N+1];
+                flow = dfs(S,INF);
+                if (flow==0) break;
+                maxFlow+=flow;
+            }
+            return maxFlow;
+        }
+        public long dfs(int node, long flow){
+            //found augmenting path
+            if (node==T) return flow;
+            visited[node]=true;
+            for (Edge child : graph[node]){
+                if (child.cap>0 && !visited[child.v]){
+                    long pathCap = dfs(child.v,Math.min(flow,child.cap));
+                    //augmenting path exists
+                    if (pathCap > 0){
+                        child.augment(pathCap);
+                        return pathCap;
+                    }
+                }
+            }
+            return 0;
+        }
+        public void print(){
+            for (int i=1;i<=N;i++){
+                System.out.println(graph[i]);
+            }
+        }
+        private static class Edge {
+            int u;
+            int v;
+            int cap;
+            MaxFlow.Edge residual;
+
+            public Edge(int u, int v, int c){
+                this.u=u;
+                this.v=v;
+                this.cap=c;
+            }
+            public void augment(long pathCap){
+                cap-=pathCap;
+                residual.cap+=pathCap;
+            }
+            public String toString(){
+                return "["+u+", "+v+" : "+cap+"]";
+            }
+        }
+    }
+
 
 
 
