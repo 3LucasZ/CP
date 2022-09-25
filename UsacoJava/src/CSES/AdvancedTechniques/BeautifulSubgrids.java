@@ -1,4 +1,4 @@
-package USACO.Silver.Training;
+package Training.SilverTraining;
 
 import java.io.*;
 import java.util.*;
