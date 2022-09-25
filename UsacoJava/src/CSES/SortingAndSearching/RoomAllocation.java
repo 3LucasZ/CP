@@ -1,4 +1,4 @@
-package USACO.Silver.UsacoGuideSilver.MoreOpsOnSets;
+package USACOGuide.UsacoGuideSilver.MoreOpsOnSets;
 
 import java.io.*;
 import java.util.*;

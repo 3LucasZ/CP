@@ -1,4 +1,4 @@
-package USACO.Gold.UsacoGuideGold.Stacks;
+package USACOGuide.UsacoGuideGold.Stacks;
 
 import java.io.*;
 import java.util.*;

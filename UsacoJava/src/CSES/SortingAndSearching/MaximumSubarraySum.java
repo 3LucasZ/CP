@@ -1,4 +1,4 @@
-package USACO.Silver.UsacoGuideSilver.PrefixSums;
+package USACOGuide.UsacoGuideSilver.PrefixSums;
 
 import java.io.*;
 import java.util.*;

@@ -1,4 +1,4 @@
-package USACO.Silver.UsacoGuideSilver.SilverGreedy;
+package USACOGuide.UsacoGuideSilver.SilverGreedy;
 
 import java.io.*;
 import java.util.*;

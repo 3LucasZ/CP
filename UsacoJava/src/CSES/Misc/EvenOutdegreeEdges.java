@@ -1,4 +1,4 @@
-package USACO.Silver.UsacoGuideSilver.IntroToTreeAlgor;
+package USACOGuide.UsacoGuideSilver.IntroToTreeAlgor;
 
 import java.io.*;
 import java.util.*;

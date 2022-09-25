@@ -1,4 +1,4 @@
-package USACO.Silver.UsacoGuideSilver.SilverGreedy;/*
+package USACOGuide.UsacoGuideSilver.SilverGreedy;/*
 CSES Problem Set
 Tasks And Deadlines
 USACO Silver Guide - Greedy + Sorting - Easy

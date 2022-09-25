@@ -1,4 +1,4 @@
-package USACO.Gold.UsacoGuideGold.SlidingWindow;
+package USACOGuide.UsacoGuideGold.SlidingWindow;
 
 import java.io.*;
 import java.util.*;
