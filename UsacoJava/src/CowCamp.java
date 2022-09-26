@@ -19,6 +19,7 @@ public class CowCamp {
         K = Integer.parseInt(st.nextToken());
 
         //precomp: prob[t][x] => probability of x correct guesses out of t => t choose k / 2^t
+        //prob range [0,1]
         double[][] prob = new double[T+1][T+1];
         prob[0][0]=1.0;
         for (int t=1;t<=T;t++){
@@ -30,11 +31,13 @@ public class CowCamp {
         if (debug) System.out.println("probT: "+Arrays.toString(prob[T]));
 
         //precomp xpx = sum(0...x*prob[t][0...x])
+        //xpx range [0,T]
         double[] xpx = new double[T+1];
         xpx[0]=0; for (int i=1;i<=T;i++) xpx[i]=xpx[i-1]+i*prob[T][i];
         if (debug) System.out.println("xpx: "+Arrays.toString(xpx));
 
         //precomp px = sum(prob[t][0...x])
+        //px range [0,1]
         double[] px = new double[T+1];
         px[0]=prob[T][0]; for (int i=1;i<=T;i++) px[i]=px[i-1]+prob[T][i];
         if (debug) System.out.println("px: "+Arrays.toString(px));
@@ -71,9 +74,11 @@ public class CowCamp {
         out.println(1+prevE);
         out.close();
     }
+    //q time step propagation formula, geometric series + b^q * x term
     public static double f(double x, double a, double b, int q){
         return a*(1-pow(b,q))/(1-b)+pow(b,q)*x;
     }
+    //log(p) pow method
     public static double pow(double x, int p){
         if(p==0) return 1;
         if(p%2==1)return x*pow(x,p-1);
