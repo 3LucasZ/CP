@@ -1,3 +1,5 @@
+package USACO.SeasonOld.Dec2014.Gold;
+
 import java.io.*;
 import java.util.*;
 /*

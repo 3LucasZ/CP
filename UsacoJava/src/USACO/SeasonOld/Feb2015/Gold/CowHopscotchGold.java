@@ -1,4 +1,4 @@
-package USACO.Season2014_2015.Feb2015.Gold;
+package USACO.SeasonOld.Feb2015.Gold;
 
 import java.io.*;
 import java.util.*;

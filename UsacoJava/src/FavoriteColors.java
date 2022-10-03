@@ -8,72 +8,54 @@ public class FavoriteColors {
     static int N;
     static int M;
 
-    static HashSet<Integer>[] adjset;
+    static ArrayList<Integer>[] graph;
     static DSU dsu;
     static Queue<Integer> queue;
 
     public static void main(String[] args) throws IOException {
         //parse
         setup("fcolor");
-        //setup("UsacoJava/io/fcolor");
-
+        //setup("io/fcolor");
         StringTokenizer st = new StringTokenizer(br.readLine());
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
-        adjset = new HashSet[N+1]; for (int i=1;i<=N;i++) adjset[i] = new HashSet<Integer>();
-
+        graph = new ArrayList[N+1]; for (int i=1;i<=N;i++) graph[i] = new ArrayList<Integer>();
         for (int i=0;i<M;i++){
             st = new StringTokenizer(br.readLine());
             int u = Integer.parseInt(st.nextToken());
             int v = Integer.parseInt(st.nextToken());
-            adjset[u].add(v);
+            graph[u].add(v);
         }
 
-        //log
-        //setup
+        //sim setup
         queue = new LinkedList();
         dsu = new DSU(N);
-        for (int i=1;i<=N;i++) if (adjset[i].size()>1) queue.add(i);
+        for (int i=1;i<=N;i++) if (graph[i].size()>1) queue.add(i);
 
-        //while node exists with adjset size > 1
+        //sim while node exists with adjset size > 1
         while (!queue.isEmpty()) {
-            int next = dsu.get(queue.poll()); if (adjset[next].size() <= 1) continue;
-
-            //get id: the head after all unions
-            int head = -1;
-            for (int node : adjset[next]){
-                node = dsu.get(node);
-                if (head!=-1) {
-                    dsu.union(node, head);
-                }
-                head=node;
-            }
-
-            int initSize = adjset[head].size();
-
-            //create complete merged set
-            HashSet<Integer> set = new HashSet<>();
-            for (int node : adjset[next]) {
-                node = dsu.get(node);
-                set.addAll(adjset[node]);
-            }
-            adjset[head] = set;
-
-            if (set.size() > initSize) queue.add(head);
+            int next = queue.peek();
+            //next has 0 or 1 child
+            if (graph[next].size() <= 1) {queue.poll();continue;}
+            //get child1 and child2
+            int child1 = graph[next].remove(graph[next].size()-1);
+            int child2 = graph[next].get(graph[next].size()-1);
+            //child1 is the same as child2, continue
+            if (dsu.get(child1)==dsu.get(child2)) continue;
+            //else merge
+            dsu.union(child1,child2);
         }
-
+        //make sure DSU is correct since this determines real color
         if (debug) for (int i=1;i<=N;i++){
             System.out.println(i+": "+dsu.get(i));
         }
-
         //get real color
-        int co = 0;
+        int c = 0;
         int[] color = new int[N+1];
         for (int i=1;i<=N;i++){
-            if (color[dsu.get(i)]==0) color[dsu.get(i)]=++co;
+            if (color[dsu.get(i)]==0) color[dsu.get(i)]=++c;
             out.println(color[dsu.get(i)]);
         }
-
         out.close();
     }
     private static class DSU {
@@ -96,20 +78,32 @@ public class FavoriteColors {
             return parent[v];
         }
 
-        //add edge
+        //add edge: modified merge union!
         public void union(int u, int v){
             int u_parent = get(u);
             int v_parent = get(v);
-            //same component, do nothing
             if (u_parent == v_parent) return;
-            if (height[u_parent] < height[v_parent]){
-                parent[u_parent] = v_parent;
-                height[v_parent] += height[u_parent];
+            //make sure u_parent is the parent(more height) and v_parent is the child(less height) during the merge
+            if (height[v_parent] > height[u_parent]) {
+                int tmp = u_parent;
+                u_parent=v_parent;
+                v_parent=tmp;
             }
-            else {
-                parent[v_parent] = u_parent;
-                height[u_parent] += height[v_parent];
+            //merge nodes
+            parent[v_parent] = u_parent;
+            height[u_parent] += height[v_parent];
+            //make sure adj1 is the larger list
+            ArrayList<Integer> adj1 = graph[u_parent];
+            ArrayList<Integer> adj2 = graph[v_parent];
+            if (graph[v_parent].size()>graph[u_parent].size()) {
+                adj1 = graph[v_parent];
+                adj2 = graph[u_parent];
             }
+            //merge adj lists
+            for (int child : adj2) adj1.add(child);
+            graph[u_parent]=adj1;
+            //update the queue
+            if (graph[u_parent].size()>1) queue.add(u_parent);
         }
         //check fo connected components
         public boolean connected(int u, int v){

@@ -1,4 +1,4 @@
-package USACO.Season2014_2015.March2014.Gold;
+package USACO.SeasonOld.March2014.Gold;
 
 import java.io.*;
 import java.text.DecimalFormat;
