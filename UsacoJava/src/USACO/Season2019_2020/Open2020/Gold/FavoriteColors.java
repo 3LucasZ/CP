@@ -1,3 +1,5 @@
+package USACO.Season2019_2020.Open2020.Gold;
+
 import java.io.*;
 import java.util.*;
 
