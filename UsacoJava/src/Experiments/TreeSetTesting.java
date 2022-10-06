@@ -2,7 +2,7 @@ package Experiments;
 
 import java.util.TreeSet;
 
-public class TreeSetTest {
+public class TreeSetTesting {
     public static void main(String[] args){
         TreeSet<Pie> pies = new TreeSet<>((a,b)-> {
             if (a.B == b.B) {
