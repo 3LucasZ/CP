@@ -73,12 +73,12 @@ public class SegmentTreePURS {
             while (size < n) size *= 2;
             tree = new long[2*size+1];
         }
-        void set (int k, int x){
-            add(k,x-tree[k+size-1]);
+        void add (int k, int x){
+            set(k,tree[k+size-1]+x);
         }
-        void add(int k, long x){
+        void set(int k, long x){
             k+=size-1;
-            tree[k]+=x;
+            tree[k]=x;
             for (k/=2;k>=1;k/=2){
                 tree[k]=tree[2*k]+tree[2*k+1];
             }

@@ -1,3 +1,5 @@
+package CSES.RangeQueries;
+
 import java.io.*;
 import java.util.*;
 /*
