@@ -1,4 +1,4 @@
-package Helper;
+package Helper.Strings;
 
 public class Hasher {
     //hash helpers
