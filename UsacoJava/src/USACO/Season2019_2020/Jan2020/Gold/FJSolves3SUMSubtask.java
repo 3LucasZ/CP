@@ -1,4 +1,4 @@
-package USACOGuide.UsacoGuideGold.DP;
+package USACO.Season2019_2020.Jan2020.Gold;
 
 import java.io.*;
 import java.util.*;
