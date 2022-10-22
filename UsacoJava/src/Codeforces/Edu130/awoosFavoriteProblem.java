@@ -1,4 +1,4 @@
-package Codeforces.EduRound130;
+package Codeforces.Edu130;
 
 import java.io.*;
 import java.util.*;

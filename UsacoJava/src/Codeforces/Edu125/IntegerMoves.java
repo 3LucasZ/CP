@@ -1,4 +1,4 @@
-package Codeforces.EduRound125;
+package Codeforces.Edu125;
 
 import java.io.BufferedReader;
 import java.io.IOException;
