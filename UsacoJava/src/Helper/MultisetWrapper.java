@@ -3,9 +3,6 @@ package Helper;
 import java.util.*;
 
 public class MultisetWrapper {
-    public static void main(String[] args){
-
-    }
     private static class Multiset {
         TreeMap<Integer, Integer> ms = new TreeMap<>();
         public void add(int x){

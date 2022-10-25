@@ -1,6 +1,6 @@
 package Helper.Geo;
 
-public class Geometry {
+public class PointLine {
     private static class Point {
         int x;
         int y;

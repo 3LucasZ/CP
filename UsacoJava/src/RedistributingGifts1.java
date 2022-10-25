@@ -1,6 +1,9 @@
 import java.io.*;
 import java.util.*;
-
+/*
+Solves 8/18 TCS
+Super weird algorithm using cycles, anticycles, and bitsets
+ */
 public class RedistributingGifts1 {
     static boolean submission = false;
     static boolean debug = false;

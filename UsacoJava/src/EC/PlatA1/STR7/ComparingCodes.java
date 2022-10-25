@@ -1,3 +1,5 @@
+package EC.PlatA1.STR7;
+
 import java.io.*;
 import java.util.*;
 
