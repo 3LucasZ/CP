@@ -7,7 +7,7 @@ LANG: JAVA
 PROB: ditch
  */
 public class ditch {
-    static boolean submission = true;
+    static boolean submission = false;
     static boolean debug = true;
 
     static int N;
@@ -91,6 +91,16 @@ public class ditch {
                 }
             }
             return 0;
+        }
+        public void reset(){
+            for (int node=1;node<=N;node++){
+                for (Edge child : graph[node]){
+                    if (child.residual.cap<0) {
+                        child.cap += child.residual.cap;
+                        child.residual.cap = 0;
+                    }
+                }
+            }
         }
         private static class Edge {
             int u;

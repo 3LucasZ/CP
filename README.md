@@ -4,7 +4,7 @@ All in Java
 Solutions to CP problems from:
 * USACO
 * USACO Guide
-* USACO Training Gateway
+* USACO UnsortedTraining Gateway
 * CF
 * CSES
 * Small amount of LeetCode, CodeJam, Kickstart

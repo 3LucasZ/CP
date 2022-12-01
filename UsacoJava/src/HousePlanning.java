@@ -1,37 +1,45 @@
-package Helper.Graph;
-
 import java.io.*;
 import java.util.*;
-/*
-Test Link:
 
- */
-public class FordFulkersonMaxFlow {
-    static boolean submission = true;
+/*
+PROB: HousePlanning
+LANG: JAVA
+*/
+public class HousePlanning {
+    static boolean submission = false;
     static boolean debug = true;
 
-    static int N;
-    static int M;
-
     public static void main(String[] args) throws IOException {
-        //parse
-        setup("ditch");
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        M = Integer.parseInt(st.nextToken());
-        N = Integer.parseInt(st.nextToken());
-        MaxFlow flow = new MaxFlow(N,1,N);
-        for (int i=0;i<M;i++){
-            st = new StringTokenizer(br.readLine());
-            int u = Integer.parseInt(st.nextToken());
-            int v = Integer.parseInt(st.nextToken());
-            int c = Integer.parseInt(st.nextToken());
-            flow.addEdge(u,v,c);
-        }
-
-        //solve
-        long ans = flow.solve();
-        out.println(ans);
+        //* handle TCS
+        setup("HousePlanning");
+        int T = Integer.parseInt(br.readLine());
+        for (int i = 1; i <= T; i++) solve(i);
         out.close();
+    }
+
+    static int N;
+    static int[] d1;
+    static int[] d2;
+    static MaxFlow match;
+
+    public static void solve(int tcs) throws IOException {
+        if (debug) System.out.println("Case: " + tcs);
+        //* parse
+        N = Integer.parseInt(br.readLine());
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        for (int i=0;i<N;i++) d1[i]=Integer.parseInt(st.nextToken());
+        for (int i=0;i<N;i++) d2[i]=Integer.parseInt(st.nextToken());
+        //* Set up MaxFlow
+         //match = new MaxFlow(N, )
+        //* bash |p1-p2|=k
+        for (int i=0;i<N;i++){
+            int k1 = d1[0]+d2[i];
+            int k2=Math.abs(d1[0]-d2[i]);
+        }
+    }
+    public static boolean tryK(int k){
+        //MaxFlow matching = new MaxFlow(N)
+        return true;
     }
     private static class MaxFlow {
         /*
@@ -119,26 +127,14 @@ public class FordFulkersonMaxFlow {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     static BufferedReader br;
     static PrintWriter out;
+
     public static void setup(String fileName) throws IOException {
         if (submission) {
-            br = new BufferedReader(new FileReader(fileName+".in"));
-            out = new PrintWriter(new BufferedWriter(new FileWriter(fileName+".out")));
-        }
-        else {
+            br = new BufferedReader(new FileReader(fileName + ".in"));
+            out = new PrintWriter(new BufferedWriter(new FileWriter(fileName + ".out")));
+        } else {
             br = new BufferedReader(new InputStreamReader(System.in));
             out = new PrintWriter(System.out);
         }

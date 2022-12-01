@@ -1,4 +1,4 @@
-package Training.SilverTraining;
+package UnsortedTraining.SilverTraining;
 
 import java.io.*;
 import java.util.*;
