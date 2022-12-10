@@ -1,4 +1,4 @@
-package Contests.GoogleCodeJam.Qual2021;
+package CodeJam.Qual_2021;
 
 import java.io.*;
 import java.util.*;
