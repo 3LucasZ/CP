@@ -9,6 +9,7 @@ public class ChoosePowInv {
             return pow(x,MOD-2);
         }
         public long pow(long x, long p) {
+            if (x==0) return 0;
             if (p == 0) return 1;
             if (p % 2 == 1) return (x * pow(x, p - 1)) % MOD;
             else return pow((x * x) % MOD, p / 2);
@@ -32,7 +33,7 @@ public class ChoosePowInv {
             //gen inverses (1...N)!^-1
             i = new long[MAXF + 1];
             for (int A = 1; A <= MAXF - 1; A++) {
-                i[A] = pow(f[A], MAXF - 2);
+                i[A] = inv(f[A]);
             }
         }
         public long choose(int n, int k) {

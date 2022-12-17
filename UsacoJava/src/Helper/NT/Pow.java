@@ -10,6 +10,7 @@ public class Pow {
         System.out.println(pow(2,10));
     }
     public static long pow(long x, int p){
+        if(x==0) return 0;
         if(p==0) return 1;
         if(p%2==1)return x*pow(x,p-1);
         else return pow(x*x,p/2);
