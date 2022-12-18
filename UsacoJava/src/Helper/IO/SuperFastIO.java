@@ -1,7 +1,7 @@
-package Helper;
+package Helper.IO;
 
 import java.io.*;
-public class FastIO {
+public class SuperFastIO {
     static boolean submission = false;
     static boolean debug = true;
 
