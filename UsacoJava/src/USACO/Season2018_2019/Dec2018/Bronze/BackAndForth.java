@@ -1,4 +1,4 @@
-package USACOGuide.UsacoGuideBronze.Recursion;
+package USACO.Season2018_2019.Dec2018.Bronze;
 
 import java.io.*;
 import java.util.*;

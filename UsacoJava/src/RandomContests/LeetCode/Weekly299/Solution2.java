@@ -1,4 +1,4 @@
-package Contests.LeetCode.Weekly299;
+package RandomContests.LeetCode.Weekly299;
 
 public class Solution2 {
     final long MOD = (long) (1e9+7);

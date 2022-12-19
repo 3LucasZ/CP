@@ -1,4 +1,4 @@
-package USACOGuide.UsacoGuideBronze.Recursion;/*
+package USACO.Season2019_2020.Dec2019.Bronze;/*
 USACO 2019 December Contest, Bronze
 Problem 3. Livestock Lineup
 USACO Guide Bronze Complete Search with Recursion Hard

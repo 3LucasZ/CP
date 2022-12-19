@@ -1,4 +1,4 @@
-package USACOGuide.UsacoGuideBronze.Simulation;
+package USACO.Season2015_2016.Dec2015.Bronze;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -63,14 +63,4 @@ public class SpeedingTicket {
         System.out.println(str);
     }
 }
-class Segment {
-    int len;
-    int speed;
-    public Segment(int x, int y) {
-        len = x;
-        speed = y;
-    }
-    public String toString() {
-        return "(" + len + ", " + speed + ")";
-    }
-}
+

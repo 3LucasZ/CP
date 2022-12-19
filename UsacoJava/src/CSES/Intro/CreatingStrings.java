@@ -1,4 +1,4 @@
-package USACOGuide.UsacoGuideBronze.Recursion;
+package CSES.Intro;
 
 import java.util.*;
 

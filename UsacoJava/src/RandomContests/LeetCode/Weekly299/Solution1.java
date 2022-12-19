@@ -1,4 +1,4 @@
-package Contests.LeetCode.Weekly299;
+package RandomContests.LeetCode.Weekly299;
 
 class Solution1 {
     static boolean debug = true;

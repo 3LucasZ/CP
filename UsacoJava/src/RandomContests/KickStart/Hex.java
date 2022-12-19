@@ -1,4 +1,4 @@
-package Contests.KickStart;
+package RandomContests.KickStart;
 
 import java.io.*;
 

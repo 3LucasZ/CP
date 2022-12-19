@@ -1,4 +1,4 @@
-package Contests.LeetCode.Weekly299;
+package RandomContests.LeetCode.Weekly299;
 
 public class Solution3 {
     public int maximumsSplicedArray(int[] nums1, int[] nums2) {
