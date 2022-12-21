@@ -4,7 +4,7 @@ import java.util.*;
 
 public class SegmentTreeMaxMin {
     public static void main(String[] args){
-        SegTree tree = new SegTree(10, new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10});
+        SegTree tree = new SegTree(10, new int[]{0, 1, 2, 3, 4, 5, 6, 10, 10, 10, 3});
         System.out.println(tree.treeMax[1]);
         System.out.println(tree.treeMax[2]+", "+ tree.treeMax[3]);
         System.out.println(tree.treeMax[4]+", "+ tree.treeMax[5]+", "+tree.treeMax[6]+", "+tree.treeMax[7]);
@@ -13,8 +13,10 @@ public class SegmentTreeMaxMin {
         System.out.println(tree.max(1,10));
     }
     private static class SegTree {
-        //1-indexed
-        //range is []
+        /*
+        1-indexed
+         range is []
+         */
         int size;
         Pair[] treeMin;
         Pair[] treeMax;
@@ -32,6 +34,8 @@ public class SegmentTreeMaxMin {
             while (size < n) size *= 2;
             treeMin = new Pair[2*size+1]; for (int i=1;i<=2*size;i++) treeMin[i] = new Pair();
             treeMax = new Pair[2*size+1]; for (int i=1;i<=2*size;i++) treeMax[i] = new Pair();
+
+            //fast prefill tree with arr
             for (int i=1;i<=n;i++){
                 treeMin[i+size-1]=new Pair(i,arr[i]);
                 treeMax[i+size-1]=new Pair(i,arr[i]);
@@ -53,7 +57,7 @@ public class SegmentTreeMaxMin {
         Pair max(int a, int b) {
             a+=size-1;
             b+=size-1;
-            Pair ret = new Pair();
+            Pair ret = new Pair(0,0);
             while (a<=b){
                 if (a%2==1) ret=Pair.max(ret,treeMax[a++]);
                 if (b%2==0) ret=Pair.max(ret,treeMax[b--]);
@@ -65,7 +69,7 @@ public class SegmentTreeMaxMin {
         Pair min(int a, int b) {
             a+=size-1;
             b+=size-1;
-            Pair ret = new Pair();
+            Pair ret = new Pair(0,Integer.MAX_VALUE);
             while (a<=b){
                 if (a%2==1) ret=Pair.min(ret,treeMin[a++]);
                 if (b%2==0) ret=Pair.min(ret,treeMin[b--]);
@@ -90,11 +94,11 @@ public class SegmentTreeMaxMin {
             return new Pair(i,val);
         }
         public static Pair max(Pair u, Pair v){
-            if (u.val>v.val) return u.clone();
+            if (u.val>v.val || (u.val==v.val && u.i>v.i)) return u.clone();
             return v.clone();
         }
         public static Pair min(Pair u, Pair v){
-            if (u.val>v.val) return v.clone();
+            if (u.val>v.val || (u.val==v.val && v.i>u.i)) return v.clone();
             return u.clone();
         }
         public String toString(){

@@ -1,6 +1,9 @@
 package Helper.NT;
 
 public class ChoosePowInv {
+    // give MOD for (pow, inv) ability
+    // give N, MOD for (choose, !) ability
+    // 100% works
     private static class NT {
         // Note: only works if MOD is prime
         //* pow, inv
