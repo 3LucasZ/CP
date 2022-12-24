@@ -1,4 +1,4 @@
-package USACOGuide.UsacoGuideGold.EulerTour;
+package USACO.Season2019_2020.Dec2019.Plat;
 
 import java.io.*;
 import java.util.*;

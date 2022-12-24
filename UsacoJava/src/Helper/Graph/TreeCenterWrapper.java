@@ -1,73 +1,85 @@
+package Helper.Graph;
+
 import java.io.*;
 import java.util.*;
 /*
-PROB: Playoff
+PROB: TreeCenter
 LANG: JAVA
 */
-public class Playoff {
+public class TreeCenterWrapper {
     static boolean fileSubmission = false;
     static String fileName = "";
     
-    static boolean debug = false;
-
-    static int N;
-    static int[] type;
-
+    static boolean debug = true;
+    
     public static void solve() throws IOException {
         //* parse
-        N = io.nextInt();
-        String str = io.nextLine();
-        type = new int[N];
-        for (int i=0;i<N;i++){
-            type[i]=str.charAt(i)=='1'?1:0;
+        int N = io.nextInt();
+        ArrayList<Integer>[] tree = new ArrayList[N+1]; for (int i=1;i<=N;i++) tree[i] = new ArrayList<>();
+        for (int i=0;i<N-1;i++){
+            int u = io.nextInt();
+            int v = io.nextInt();
+            tree[u].add(v);
+            tree[v].add(u);
         }
-        if (debug) io.println(Arrays.toString(type));
-        //* dp
-        int nums = 1<<N;
-        boolean[][] dp = new boolean[N+1][nums+1];
-        int[][] sum = new int[N+1][nums+1];
-        //base case
-        dp[0][1]=true;
-        sum[0][1]=1;
-        //transitions
-        for (int i=1;i<=N;i++){
-            if (debug) io.println("Round: "+i);
-            for (int num = 1;num<=(1<<i);num++){
-                sum[i][num]=sum[i][num-1];
-                int l = num-1;
-                int r = (1<<i)-num;
-                int lo,hi;
-                //lower skill levels win
-                if (type[i-1]==0){
-                    if (r==0) continue;
-                    int rlo = Math.max(1,(r-l+1)/2);
-                    int rhi = (r+1)/2;
-                    lo = (1<<(i-1)) - rhi + 1;
-                    hi = (1<<(i-1)) - rlo + 1;
-                }
-                else {
-                    if (l==0) continue;
-                    hi = (l+1)/2;
-                    lo = Math.max(1,(l-r+1)/2);
-                }
-                if (debug) {
-                    io.println("num: " + num);
-                    io.println("[" + lo + ", " + hi + "]");
-                }
-                //is num good?
-                boolean good = sum[i-1][hi]-sum[i-1][lo-1]>0;
-                if (good) {
-                    dp[i][num] = true;
-                    sum[i][num]++;
+        TreeCenter tc = new TreeCenter(tree);
+        io.println("Diameter: "+tc.maxDist);
+        io.println("Center: "+tc.center);
+    }
+    private static class TreeCenter {
+        ArrayList<Integer>[] tree;
+        int maxDist = 0;
+        int maxNode1 = 1;
+        int maxNode2 = 0;
+        int center;
+
+        TreeCenter(ArrayList<Integer>[] tree) {
+            this.tree = tree;
+            maxDist = 0;
+            dfs1(1, 0, 0);
+            maxDist = 0;
+            dfs2(maxNode1,0,0);
+            dfs3(maxNode1,0,0);
+        }
+
+        public void dfs1(int node, int par, int dist) {
+            //process if leaf
+            if (tree[node].size() == 1) {
+                if (dist > maxDist) {
+                    maxDist = dist;
+                    maxNode1 = node;
                 }
             }
+            //DFS
+            for (int child : tree[node]) {
+                if (child==par) continue;
+                dfs1(child, node,dist + 1);
+            }
         }
-        if (debug) for (int i=0;i<=N;i++){
-            io.println("round: "+i+": "+Arrays.toString(dp[i]));
+        public void dfs2(int node, int par, int dist) {
+            //process if leaf
+            if (tree[node].size() == 1) {
+                if (dist > maxDist) {
+                    maxDist = dist;
+                    maxNode2 = node;
+                }
+            }
+            //DFS
+            for (int child : tree[node]) {
+                if (child==par) continue;
+                dfs2(child, node,dist + 1);
+            }
         }
-        //* ret
-        for (int i=1;i<=nums;i++){
-            if (dp[N][i]) io.print(i+" ");
+        public boolean dfs3(int node, int par, int dist) {
+            if (node==maxNode2) return true;
+            //DFS
+            boolean good = false;
+            for (int child : tree[node]) {
+                if (child==par) continue;
+                if (dfs3(child, node,dist + 1)) good=true;
+            }
+            if (dist==maxDist/2) center=node;
+            return good;
         }
     }
     

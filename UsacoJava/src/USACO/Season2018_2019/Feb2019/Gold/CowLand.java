@@ -1,4 +1,4 @@
-package USACOGuide.UsacoGuideGold.EulerTour;
+package USACO.Season2018_2019.Feb2019.Gold;
 
 import java.io.*;
 import java.util.ArrayList;
