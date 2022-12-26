@@ -1,21 +1,73 @@
-package Helper.IO;
+package USACO.Season2016_2017.Jan2017.Plat;
 
 import java.io.*;
-public class SuperFastIO {
-    static boolean fileSubmission = false;
-    static String fileName = "";
+import java.util.*;
+/*
+PROB: BuildingATallBarn
+LANG: JAVA
+*/
+public class BuildingATallBarn {
+    static boolean fileSubmission = true;
+    static String fileName = "tallbarn";
+    
+    static boolean debug = false;
 
-    static boolean debug = true;
+    static int N;
+    static long K;
+    static Long[] A;
 
-    public static void solve() throws IOException{
+    static long MAXA = (long) 1e12;
 
+    public static void solve() throws IOException {
+        //* parse
+        N = io.nextInt();
+        K = io.nextLong(); K-=N;
+        A = new Long[N];
+        for (int i=0;i<N;i++) A[i]=io.nextLong();
+
+        //* bin search maxSave
+        double lo=0;double hi=MAXA;
+        for (int i=0;i<100;i++){
+            double mid = (lo+hi)/2;
+            double tot = totCows(mid);
+            if (tot<K)hi=mid;
+            else if (tot>K)lo=mid;
+            else {
+                lo=mid;
+                break;
+            }
+        }
+        if (debug){
+            io.println("minSave: "+lo);
+        }
+        //* ret
+        double ans = 0;
+        double rem = K;
+        for (int i=0;i<N;i++){
+            rem-=cows(i,lo);
+        }
+        for (int i=0;i<N;i++){
+            double cows = cows(i,lo);
+            if (rem<0){
+                cows--;
+                rem++;
+            }
+            ans+=A[i]/(cows+1);
+        }
+        io.println(Math.round(ans));
     }
-
-
-
-
-
-
+    public static double totCows(double minSave){
+        double ret = 0;
+        for (int i=0;i<N;i++){
+            double cows = cows(i,minSave);
+            ret+=cows;
+        }
+        return ret;
+    }
+    public static double cows(int i, double minSave){
+        double quad = (-1+Math.sqrt(1+4*A[i]/minSave))/2;
+        return Math.floor(quad);
+    }
 
 
 

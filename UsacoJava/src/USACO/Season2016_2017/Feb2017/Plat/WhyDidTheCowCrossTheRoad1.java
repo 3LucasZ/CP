@@ -1,4 +1,4 @@
-package USACOGuide.UsacoGuideGold.PointUpdateRangeSum;
+package USACO.Season2016_2017.Feb2017.Plat;
 
 import java.io.*;
 import java.util.*;
@@ -18,7 +18,7 @@ bash 4N cycles
 easy shift calculation
 first plat solved!
  */
-public class PlatinumWhyDidTheCowCrossTheRoad {
+public class WhyDidTheCowCrossTheRoad1 {
     //io
     static boolean submission = true;
     static PrintWriter out;

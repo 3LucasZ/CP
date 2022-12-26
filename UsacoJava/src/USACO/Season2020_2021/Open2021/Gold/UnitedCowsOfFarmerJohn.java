@@ -1,4 +1,4 @@
-package USACOGuide.UsacoGuideGold.PointUpdateRangeSum;
+package USACO.Season2020_2021.Open2021.Gold;
 
 import java.io.*;
 import java.util.*;

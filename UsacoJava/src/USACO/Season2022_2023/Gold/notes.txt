@@ -1,0 +1,19 @@
+Absolute Round Failure...
+105/1000
+
+P1:
+* Had a solution in mind to solve first 15/20 cases but only worked on 8
+* Easily solved: Changed dp to push forward instead of retrieve backward and set init dp states to -INF
+P2:
+* 3 hours of implementation, logic was correct but implementation was not
+* Easily solved: tree set hash collisions must be accounted for, and to change an element you must delete it, change it, then add it
+P3:
+* Looked at it for a few minutes and had a general idea (incrementally set the minDegree and try out CC). Not enough time to try out.
+* Easily solved: Tried out the above quick algorithm and got 9/20 cases
+* With a couple hours of work got a full solve (20/20) with optimization and reverse add DSU trick
+
+Actual: 105/1000
+Hypothetical: 750/1000
+Goal: 500/1000
+Infinite time: 1000/1000
+Result: Failure but will lead to success.

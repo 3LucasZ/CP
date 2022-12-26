@@ -11,13 +11,17 @@ public class DSUWrapper {
         System.out.println(dsu.connected(1,4));
     }
     private static class DSU {
+        /*
+        union and get operations
+        sz is the size of the component
+         */
         int[] parent;
-        int[] height;
+        int[] sz;
 
         public DSU(int num){
-            height = new int[num+1];
+            sz = new int[num+1];
             parent = new int[num+1];
-            Arrays.fill(height, 1);
+            Arrays.fill(sz, 1);
             Arrays.fill(parent, -1);
         }
 
@@ -32,20 +36,21 @@ public class DSUWrapper {
 
         //add edge
         public void union(int u, int v){
-            int u_parent = get(u);
-            int v_parent = get(v);
+            int U = get(u);
+            int V = get(v);
             //same component, do nothing
-            if (u_parent == v_parent) return;
-            if (height[u_parent] < height[v_parent]){
-                parent[u_parent] = v_parent;
-                height[v_parent] += height[u_parent];
+            if (U == V) return;
+            //enforce sz[V]<sz[U]
+            if (sz[U]<sz[V]){
+                int tmp=U;
+                U=V;
+                V=tmp;
             }
-            else {
-                parent[v_parent] = u_parent;
-                height[u_parent] += height[v_parent];
-            }
+            //op
+            parent[V] = U;
+            sz[U] += sz[V];
         }
-        //check fo connected components
+        //check CC
         public boolean connected(int u, int v){
             return get(u)==get(v);
         }
