@@ -1,2 +1,6 @@
+#Find filename with keyword
 ls -R | grep TeamBuildingPlat
 find . -print | grep -i MeetInTheMiddle
+
+#Find file that contains keyword
+grep -rnw . -e 'pow'
