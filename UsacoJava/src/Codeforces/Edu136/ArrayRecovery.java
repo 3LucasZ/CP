@@ -1,63 +1,67 @@
+package Codeforces.Edu136;
+
 import java.io.*;
 import java.util.*;
-/*
-PROB: ChipMove
-LANG: JAVA
-*/
-public class ChipMove {
-    static boolean fileSubmission = false;
-    static String fileName = "";
+
+public class ArrayRecovery {
+    static boolean debug = false;
     
-    static boolean debug = true;
-    
-    public static void solve() throws IOException {
+    public static void solve(int tcs) throws IOException {
+        if (debug) io.println("Case: "+tcs);
         //* parse
         int N = io.nextInt();
-        int K = io.nextInt();
-        int MOD = 998244353;
+        int[] A = new int[N+1];
+        for (int i=1;i<=N;i++){
+            int x = io.nextInt();
+            A[i]=x;
+        }
 
-        //* dp
+        //* simulate
         int[] ans = new int[N+1];
-        int[] dp = new int[N+1]; //dp[s][i] = ways to achieve position i with s moves
-        dp[0]=1; //base case
-        for (int mn=0;mn+K<=N;mn+=K++){
-            int[] sum = new int[N+1];
-            for (int i=mn;i<=N;i++){
-                int cur=dp[i];
-                dp[i]=sum[i%K];
-                sum[i%K]=(sum[i%K]+cur)%MOD;
-                ans[i]=(ans[i]+dp[i])%MOD;
+        ans[1]=A[1];
+        for (int i=2;i<=N;i++){
+            int x = A[i];
+            int l = ans[i-1]-x;
+            if (x!=0&&l>=0) {
+                io.println(-1);
+                return;
             }
+            ans[i]=ans[i-1]+x;
         }
 
-        //* ret
-        for (int i=1;i<=N;i++) io.print(ans[i]+" ");io.println();
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    public static void main(String[] args) throws IOException {
-        if (fileSubmission){
-            io = new IO(fileName, debug);
-        } else {
-            io = new IO(debug);
+        //*ret
+        for (int i=1;i<=N;i++){
+            io.print(ans[i]+" ");
         }
-        solve();
+        io.println();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    static IO io;
+    public static void main(String[] args) throws IOException {
+        io = new IO(debug);
+        int T = io.nextInt();
+        for (int i=1;i<=T;i++) solve(i);
         io.close();
     }
-    static IO io;
     private static class IO {
     BufferedReader br;
     StringTokenizer st;
@@ -86,6 +90,7 @@ public class ChipMove {
         return st.nextToken();
     }
     int nextInt() { return Integer.parseInt(next()); }
+    long nextLong() { return Long.parseLong(next()); }
     double nextDouble() {return Double.parseDouble(next());}
     String nextLine() {
         String str = "";
@@ -128,5 +133,4 @@ public class ChipMove {
     void close(){
         out.close();
     }
-};;
-}
+};}

@@ -1,25 +1,16 @@
+package Codeforces.Round842;
+
 import java.io.*;
 import java.util.*;
 
-public class PermutationChain {
+public class GreatestConvex {
     static boolean debug = false;
     
     public static void solve(int tcs) throws IOException {
         if (debug) io.println("Case: "+tcs);
-        //* parse
-        int N = io.nextInt();
-        int[] A = new int[N+1];
-        for (int i=1;i<=N;i++) A[i]=i;
-        io.println(N);
-        for (int j=1;j<=N;j++) io.print(A[j]+" ");
-        io.println();
-        for (int i=1;i<=N-1;i++){
-            int tmp = A[i];
-            A[i]=A[i+1];
-            A[i+1]=tmp;
-            for (int j=1;j<=N;j++) io.print(A[j]+" ");
-            io.println();
-        }
+        //* parse\
+        int K = io.nextInt();
+        io.println(K-1);
     }
 
 

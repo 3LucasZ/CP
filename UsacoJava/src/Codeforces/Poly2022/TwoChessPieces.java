@@ -1,4 +1,4 @@
-package Codeforces.PickNPlay;
+package Codeforces.Poly2022;
 
 import java.io.*;
 import java.util.*;

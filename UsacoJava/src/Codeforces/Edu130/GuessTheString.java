@@ -9,52 +9,76 @@ public class GuessTheString {
     static boolean debug = false;
     //param
     static int N;
-    static char[] ans;
-    static int[] distinct;
+    static char[] ans; //char ans array for 1..N
+    static int[][] distinct; //distinct chars in range l..r
+    static int[] last; //last index of char[i] a..z ASCII type
 
-    public static void main(String[] args) throws IOException {
-        N = Integer.parseInt(br.readLine());
+    public static void main(String[] args) throws IOException{
+        //parse
+        N=Integer.parseInt(br.readLine());
         ans = new char[N+1];
-        distinct = new int[N+1];
-        for (int i=1;i<=N;i++){
-            if (debug) System.out.println("Testing: "+i);
-            bin(i);
-            if (debug) System.out.println(Arrays.toString(ans));
-            if (debug) System.out.println(Arrays.toString(distinct));
-        }
-
-        out.print("! ");
-        for (int i=1;i<=N;i++) out.print(ans[i]);
-        out.close();
-    }
-    public static void bin(int i) throws IOException {
-        int lo=1;
-        int hi=i;
-        while (lo<hi){
-            int mid = (lo+hi)/2;
-            while (ans[mid]==ans[mid-1]) mid--;
-            out.println("? 2 "+mid+" "+i);out.flush();
-            int inclusive = Integer.parseInt(br.readLine());
-            //out.println("? 2 "+mid+" "+(i-1));out.flush();
-            //int exclusive = Integer.parseInt(br.readLine());
-            int exclusive = 0;
-            HashSet<Character> seen = new HashSet<>();
-            for (int j=mid;j<=i-1;j++){
-                seen.add(ans[j]);
+        distinct = new int[N+1][N+1];
+        last = new int['z'+1];
+        //get first letter
+        ans[1]=get(1);
+        distinct[1][1]=1;
+        last[ans[1]]=1;
+        //build each letter one by one
+        for (int i=2;i<=N;i++){
+            //if new letter
+            int q = range(1,i);
+            if (distinct[1][i-1]==q-1){
+                ans[i]=get(i);
             }
-            exclusive=seen.size();
-            if (inclusive==exclusive+1) hi=mid;
-            else lo=mid+1;
+            //else find the old letter
+            else {
+                ArrayList<Integer> search = new ArrayList<>();
+                for (int c='a';c<='z';c++){
+                    if (last[c]!=0) search.add(last[c]);
+                }
+                Collections.sort(search);
+                if (debug){
+                    System.out.println("search: "+search);
+                }
+                int lo = 0;
+                int hi = search.size()-1;
+                while (lo<hi){
+                    int mid = (lo+hi+1)/2;
+                    int A = distinct[search.get(mid)][i-1];
+                    int B = range(search.get(mid),i);
+                    if (A==B){
+                        lo=mid;
+                    } else {
+                        hi=mid-1;
+                    }
+                }
+                ans[i]=ans[search.get(lo)];
+            }
+            //update last
+            last[ans[i]]=i;
+            //update distinct
+            HashSet<Character> found = new HashSet<>();
+            for (int l=i;l>=1;l--){
+                found.add(ans[l]);
+                distinct[l][i]=found.size();
+            }
+            if (debug){
+                System.out.println(Arrays.toString(ans));
+                System.out.println(Arrays.toString(last));
+            }
         }
-        if (lo==1){
-            out.println("? 1 "+i);out.flush();
-            ans[i]=br.readLine().charAt(0);
-            distinct[i]=distinct[i-1]+1;
-        }
-        else {
-            ans[i]=ans[lo-1];
-            distinct[i]=distinct[i-1];
-        }
+        //ret
+        System.out.print("! ");
+        for (int i=1;i<=N;i++) System.out.print(ans[i]);
+        System.out.println();
+    }
+    static char get(int i) throws IOException{
+        System.out.println("? 1 "+i);
+        return br.readLine().charAt(0);
+    }
+    static int range(int l, int r) throws IOException {
+        System.out.println("? 2 "+l+" "+r);
+        return Integer.parseInt(br.readLine());
     }
 }
 /*
@@ -62,12 +86,11 @@ public class GuessTheString {
 g
 2
 u
-2
 3
 e
-3
 4
 s
-2
+4
 1
+3
  */

@@ -1,21 +1,31 @@
+package Codeforces.Poly2022;
+
 import java.io.*;
 import java.util.*;
 
-public class Moves {
+public class AddPlusMinusSign {
     static boolean debug = false;
     
     public static void solve(int tcs) throws IOException {
         if (debug) io.println("Case: "+tcs);
         //* parse
         int N = io.nextInt();
-        int ans = N/3;
-        if (N==1){
-            io.println(2);
-            return;
+        String str = io.nextLine();
+        int sum = str.charAt(0)-'0';
+        for (int i=1;i<N;i++){
+            int x = str.charAt(i)-'0';
+            if (x==0) io.print("+");
+            else {
+                if (sum==0) {
+                    io.print("+");
+                    sum++;
+                } else {
+                    io.print("-");
+                    sum--;
+                }
+            }
         }
-        if (N%3==1) ans+=1;
-        if (N%3==2) ans+=1;
-        io.println(ans);
+        io.println();
     }
 
 
