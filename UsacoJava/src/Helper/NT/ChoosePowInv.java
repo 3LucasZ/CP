@@ -3,9 +3,11 @@ package Helper.NT;
 public class ChoosePowInv {
     // give MOD for (pow, inv) ability
     // give N, MOD for (choose, !) ability
-    // 100% works
+    // rigorous: 100% tested to work
+    // ambiguous: pow(0,0)
+    // time complexity: O(MAXF)
+    // Requirements: MOD is prime
     private static class NT {
-        // Note: only works if MOD is prime
         //* pow, inv
         long MOD;
         public long inv(long x) {
@@ -20,10 +22,8 @@ public class ChoosePowInv {
         public NT(long MOD) {
             this.MOD=MOD;
         }
-        //* choose
-        //factorials
+        //* choose, factorials, factorial inverses
         long[] f;
-        //factorial inverses
         long[] i;
         int MAXF;
         public NT(int MAXF, long MOD) {
@@ -35,8 +35,9 @@ public class ChoosePowInv {
             for (int i = 1; i <= MAXF; i++) f[i] = (f[i - 1] * i) % MOD;
             //gen inverses (1...N)!^-1
             i = new long[MAXF + 1];
-            for (int A = 1; A <= MAXF - 1; A++) {
-                i[A] = inv(f[A]);
+            i[MAXF]=inv(f[MAXF]);
+            for (int A = MAXF; A > 0; A--) {
+                i[A-1]=i[A]*A%MOD;
             }
         }
         public long choose(int n, int k) {

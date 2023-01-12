@@ -2,7 +2,7 @@ package Helper;
 
 import java.util.*;
 
-public class CoordinateCompression {
+public class CoordinateCompressionWithObjects{
     public static void main(String[] args){
         int N = 5;
         Point[] values = new Point[N];

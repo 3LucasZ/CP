@@ -1,7 +1,7 @@
 package Helper;
 
 import java.util.*;
-
+//TODO: Make it into an interface so that Int, Long, Char can be used interchangeably
 public class MultisetWrapper {
     private static class Multiset {
         /*
