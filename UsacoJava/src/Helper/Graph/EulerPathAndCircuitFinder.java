@@ -3,18 +3,25 @@ package Helper.Graph;
 import java.io.*;
 import java.util.*;
 
-public class EulerCircuitFinder {
-    //find the euler circuit: find_circuit(1)
-    //find the euler path: find_circuit(odd node)
+public class EulerPathAndCircuitFinder{
+    //Description:
+    //Visits all the EDGES of a graph either as a PATH or CIRCUIT
 
-    //assumptions: strongly connected, nodes of degree 0 discarded
+    //Usage:
+    //find the euler circuit: find_circuit(any node) or getEulerCircuit()
+    //find the euler path: find_circuit(odd degree node) or getEulerPath()
 
-    //euler circuit must (undirected): every node has even degree
-    //euler path must (undirected) every node but 2 has even degree
+    //assumptions:
+    //strongly connected, nodes of degree 0 discarded
+    //if undirected, euler circuit: every node has even degree
+    //if undirected, euler path: every node but 2 has even degree
+    //if directed, euler circuit: in degree of each node = out degree
+    //in this example its adjSet but adjList, adjMatrix are all okay
 
-    //euler circuit must (directed): indegree of each node = outdegree
+    //Complexity:
+    //O(N+M)
 
-    //Complexity(O(N+M))
+    //Tested to work 100% of the time
 
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static PrintWriter out = new PrintWriter(System.out);
@@ -38,7 +45,7 @@ public class EulerCircuitFinder {
         }
 
         //logic
-        getCircuit();
+        getEulerCircuit();
 
         //ret
         out.println(circuit);
@@ -46,7 +53,7 @@ public class EulerCircuitFinder {
     }
 
     static ArrayList<Integer> circuit = new ArrayList<>();
-    public static void getTour(){
+    public static void getEulerPath(){
         for (int i=1;i<=N;i++){
             if (graph[i].size()%2==1){
                 findCircuit(i);
@@ -54,7 +61,7 @@ public class EulerCircuitFinder {
             }
         }
     }
-    public static void getCircuit(){
+    public static void getEulerCircuit(){
         findCircuit(1);
     }
     public static void findCircuit(int u) {
