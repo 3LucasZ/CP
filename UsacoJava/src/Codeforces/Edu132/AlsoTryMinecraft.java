@@ -1,52 +1,73 @@
+package Codeforces.Edu132;
+
 import java.io.*;
 import java.util.*;
-
-public class ThreeDoors {
-    static boolean debug = false;
-
-    public static void solve(int tcs) throws IOException {
-        if (debug) io.println("Case: "+tcs);
+/*
+PROB: AlsoTryMinecraft
+LANG: JAVA
+*/
+public class AlsoTryMinecraft {
+    static boolean fileSubmission = false;
+    static String fileName = "";
+    
+    static boolean debug = true;
+    
+    public static void solve() throws IOException {
         //* parse
-        int key = io.nextInt();
-        int empty = 0;
-        int[] door = new int[4];
-        for (int i=1;i<=3;i++) {
-            door[i]=io.nextInt();
-            if (door[i]==0) empty=i;
+        int N = io.nextInt();
+        int M = io.nextInt();
+        long[] A = new long[N+2];
+        for (int i=1;i<=N;i++){
+            A[i]=io.nextInt();
         }
-        if (key==empty || door[key]==empty){
-            io.println("NO");
-        } else {
-            io.println("YES");
+
+        //* fw presum
+        long[] fw = new long[N+1];
+        for (int i=1;i<=N;i++){
+            fw[i]=fw[i-1]+Math.max(0,A[i-1]-A[i]);
+        }
+        //* bw presum
+        long[] bw = new long[N+2];
+        for (int i=N;i>=1;i--){
+            bw[i]=bw[i+1]+Math.max(0,A[i+1]-A[i]);
+        }
+
+        //* query
+        for (int i=1;i<=M;i++){
+            int u = io.nextInt();
+            int v = io.nextInt();
+            if (v>u){
+                io.println(fw[v]-fw[u]);
+            } else {
+                io.println(bw[v]-bw[u]);
+            }
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    static IO io;
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     public static void main(String[] args) throws IOException {
-        io = new IO(debug);
-        int T = io.nextInt();
-        for (int i=1;i<=T;i++) solve(i);
+        if (fileSubmission){
+            io = new IO(fileName, debug);
+        } else {
+            io = new IO(debug);
+        }
+        solve();
         io.close();
     }
+    static IO io;
     private static class IO {
     BufferedReader br;
     StringTokenizer st;
@@ -118,4 +139,5 @@ public class ThreeDoors {
     void close(){
         out.close();
     }
-};}
+};;
+}

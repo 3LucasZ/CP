@@ -2,8 +2,8 @@ package Helper;
 
 public class RotateMatrix45{
 	/*
-	1. rotate an array element by 45 degrees CCW (without overflow)
-	2. rotate a point by 45 degrees CCW (around origin)
+	1. rotate an array element by 45 degrees CCW/CW (without overflow)
+	2. rotate a point by 45 degrees CCW/CW (around origin)
 	 */
 	static int N = 5;
 	public static void main(String[] args){
@@ -24,7 +24,7 @@ public class RotateMatrix45{
 		int[][] tArr = new int[2*N][2*N];
 		for (int r=0;r<N;r++){
 			for (int c=0;c<N;c++){
-				Point t = elementRotate45(r,c);
+				Point t = elementRotate45CCW(r,c);
 				tArr[t.x][t.y]=arr[r][c];
 			}
 		}
@@ -39,17 +39,23 @@ public class RotateMatrix45{
 		//testing rotate points
 		Point test = new Point(1,3);
 		System.out.print(test+" -> ");
-		pointRotate45(test);
+		pointRotate45CCW(test);
 		System.out.println(test);
 	}
-	static Point elementRotate45(int r, int c) {
+	static Point elementRotate45CCW(int r,int c) {
 		return new Point(N-r+c,r+c);
 	}
-	static void pointRotate45(Point orig){
+	static void pointRotate45CCW(Point orig){
 		int x = orig.x;
 		int y = orig.y;
 		orig.x=x-y;
 		orig.y=x+y;
+	}
+	static void pointRotate45CW(Point orig){
+		int x = orig.x;
+		int y = orig.y;
+		orig.x=x+y;
+		orig.y=y-x;
 	}
 	private static class Point {
 		int x;

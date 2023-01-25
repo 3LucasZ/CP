@@ -56,6 +56,7 @@ public class SegmentTreePURS {
         //range is []
         int size;
         long[] tree;
+        long[] val;
         public SegTree(int n){
             init(n);
         }
@@ -63,6 +64,7 @@ public class SegmentTreePURS {
             init(n);
             for (int i=1;i<=n;i++){
                 tree[i+size-1]=arr[i];
+                val[i]=arr[i];
             }
             for (int i=size-1;i>=1;i--){
                 tree[i]=tree[i*2]+tree[i*2+1];
@@ -79,6 +81,7 @@ public class SegmentTreePURS {
         void set(int k, long x){
             k+=size-1;
             tree[k]=x;
+            val[k]=x;
             for (k/=2;k>=1;k/=2){
                 tree[k]=tree[2*k]+tree[2*k+1];
             }

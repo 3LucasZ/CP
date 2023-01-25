@@ -1,48 +1,77 @@
+package Codeforces.PickNPlay;
+
 import java.io.*;
 import java.util.*;
 /*
-PROB: Rorororobot
+PROB: SerejaAndBrackets
 LANG: JAVA
 */
-public class Rorororobot {
+public class SerejaAndBrackets {
     static boolean fileSubmission = false;
     static String fileName = "";
     
-    static boolean debug = true;
-    
+    static boolean debug = false;
+
+    static int N;
+    static int Q;
+    static char[] A;
+
     public static void solve() throws IOException {
         //* parse
-        int N = io.nextInt();
-        int M = io.nextInt();
-        int[] h = new int[M+1];
-        for (int i=1;i<=M;i++) h[i]=io.nextInt();
-        SegTree seg = new SegTree(M,h);
+        String str = io.next();
+        N = str.length();
+        A = new char[N+1];
+        for (int i=0;i<N;i++) A[i+1]=str.charAt(i);
 
-        //* handle
-        int q = io.nextInt();
-        for (int i=0;i<q;i++){
-            int r1 = io.nextInt();
-            int c1 = io.nextInt();
-            int r2 = io.nextInt();
-            int c2 = io.nextInt();
-            int k = io.nextInt();
-            if ((r2-r1)%k!=0 || (c2-c1)%k!=0) {
-                io.println("NO");
-                continue;
-            }
-            int mx =(int)seg.max(Math.min(c1,c2),Math.max(c1,c2))+1;
-            if (r1>=mx){
-                io.println("YES");
-                continue;
-            }
-            int add = k-(mx-r1)%k;
-            if (add==k) add=0;
-            if (mx+add<=N){
-                io.println("YES");
+        //* pair ) with the closest ( EXTREMELY GREEDY
+        SegTree end = new SegTree(N);
+        ArrayList<Integer>[] other = new ArrayList[N+1]; for (int i=0;i<=N;i++) other[i] = new ArrayList<>();
+
+        Stack<Integer> open = new Stack<>();
+        for (int i=1;i<=N;i++){
+            if (A[i]=='('){
+                open.add(i);
             } else {
-                io.println("NO");
+                if (!open.isEmpty()){
+                    end.add(i,1);
+                    int last = open.pop();
+                    other[last].add(i);
+                }
             }
         }
+
+        if (debug){
+            io.println("end:"+Arrays.toString(end.val));
+        }
+
+        //* handle querying
+        Q = io.nextInt();
+        int[] l = new int[Q];
+        int[] r = new int[Q];
+        for (int i=0;i<Q;i++){
+            l[i] = io.nextInt();
+            r[i] = io.nextInt();
+        }
+
+        //* order queries by l
+        Integer[] o = new Integer[Q];
+        for (int i=0;i<Q;i++) o[i]=i;
+        Arrays.sort(o,Comparator.comparingInt(a->l[a]));
+
+        //* go up up deleting and yeeting
+        int[] ans = new int[Q];
+        int t = 0;
+        for (int i=0;i<Q;i++){
+            int j = o[i];
+            while (t<l[j]){
+                for (int s : other[t]){
+                    end.add(s,-1);
+                }
+                t++;
+            }
+            ans[j]=(int)(2*end.sum(l[j],r[j]));
+        }
+        for (int i : ans) io.println(i);
     }
 
     private static class SegTree {
@@ -50,6 +79,7 @@ public class Rorororobot {
         //range is []
         int size;
         long[] tree;
+        long[] val;
         public SegTree(int n){
             init(n);
         }
@@ -57,30 +87,36 @@ public class Rorororobot {
             init(n);
             for (int i=1;i<=n;i++){
                 tree[i+size-1]=arr[i];
+                val[i]=arr[i];
             }
             for (int i=size-1;i>=1;i--){
-                tree[i]=Math.max(tree[i*2],tree[i*2+1]);
+                tree[i]=tree[i*2]+tree[i*2+1];
             }
         }
         public void init(int n){
             size = 1;
             while (size < n) size *= 2;
             tree = new long[2*size+1];
+            val = new long[n+1];
+        }
+        void add (int k, int x){
+            set(k,tree[k+size-1]+x);
         }
         void set(int k, long x){
+            val[k]=x;
             k+=size-1;
             tree[k]=x;
             for (k/=2;k>=1;k/=2){
-                tree[k]=Math.max(tree[2*k],tree[2*k+1]);
+                tree[k]=tree[2*k]+tree[2*k+1];
             }
         }
-        long max(int a, int b) {
+        long sum(int a, int b) {
             a+=size-1;
             b+=size-1;
             long ret = 0;
             while (a<=b){
-                if (a%2==1) ret=Math.max(ret,tree[a++]);
-                if (b%2==0) ret=Math.max(ret,tree[b--]);
+                if (a%2==1) ret+=tree[a++];
+                if (b%2==0) ret+=tree[b--];
                 a/=2;
                 b/=2;
             }

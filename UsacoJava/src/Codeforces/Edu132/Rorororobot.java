@@ -1,97 +1,93 @@
+package Codeforces.Edu132;
+
 import java.io.*;
 import java.util.*;
 /*
-PROB: XORTree
+PROB: Rorororobot
 LANG: JAVA
 */
-public class XORTree {
+public class Rorororobot {
     static boolean fileSubmission = false;
     static String fileName = "";
     
-    static boolean debug = false;
-
-    static int N;
-    static int[] A;
-    static ArrayList<Integer>[] tree;
-
-    static int[] xor;
-
-    static int ans = 0;
+    static boolean debug = true;
     
     public static void solve() throws IOException {
         //* parse
-        N = io.nextInt();
-        A = new int[N+1];
-        for (int i=1;i<=N;i++) A[i]=io.nextInt();
-        tree = new ArrayList[N+1]; for (int i=1;i<=N;i++) tree[i] = new ArrayList<>();
-        for (int i=0;i<N-1;i++){
-            int u = io.nextInt();
-            int v = io.nextInt();
-            tree[u].add(v);
-            tree[v].add(u);
-        }
+        int N = io.nextInt();
+        int M = io.nextInt();
+        int[] h = new int[M+1];
+        for (int i=1;i<=M;i++) h[i]=io.nextInt();
+        SegTree seg = new SegTree(M,h);
 
-        //* precomp
-        xor = new int[N+1];
-        xor[1]=A[1];
-        precomp(1,0);
-        if (debug){
-            io.println("xor: "+Arrays.toString(xor));
-        }
-
-        //* DFS
-        DFS(1,0);
-        io.println(ans);
-    }
-    static void precomp(int node, int par){
-        for (int child : tree[node]){
-            if (child==par) continue;
-            xor[child]=xor[node]^A[child];
-            precomp(child,node);
-        }
-    }
-    static HashSet<Integer> DFS(int node, int par){
-        //DFS children first then merge them all
-        HashSet<Integer> ret = new HashSet<>();
-        boolean bad = false;
-        for (int child : tree[node]){
-            if (child==par) continue;
-            HashSet<Integer> res = DFS(child,node);
-            if (res==null) continue;
-            if (!bad){
-                ret=merge(ret,res,node);
-                if(ret==null){
-                    bad=true;
-                    ans++;
-                }
+        //* handle
+        int q = io.nextInt();
+        for (int i=0;i<q;i++){
+            int r1 = io.nextInt();
+            int c1 = io.nextInt();
+            int r2 = io.nextInt();
+            int c2 = io.nextInt();
+            int k = io.nextInt();
+            if ((r2-r1)%k!=0 || (c2-c1)%k!=0) {
+                io.println("NO");
+                continue;
+            }
+            int mx =(int)seg.max(Math.min(c1,c2),Math.max(c1,c2))+1;
+            if (r1>=mx){
+                io.println("YES");
+                continue;
+            }
+            int add = k-(mx-r1)%k;
+            if (add==k) add=0;
+            if (mx+add<=N){
+                io.println("YES");
+            } else {
+                io.println("NO");
             }
         }
-        if (!bad) ret.add(xor[node]);
-
-        //ret
-        if (debug){
-            io.println("node: "+node);
-            io.println("ret: "+ret);
-        }
-        return ret;
     }
-    static HashSet<Integer> merge(HashSet<Integer> u, HashSet<Integer> v, int mid){
-        //enforce sz[u]<sz[v] so that we merge u->v
-        if (v.size()<u.size()){
-            HashSet<Integer> tmp = u;
-            u=v;
-            v=tmp;
-        }
 
-        //if u contains something that * mid is in v then return false
-        for (int x : u){
-            if (v.contains(x^A[mid])) return null;
+    private static class SegTree {
+        //1-indexed
+        //range is []
+        int size;
+        long[] tree;
+        public SegTree(int n){
+            init(n);
         }
-        if (u.contains(xor[mid]^A[mid]) || v.contains(xor[mid]^A[mid])) return null;
-
-        //merge
-        v.addAll(u);
-        return v;
+        public SegTree(int n, int[] arr){
+            init(n);
+            for (int i=1;i<=n;i++){
+                tree[i+size-1]=arr[i];
+            }
+            for (int i=size-1;i>=1;i--){
+                tree[i]=Math.max(tree[i*2],tree[i*2+1]);
+            }
+        }
+        public void init(int n){
+            size = 1;
+            while (size < n) size *= 2;
+            tree = new long[2*size+1];
+        }
+        void set(int k, long x){
+            k+=size-1;
+            tree[k]=x;
+            for (k/=2;k>=1;k/=2){
+                tree[k]=Math.max(tree[2*k],tree[2*k+1]);
+            }
+        }
+        long max(int a, int b) {
+            a+=size-1;
+            b+=size-1;
+            long ret = 0;
+            while (a<=b){
+                if (a%2==1) ret=Math.max(ret,tree[a++]);
+                if (b%2==0) ret=Math.max(ret,tree[b--]);
+                a/=2;
+                b/=2;
+            }
+            return ret;
+        }
     }
     
     

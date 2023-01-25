@@ -1,58 +1,86 @@
+package Codeforces.PickNPlay;
+
 import java.io.*;
 import java.util.*;
 
-public class RecoverAnRBS {
+public class EmptyGraph {
     static boolean debug = false;
-
-    static String str;
+    static int INF = (int)1e9;
     public static void solve(int tcs) throws IOException {
         if (debug) io.println("Case: "+tcs);
         //* parse
-        str = io.nextLine();
-        int N = str.length();
-        char[] A = new char[N];
-        for (int i=0;i<N;i++) A[i]=str.charAt(i);
-
-        //* cnt init open (
-        int open = 0;
-        for (int i=0;i<N;i++){
-            if (A[i]=='(') open++;
+        int N = io.nextInt();
+        int K = io.nextInt();
+        int[] A = new int[N+1];
+        for (int i=0;i<N;i++) A[i]=io.nextInt();
+        A[N]=INF;
+        if (debug){
+            io.println("A:"+Arrays.toString(A));
         }
 
-        //* edit A to soonest cfg
-        int INF = Integer.MAX_VALUE;
-        int a = -INF;
-        int b = INF;
-        for (int i=0;i<N;i++){
-            if (A[i]=='?') {
-                if (open < N/2){
-                    a=Math.max(a,i);
-                    A[i]='(';
-                    open++;
-                } else {
-                    b=Math.min(b,i);
-                    A[i]=')';
-                }
-            }
-        }
-        if (a==-INF || b==INF) {
-            io.println("YES");
+        //* base case
+        if (N==2 && K==1){
+            io.println(Math.max(A[0],A[1]));
             return;
         }
-
-        //* try cfg
-        A[a]=')';
-        A[b]='(';
-        int waiting = 0;
-        for (int i=0;i<N;i++){
-            if (A[i]=='(') waiting++;
-            else waiting --;
-            if (waiting < 0){
-                io.println("YES");
-                return;
-            }
+        //* rank
+        Integer[] sort = new Integer[N+1];
+        for (int i=0;i<=N;i++) sort[i]=i;
+        Arrays.sort(sort,(a,b)->(A[a]-A[b]));
+        if (debug){
+            io.println("Sort:"+Arrays.toString(sort));
         }
-        io.println("NO");
+
+        //* simulate
+        int ans = 0;
+        for (int i=0;i<N-1;i++){
+            int u, v;
+            u = A[i];
+            v = A[i+1];
+            int d;
+
+            //stay
+            ans=Math.max(ans,Math.min(Math.min(u,v),2*A[sort[K]]));
+            //bring u up
+            d=0;
+            if (u>A[sort[K-1]]) {
+                d++;
+                K--;
+            }
+            ans=Math.max(ans,Math.min(Math.min(INF,v),2*A[sort[K]]));
+            K+=d;
+            //bring v up
+            d=0;
+            if (v>A[sort[K-1]]) {
+                d++;
+                K--;
+            }
+            ans=Math.max(ans,Math.min(Math.min(INF,u),2*A[sort[K]]));
+            K+=d;
+            //bring u,v up
+            d=0;
+            if (v>A[sort[K-1]]) {
+                d++;
+                K--;
+            }
+            if (K<=0) {
+                K+=d;
+                continue;
+            }
+            if (u>A[sort[K-1]]){
+                d++;
+                K--;
+            }
+            if (K<=0) {
+                K+=d;
+                continue;
+            }
+            ans=Math.max(ans,Math.min(INF,2*A[sort[K]]));
+            K+=d;
+        }
+
+        //* ret
+        io.println(ans);
     }
 
 

@@ -1,45 +1,99 @@
+package Codeforces.Edu132;
+
 import java.io.*;
 import java.util.*;
 /*
-PROB: AlsoTryMinecraft
+PROB: XORTree
 LANG: JAVA
 */
-public class AlsoTryMinecraft {
+public class XORTree {
     static boolean fileSubmission = false;
     static String fileName = "";
     
-    static boolean debug = true;
+    static boolean debug = false;
+
+    static int N;
+    static int[] A;
+    static ArrayList<Integer>[] tree;
+
+    static int[] xor;
+
+    static int ans = 0;
     
     public static void solve() throws IOException {
         //* parse
-        int N = io.nextInt();
-        int M = io.nextInt();
-        long[] A = new long[N+2];
-        for (int i=1;i<=N;i++){
-            A[i]=io.nextInt();
-        }
-
-        //* fw presum
-        long[] fw = new long[N+1];
-        for (int i=1;i<=N;i++){
-            fw[i]=fw[i-1]+Math.max(0,A[i-1]-A[i]);
-        }
-        //* bw presum
-        long[] bw = new long[N+2];
-        for (int i=N;i>=1;i--){
-            bw[i]=bw[i+1]+Math.max(0,A[i+1]-A[i]);
-        }
-
-        //* query
-        for (int i=1;i<=M;i++){
+        N = io.nextInt();
+        A = new int[N+1];
+        for (int i=1;i<=N;i++) A[i]=io.nextInt();
+        tree = new ArrayList[N+1]; for (int i=1;i<=N;i++) tree[i] = new ArrayList<>();
+        for (int i=0;i<N-1;i++){
             int u = io.nextInt();
             int v = io.nextInt();
-            if (v>u){
-                io.println(fw[v]-fw[u]);
-            } else {
-                io.println(bw[v]-bw[u]);
+            tree[u].add(v);
+            tree[v].add(u);
+        }
+
+        //* precomp
+        xor = new int[N+1];
+        xor[1]=A[1];
+        precomp(1,0);
+        if (debug){
+            io.println("xor: "+Arrays.toString(xor));
+        }
+
+        //* DFS
+        DFS(1,0);
+        io.println(ans);
+    }
+    static void precomp(int node, int par){
+        for (int child : tree[node]){
+            if (child==par) continue;
+            xor[child]=xor[node]^A[child];
+            precomp(child,node);
+        }
+    }
+    static HashSet<Integer> DFS(int node, int par){
+        //DFS children first then merge them all
+        HashSet<Integer> ret = new HashSet<>();
+        boolean bad = false;
+        for (int child : tree[node]){
+            if (child==par) continue;
+            HashSet<Integer> res = DFS(child,node);
+            if (res==null) continue;
+            if (!bad){
+                ret=merge(ret,res,node);
+                if(ret==null){
+                    bad=true;
+                    ans++;
+                }
             }
         }
+        if (!bad) ret.add(xor[node]);
+
+        //ret
+        if (debug){
+            io.println("node: "+node);
+            io.println("ret: "+ret);
+        }
+        return ret;
+    }
+    static HashSet<Integer> merge(HashSet<Integer> u, HashSet<Integer> v, int mid){
+        //enforce sz[u]<sz[v] so that we merge u->v
+        if (v.size()<u.size()){
+            HashSet<Integer> tmp = u;
+            u=v;
+            v=tmp;
+        }
+
+        //if u contains something that * mid is in v then return false
+        for (int x : u){
+            if (v.contains(x^A[mid])) return null;
+        }
+        if (u.contains(xor[mid]^A[mid]) || v.contains(xor[mid]^A[mid])) return null;
+
+        //merge
+        v.addAll(u);
+        return v;
     }
     
     
