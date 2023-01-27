@@ -8,7 +8,8 @@ public class SuperFastIO {
     static boolean debug = true;
 
     public static void solve() throws IOException{
-
+        int N = io.nextInt();
+        for (int i=0;i<N;i++) io.println(io.read());
     }
 
 
@@ -82,6 +83,22 @@ public class SuperFastIO {
                 buf[cnt++] = (byte)c;
             }
             return new String(buf, 0, cnt);
+        }
+
+        public String readLine(int len) throws IOException{
+            byte[] buf=new byte[len]; // IMPORTANT: read line length
+            int cnt=0, c;
+            while((c=read())!=-1){
+                if(c=='\n'){
+                    if(cnt!=0){
+                        break;
+                    }else{
+                        continue;
+                    }
+                }
+                buf[cnt++]=(byte)c;
+            }
+            return new String(buf,0,cnt);
         }
 
         public int nextInt() throws IOException
