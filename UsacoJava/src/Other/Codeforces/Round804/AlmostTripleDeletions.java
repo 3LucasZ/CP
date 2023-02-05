@@ -1,75 +1,61 @@
+package Other.Codeforces.Round804;
+
 import java.io.*;
 import java.util.*;
 
-public class FlexibleStringRevisit{
+public class AlmostTripleDeletions {
     static boolean debug = false;
 
-    static long MOD = 998244353;
+    static int N;
+    static int[] A;
+    static boolean[][] rem;
 
     public static void solve(int tcs) throws IOException {
         if (debug) io.println("Case: "+tcs);
         //* parse
-        NT nt = new NT(MOD);
-        int N = io.nextInt();
-        String str1 = io.nextLine();
-        String str2 = io.nextLine();
-        int d = 0;
-        for (int i=0;i<N;i++){
-            if (str1.charAt(i)!=str2.charAt(i)) d++;
+        N = io.nextInt();
+        A = new int[N+1];
+        for (int i=1;i<=N;i++)A[i]=io.nextInt();
+
+        //* precomp rem[l][r]
+        rem = new boolean[N+1][N+1];
+        for (int l=0;l<N;l++){
+            int[] freq = new int[N+1];
+            int max = 0;
+            for (int r=l;r<=N;r++){
+                freq[A[r]]++;
+                max=Math.max(max,freq[A[r]]);
+                if ((r-l+1)%2==0 && max<=(r-l+1)/2){
+                    rem[l][r]=true;
+                };
+            }
         }
 
-        //* solve dp for expected value to beat x cards
-        long[] f = new long[N+1];
-        f[0]=0;
-        f[1]=mod(nt.pow(2,N)-1);
-        for (int i=2;i<=N;i++){
-            f[i]=mod((N*f[i-1]-(i-1)*f[i-2]-N))*nt.inv(N-i+1)%MOD;
+        //* dp
+        int[] dp = new int[N+1];
+        //base cases
+        for (int i=1;i<=N;i++){
+            if (rem(1,i-1)) dp[i]=1;
+        }
+        //transitions from j
+        for (int i=1;i<=N;i++){
+            for (int j=1;j<i;j++){
+                if (rem(j+1,i-1) &&A[i]==A[j]&&dp[j]!=0){
+                    dp[i]=Math.max(dp[i],dp[j]+1);
+                }
+            }
         }
 
         //* ret
-        io.println(f[d]);
+        int ans = 0;
+        for (int i=1;i<=N;i++){
+            if (rem(i+1,N)) ans=Math.max(ans,dp[i]);
+        }
+        io.println(ans);
     }
-    static long mod(long x){
-        return (x%MOD+MOD)%MOD;
-    }
-
-    private static class NT {
-        //* pow, inv
-        long MOD;
-        public long inv(long x) {
-            return pow(x,MOD-2);
-        }
-        public long pow(long x, long p) {
-            if (x==0) return 0;
-            if (p == 0) return 1;
-            if (p % 2 == 1) return (x * pow(x, p - 1)) % MOD;
-            else return pow((x * x) % MOD, p / 2);
-        }
-        public NT(long MOD) {
-            this.MOD=MOD;
-        }
-        //* choose, factorials, factorial inverses
-        long[] f;
-        long[] i;
-        int MAXF;
-        public NT(int MAXF, long MOD) {
-            //gen factorials (1...N)!
-            this.MAXF=MAXF;
-            this.MOD=MOD;
-            f = new long[MAXF + 1];
-            f[0] = 1;
-            for (int i = 1; i <= MAXF; i++) f[i] = (f[i - 1] * i) % MOD;
-            //gen inverses (1...N)!^-1
-            i = new long[MAXF + 1];
-            i[MAXF]=inv(f[MAXF]);
-            for (int A = MAXF; A > 0; A--) {
-                i[A-1]=i[A]*A%MOD;
-            }
-        }
-        public long choose(int n, int k) {
-            if (k == n || k == 0) return 1;
-            return ((f[n] * i[k] % MOD) * i[n - k]) % MOD;
-        }
+    static boolean rem(int l, int r){
+        if (r<l) return true;
+        else return rem[l][r];
     }
 
 

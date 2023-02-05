@@ -1,46 +1,40 @@
+package Other.Codeforces.Round848;
+
 import java.io.*;
 import java.util.*;
-/*
-PROB: CarryBit
-LANG: JAVA
-*/
-public class CarryBit {
-    static boolean fileSubmission = false;
-    static String fileName = "";
-    
+
+public class FlexibleStringRevisit{
     static boolean debug = false;
 
-    static final long mod=(long)1e9+7;
-    static NT nt = new NT(1000000,mod);
-    static int N,K;
-    public static void solve() throws IOException {
-        //* parse
-        N = io.nextInt();
-        K = io.nextInt();
+    static long MOD = 998244353;
 
-        //* base
-        if (K==0) {
-            io.println(nt.pow(3,N));
-            return;
+    public static void solve(int tcs) throws IOException {
+        if (debug) io.println("Case: "+tcs);
+        //* parse
+        NT nt = new NT(MOD);
+        int N = io.nextInt();
+        String str1 = io.nextLine();
+        String str2 = io.nextLine();
+        int d = 0;
+        for (int i=0;i<N;i++){
+            if (str1.charAt(i)!=str2.charAt(i)) d++;
         }
 
-        //* iterate over q
-        long ans = 0;
-        long pow[] = new long[N+1];
-        pow[0]=1; for (int i=1;i<=N;i++) pow[i]=pow[i-1]*3%mod;
-        for (int q=0;q<=N;q++){
-            int seg1 = (q+1)/2;
-            int seg0 = q/2+1;
-            long add = pow[N-q]*nt.choose(N-K,seg0-1)%mod*nt.choose(K-1,seg1-1)%mod;
-            ans=(ans+add)%mod;
-            if (debug){
-                io.println("q:"+q+", add:"+add);
-            }
+        //* solve dp for expected value to beat x cards
+        long[] f = new long[N+1];
+        f[0]=0;
+        f[1]=mod(nt.pow(2,N)-1);
+        for (int i=2;i<=N;i++){
+            f[i]=mod((N*f[i-1]-(i-1)*f[i-2]-N))*nt.inv(N-i+1)%MOD;
         }
 
         //* ret
-        io.println(ans);
+        io.println(f[d]);
     }
+    static long mod(long x){
+        return (x%MOD+MOD)%MOD;
+    }
+
     private static class NT {
         //* pow, inv
         long MOD;
@@ -75,37 +69,37 @@ public class CarryBit {
             }
         }
         public long choose(int n, int k) {
-            if (k>n) return 0;
-            if (k<0) return 0;
-            if (k==0) return 1;
+            if (k == n || k == 0) return 1;
             return ((f[n] * i[k] % MOD) * i[n - k]) % MOD;
         }
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    static IO io;
     public static void main(String[] args) throws IOException {
-        if (fileSubmission){
-            io = new IO(fileName, debug);
-        } else {
-            io = new IO(debug);
-        }
-        solve();
+        io = new IO(debug);
+        int T = io.nextInt();
+        for (int i=1;i<=T;i++) solve(i);
         io.close();
     }
-    static IO io;
     private static class IO {
     BufferedReader br;
     StringTokenizer st;
@@ -177,5 +171,4 @@ public class CarryBit {
     void close(){
         out.close();
     }
-};;
-}
+};}

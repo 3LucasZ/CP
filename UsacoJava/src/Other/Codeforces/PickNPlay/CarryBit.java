@@ -1,47 +1,87 @@
+package Other.Codeforces.PickNPlay;
+
 import java.io.*;
 import java.util.*;
 /*
-PROB: NodePairs
+PROB: CarryBit
 LANG: JAVA
 */
-public class NodePairs {
+public class CarryBit {
     static boolean fileSubmission = false;
     static String fileName = "";
     
-    static boolean debug = true;
-    static final int MAX = 1000;
-    static final int INF = Integer.MAX_VALUE/10;
+    static boolean debug = false;
 
-    static int P;
+    static final long mod=(long)1e9+7;
+    static NT nt = new NT(1000000,mod);
+    static int N,K;
     public static void solve() throws IOException {
         //* parse
-        P = io.nextInt();
-        int[] chs2 = new int[MAX+1];
-        for (int i=1;i<=MAX;i++){
-            chs2[i]=(i*(i-1))/2;
+        N = io.nextInt();
+        K = io.nextInt();
+
+        //* base
+        if (K==0) {
+            io.println(nt.pow(3,N));
+            return;
         }
 
-        //* dp
-        int[] dp = new int[P+1]; for (int i=0;i<=P;i++) dp[i]=INF;
-        int[] dp2 = new int[P+1];
-        dp[0]=0;
-        dp2[0]=0;
-        for (int i=1;i<=P;i++){
-            for (int j=2;j<=MAX;j++){
-                int last = i-chs2[j];
-                if (last<0) break;
-
-                if (dp[i]==dp[last]+j){
-                    dp2[i]=Math.max(dp2[i],dp2[last]+dp[last]*j);
-                } else if (dp[i]>dp[last]+j){
-                    dp[i]=dp[last]+j;
-                    dp2[i]=dp2[last]+dp[last]*j;
-                }
+        //* iterate over q
+        long ans = 0;
+        long pow[] = new long[N+1];
+        pow[0]=1; for (int i=1;i<=N;i++) pow[i]=pow[i-1]*3%mod;
+        for (int q=0;q<=N;q++){
+            int seg1 = (q+1)/2;
+            int seg0 = q/2+1;
+            long add = pow[N-q]*nt.choose(N-K,seg0-1)%mod*nt.choose(K-1,seg1-1)%mod;
+            ans=(ans+add)%mod;
+            if (debug){
+                io.println("q:"+q+", add:"+add);
             }
         }
 
         //* ret
-        io.println(dp[P]+" "+dp2[P]);
+        io.println(ans);
+    }
+    private static class NT {
+        //* pow, inv
+        long MOD;
+        public long inv(long x) {
+            return pow(x,MOD-2);
+        }
+        public long pow(long x, long p) {
+            if (x==0) return 0;
+            if (p == 0) return 1;
+            if (p % 2 == 1) return (x * pow(x, p - 1)) % MOD;
+            else return pow((x * x) % MOD, p / 2);
+        }
+        public NT(long MOD) {
+            this.MOD=MOD;
+        }
+        //* choose, factorials, factorial inverses
+        long[] f;
+        long[] i;
+        int MAXF;
+        public NT(int MAXF, long MOD) {
+            //gen factorials (1...N)!
+            this.MAXF=MAXF;
+            this.MOD=MOD;
+            f = new long[MAXF + 1];
+            f[0] = 1;
+            for (int i = 1; i <= MAXF; i++) f[i] = (f[i - 1] * i) % MOD;
+            //gen inverses (1...N)!^-1
+            i = new long[MAXF + 1];
+            i[MAXF]=inv(f[MAXF]);
+            for (int A = MAXF; A > 0; A--) {
+                i[A-1]=i[A]*A%MOD;
+            }
+        }
+        public long choose(int n, int k) {
+            if (k>n) return 0;
+            if (k<0) return 0;
+            if (k==0) return 1;
+            return ((f[n] * i[k] % MOD) * i[n - k]) % MOD;
+        }
     }
     
     

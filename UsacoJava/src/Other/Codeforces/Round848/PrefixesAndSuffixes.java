@@ -1,28 +1,45 @@
+package Other.Codeforces.Round848;
+
 import java.io.*;
 import java.util.*;
 
-public class FlipFlopSum {
+public class PrefixesAndSuffixes {
     static boolean debug = false;
-    
+
+    static int N;
     public static void solve(int tcs) throws IOException {
         if (debug) io.println("Case: "+tcs);
         //* parse
-        int N = io.nextInt();
-        int[] A = new int[N];
+        N = io.nextInt();
+        String str1 = io.nextLine();
+        String str2 = io.nextLine();
+        HashMap<Integer,Integer> freq = new HashMap<>();
         for (int i=0;i<N;i++){
-            A[i]=io.nextInt();
+            add(freq,hash(str1.charAt(N-1-i),str2.charAt(i)));
         }
-
-        //* inf
-        int sum = 0; for (int i=0;i<N;i++) sum+=A[i];
-        for (int i=0;i<N-1;i++){
-            if (A[i]==-1 && A[i+1]==-1){
-                io.println(sum+4);
-                return;
+        int odds = 0;
+        int odd = -1;
+        for (int i : freq.keySet()) {
+            if (freq.get(i)%2==1) {
+                odd=i;
+                odds++;
             }
         }
-        if (sum==N) io.println(sum-4);
-        else io.println(sum);
+        if (odds==1 && odd/1000==odd%1000 && N%2==1) io.println("YES");
+        else if (odds==0 && N%2==0) io.println("YES");
+        else io.println("NO");
+    }
+    static void add(HashMap<Integer,Integer> map, int x){
+        if (!map.containsKey(x)) map.put(x,0);
+        map.put(x,map.get(x)+1);
+    }
+    static int hash(char a, char b){
+        if (a>b){
+            char tmp = a;
+            a=b;
+            b=tmp;
+        }
+        return a*1000+b;
     }
 
 

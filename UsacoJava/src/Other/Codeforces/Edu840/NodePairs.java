@@ -1,75 +1,51 @@
+package Other.Codeforces.Edu840;
+
 import java.io.*;
 import java.util.*;
 /*
-PROB: DoremyPeggingGame
+PROB: NodePairs
 LANG: JAVA
 */
-public class DoremyPeggingGame {
+public class NodePairs {
     static boolean fileSubmission = false;
     static String fileName = "";
     
     static boolean debug = true;
+    static final int MAX = 1000;
+    static final int INF = Integer.MAX_VALUE/10;
 
-    static int N;
-    static long M;
+    static int P;
     public static void solve() throws IOException {
         //* parse
-        N = io.nextInt();
-        M = io.nextInt();
-        NT nt = new NT(N,M);
+        P = io.nextInt();
+        int[] chs2 = new int[MAX+1];
+        for (int i=1;i<=MAX;i++){
+            chs2[i]=(i*(i-1))/2;
+        }
 
-        long ans = 0;
+        //* dp
+        int[] dp = new int[P+1]; for (int i=0;i<=P;i++) dp[i]=INF;
+        int[] dp2 = new int[P+1];
+        dp[0]=0;
+        dp2[0]=0;
+        for (int i=1;i<=P;i++){
+            for (int j=2;j<=MAX;j++){
+                int last = i-chs2[j];
+                if (last<0) break;
 
-        for (int k=1;k<=(N-1)/2;k++){
-            for (int l=0;l<=k-1;l++){
-                int r = N-(k+1);
-                int rng = k+1;
-                if (N%2==1) rng--;
-                long add  =N*rng%M*nt.f[l+r-1]%M*nt.choose(k-1,l);
-                ans=(ans+add)%M;
+                if (dp[i]==dp[last]+j){
+                    dp2[i]=Math.max(dp2[i],dp2[last]+dp[last]*j);
+                } else if (dp[i]>dp[last]+j){
+                    dp[i]=dp[last]+j;
+                    dp2[i]=dp2[last]+dp[last]*j;
+                }
             }
         }
-        if (N%2==0) ans= (ans+N*nt.f[N-2])%M;
-        io.println(ans);
+
+        //* ret
+        io.println(dp[P]+" "+dp2[P]);
     }
-    private static class NT {
-        //* pow, inv
-        long MOD;
-        public long inv(long x) {
-            return pow(x,MOD-2);
-        }
-        public long pow(long x, long p) {
-            if (x==0) return 0;
-            if (p == 0) return 1;
-            if (p % 2 == 1) return (x * pow(x, p - 1)) % MOD;
-            else return pow((x * x) % MOD, p / 2);
-        }
-        public NT(long MOD) {
-            this.MOD=MOD;
-        }
-        //* choose, factorials, factorial inverses
-        long[] f;
-        long[] i;
-        int MAXF;
-        public NT(int MAXF, long MOD) {
-            //gen factorials (1...N)!
-            this.MAXF=MAXF;
-            this.MOD=MOD;
-            f = new long[MAXF + 1];
-            f[0] = 1;
-            for (int i = 1; i <= MAXF; i++) f[i] = (f[i - 1] * i) % MOD;
-            //gen inverses (1...N)!^-1
-            i = new long[MAXF + 1];
-            i[MAXF]=inv(f[MAXF]);
-            for (int A = MAXF; A > 0; A--) {
-                i[A-1]=i[A]*A%MOD;
-            }
-        }
-        public long choose(int n, int k) {
-            if (k == n || k == 0) return 1;
-            return ((f[n] * i[k] % MOD) * i[n - k]) % MOD;
-        }
-    }
+    
     
     
     

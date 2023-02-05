@@ -1,43 +1,42 @@
+package Other.Codeforces.Round848;
+
 import java.io.*;
 import java.util.*;
 
-public class PrefixesAndSuffixes {
+public class TheForbiddenPerm {
     static boolean debug = false;
-
-    static int N;
+    
     public static void solve(int tcs) throws IOException {
         if (debug) io.println("Case: "+tcs);
         //* parse
-        N = io.nextInt();
-        String str1 = io.nextLine();
-        String str2 = io.nextLine();
-        HashMap<Integer,Integer> freq = new HashMap<>();
+        int N = io.nextInt();
+        int M = io.nextInt();
+        int D = io.nextInt();
+        int[] p = new int[N];
+        for (int i=0;i<N;i++) p[i]=io.nextInt();
+        int[] a = new int[M];
+        for (int i=0;i<M;i++) a[i]=io.nextInt();
+
+        //* get pos
+        int[] pos = new int[N+1];
         for (int i=0;i<N;i++){
-            add(freq,hash(str1.charAt(N-1-i),str2.charAt(i)));
+            pos[p[i]]=i;
         }
-        int odds = 0;
-        int odd = -1;
-        for (int i : freq.keySet()) {
-            if (freq.get(i)%2==1) {
-                odd=i;
-                odds++;
-            }
+        if (debug){
+            io.println("p:"+Arrays.toString(p));
+            io.println("a:"+Arrays.toString(a));
+            io.println("pos:"+Arrays.toString(pos));
         }
-        if (odds==1 && odd/1000==odd%1000 && N%2==1) io.println("YES");
-        else if (odds==0 && N%2==0) io.println("YES");
-        else io.println("NO");
-    }
-    static void add(HashMap<Integer,Integer> map, int x){
-        if (!map.containsKey(x)) map.put(x,0);
-        map.put(x,map.get(x)+1);
-    }
-    static int hash(char a, char b){
-        if (a>b){
-            char tmp = a;
-            a=b;
-            b=tmp;
+
+        //* greed
+        int ans = Integer.MAX_VALUE;
+        for (int i=1;i<M;i++){
+            ans=Math.min(Math.max(0,pos[a[i]]-pos[a[i-1]]),ans);
+            if (D+1<N)ans=Math.min(Math.max(0,pos[a[i-1]]+D+1-pos[a[i]]),ans);
         }
-        return a*1000+b;
+
+        //* ret
+        io.println(ans);
     }
 
 

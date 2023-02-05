@@ -1,68 +1,101 @@
+package Other.Codeforces.PickNPlay;
+
 import java.io.*;
 import java.util.*;
-
-public class TheForbiddenPerm {
-    static boolean debug = false;
+/*
+PROB: DoremyPeggingGame
+LANG: JAVA
+*/
+public class DoremyPeggingGame {
+    static boolean fileSubmission = false;
+    static String fileName = "";
     
-    public static void solve(int tcs) throws IOException {
-        if (debug) io.println("Case: "+tcs);
+    static boolean debug = true;
+
+    static int N;
+    static long M;
+    public static void solve() throws IOException {
         //* parse
-        int N = io.nextInt();
-        int M = io.nextInt();
-        int D = io.nextInt();
-        int[] p = new int[N];
-        for (int i=0;i<N;i++) p[i]=io.nextInt();
-        int[] a = new int[M];
-        for (int i=0;i<M;i++) a[i]=io.nextInt();
+        N = io.nextInt();
+        M = io.nextInt();
+        NT nt = new NT(N,M);
 
-        //* get pos
-        int[] pos = new int[N+1];
-        for (int i=0;i<N;i++){
-            pos[p[i]]=i;
-        }
-        if (debug){
-            io.println("p:"+Arrays.toString(p));
-            io.println("a:"+Arrays.toString(a));
-            io.println("pos:"+Arrays.toString(pos));
-        }
+        long ans = 0;
 
-        //* greed
-        int ans = Integer.MAX_VALUE;
-        for (int i=1;i<M;i++){
-            ans=Math.min(Math.max(0,pos[a[i]]-pos[a[i-1]]),ans);
-            if (D+1<N)ans=Math.min(Math.max(0,pos[a[i-1]]+D+1-pos[a[i]]),ans);
+        for (int k=1;k<=(N-1)/2;k++){
+            for (int l=0;l<=k-1;l++){
+                int r = N-(k+1);
+                int rng = k+1;
+                if (N%2==1) rng--;
+                long add  =N*rng%M*nt.f[l+r-1]%M*nt.choose(k-1,l);
+                ans=(ans+add)%M;
+            }
         }
-
-        //* ret
+        if (N%2==0) ans= (ans+N*nt.f[N-2])%M;
         io.println(ans);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    static IO io;
+    private static class NT {
+        //* pow, inv
+        long MOD;
+        public long inv(long x) {
+            return pow(x,MOD-2);
+        }
+        public long pow(long x, long p) {
+            if (x==0) return 0;
+            if (p == 0) return 1;
+            if (p % 2 == 1) return (x * pow(x, p - 1)) % MOD;
+            else return pow((x * x) % MOD, p / 2);
+        }
+        public NT(long MOD) {
+            this.MOD=MOD;
+        }
+        //* choose, factorials, factorial inverses
+        long[] f;
+        long[] i;
+        int MAXF;
+        public NT(int MAXF, long MOD) {
+            //gen factorials (1...N)!
+            this.MAXF=MAXF;
+            this.MOD=MOD;
+            f = new long[MAXF + 1];
+            f[0] = 1;
+            for (int i = 1; i <= MAXF; i++) f[i] = (f[i - 1] * i) % MOD;
+            //gen inverses (1...N)!^-1
+            i = new long[MAXF + 1];
+            i[MAXF]=inv(f[MAXF]);
+            for (int A = MAXF; A > 0; A--) {
+                i[A-1]=i[A]*A%MOD;
+            }
+        }
+        public long choose(int n, int k) {
+            if (k == n || k == 0) return 1;
+            return ((f[n] * i[k] % MOD) * i[n - k]) % MOD;
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     public static void main(String[] args) throws IOException {
-        io = new IO(debug);
-        int T = io.nextInt();
-        for (int i=1;i<=T;i++) solve(i);
+        if (fileSubmission){
+            io = new IO(fileName, debug);
+        } else {
+            io = new IO(debug);
+        }
+        solve();
         io.close();
     }
+    static IO io;
     private static class IO {
     BufferedReader br;
     StringTokenizer st;
@@ -134,4 +167,5 @@ public class TheForbiddenPerm {
     void close(){
         out.close();
     }
-};}
+};;
+}
