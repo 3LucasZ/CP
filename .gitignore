@@ -2,3 +2,8 @@
 .idea
 UsacoJava.iml
 out
+io/out.txt
+io/in.txt
+io/dif.txt
+io/dbg.txt
+io/cmp.txt
