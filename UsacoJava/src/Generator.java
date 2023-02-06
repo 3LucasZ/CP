@@ -2,7 +2,7 @@ import java.io.*;
 
 public class Generator{
 	public static void generate() {
-		int len = 2500;
+		int len = 5000;
 		long l = randLong(LL1/2,LL1);
 		long r = l+len;
 		int q = 2500;
