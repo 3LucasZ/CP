@@ -1,16 +1,21 @@
+import java.io.*;
+
 public class Generator{
 
 
-	public static void main(String[] args){
-		long l = randLong(LL1,LL2);
-		long r = randLong(LL1,l);
-		int q = 10000;
-		System.out.println(l+" "+r+" "+q);
+	public static void main(String[] args) throws IOException{
+		PrintWriter out = new PrintWriter(new FileWriter(System.getenv("CP")+"/io/in.txt"));
+		int len = 2500;
+		long l = randLong(LL1/2,LL1);
+		long r = l+len;
+		int q = 2500;
+		out.println(l+" "+r+" "+q);
 		for (int i=0;i<q;i++){
 			char node = randChar();
 			String str = randStr(randInt(3,10));
-			System.out.println(node+" "+str);
+			out.println(node+" "+str);
 		}
+		out.close();
 	}
 
 

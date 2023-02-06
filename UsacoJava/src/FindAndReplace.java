@@ -1,9 +1,10 @@
 import java.io.*;
 import java.util.*;
 
-public class P1{
+public class FindAndReplace{
 	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	static PrintWriter out = new PrintWriter(System.out);
+
 	static boolean debug = true;
 
 	static long L;
@@ -16,6 +17,10 @@ public class P1{
 	static int[] ans;
 
 	public static void main(String[] args) throws IOException{
+		if(debug){
+			br = new BufferedReader(new FileReader(System.getenv("CP")+"/io/in.txt"));
+			out = new PrintWriter(new FileWriter(System.getenv("CP")+"/io/out.txt"));
+		}
 		//parse
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		L= Long.parseLong(st.nextToken());
@@ -28,6 +33,7 @@ public class P1{
 
 		for (int i=0;i<Q;i++){
 			st = new StringTokenizer(br.readLine());
+			System.out.println(i);
 			int node = st.nextToken().charAt(0)-'a';
 			String c = st.nextToken();
 			for (int j=0;j<c.length();j++){
@@ -48,7 +54,7 @@ public class P1{
 				for (int child : edges[i][j]){
 					sz[i][j]+=sz[i+1][child];
 					if (sz[i][j]>R){
-						sz[i][j]=R+1;
+						sz[i][j]=R+10;
 					}
 				}
 			}
@@ -59,8 +65,9 @@ public class P1{
 			}
 		}
 
-		//traverse the tree
+		//* traverse the tree
 		ans = new int[(int)(R-L)+1];
+		Arrays.fill(ans,100);
 		DFS(0,0,1);
 
 		//* ret
@@ -85,7 +92,7 @@ public class P1{
 
 		//put the char to ans
 		if (l==r){
-			ans[(int)(l-L)]=node;
+			if (ans[(int)(l-L)]==100)ans[(int)(l-L)]=node;
 			return;
 		}
 
