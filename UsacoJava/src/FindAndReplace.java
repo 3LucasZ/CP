@@ -33,7 +33,6 @@ public class FindAndReplace{
 
 		for (int i=0;i<Q;i++){
 			st = new StringTokenizer(br.readLine());
-			System.out.println(i);
 			int node = st.nextToken().charAt(0)-'a';
 			String c = st.nextToken();
 			for (int j=0;j<c.length();j++){
