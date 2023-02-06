@@ -1,10 +1,7 @@
 import java.io.*;
 
 public class Generator{
-
-
-	public static void main(String[] args) throws IOException{
-		PrintWriter out = new PrintWriter(new FileWriter(System.getenv("CP")+"/io/in.txt"));
+	public static void generate() {
 		int len = 2500;
 		long l = randLong(LL1/2,LL1);
 		long r = l+len;
@@ -15,7 +12,7 @@ public class Generator{
 			String str = randStr(randInt(3,10));
 			out.println(node+" "+str);
 		}
-		out.close();
+		System.out.println("Check:"+l);
 	}
 
 
@@ -42,4 +39,15 @@ public class Generator{
 	static final int I2 =(int)(2e9);
 	static final long LL1 = (long)(1e18);
 	static final long LL2 = (long)(2e18);
+
+	static PrintWriter out;
+	public static void main(String[] args) throws IOException{
+		if (System.getenv("CP")==null){
+			out = new PrintWriter(new FileWriter("io/in.txt"));
+		} else{
+			out=new PrintWriter(new FileWriter(System.getenv("CP")+"/io/in.txt"));
+		}
+		generate();
+		out.close();
+	}
 }

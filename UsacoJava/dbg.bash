@@ -3,12 +3,17 @@
 source $HOME/.zshrc
 echo "Starting Script"
 A=$CP/UsacoJava/src
-echo "CP:" $CP "A:" $A
+echo "CP:" $CP
+echo "A:" $A
+
 echo "Running Generator"
 java $A/Generator.java
+
 echo "Running Sol"
-java $A/Sol.java
+cat $CP/io/in.txt | java $A/Sol.java > $CP/io/cmp.txt
+
 echo "Running your code"
-java $A/FindAndReplace.java > $CP/io/dbg.txt
+cat $CP/io/in.txt | java $A/FindAndReplace.java > $CP/io/out.txt
+
 echo "Running diff"
 diff $CP/io/out.txt $CP/io/cmp.txt > $CP/io/dif.txt

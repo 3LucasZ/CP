@@ -5,7 +5,7 @@ public class FindAndReplace{
 	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	static PrintWriter out = new PrintWriter(System.out);
 
-	static boolean debug = true;
+	static boolean debug = false;
 
 	static long L;
 	static long R;
@@ -17,10 +17,6 @@ public class FindAndReplace{
 	static int[] ans;
 
 	public static void main(String[] args) throws IOException{
-		if(debug){
-			br = new BufferedReader(new FileReader(System.getenv("CP")+"/io/in.txt"));
-			out = new PrintWriter(new FileWriter(System.getenv("CP")+"/io/out.txt"));
-		}
 		//parse
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		L= Long.parseLong(st.nextToken());

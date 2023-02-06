@@ -5,8 +5,8 @@ public class Sol {
 	public static final long MAXVAL = 1000000000000000000L;
 
 	public static void main(String[] args) throws IOException{
-		BufferedReader in = new BufferedReader(new FileReader(System.getenv("CP")+"/io/in.txt"));
-		PrintWriter yeah = new PrintWriter(new FileWriter(System.getenv("CP")+"/io/cmp.txt"));
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		PrintWriter yeah = new PrintWriter(System.out);
 		StringTokenizer tokenizer = new StringTokenizer(in.readLine());
 		long l = Long.parseLong(tokenizer.nextToken());
 		long r = Long.parseLong(tokenizer.nextToken());
