@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 source $HOME/.zshrc
 echo "Starting Script"
 A=$CP/UsacoJava/src
