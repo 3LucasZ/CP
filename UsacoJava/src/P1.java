@@ -4,7 +4,7 @@ import java.util.*;
 public class P1{
 	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	static PrintWriter out = new PrintWriter(System.out);
-	static boolean debug = false;
+	static boolean debug = true;
 
 	static long L;
 	static long R;
@@ -14,7 +14,6 @@ public class P1{
 	static long[][] sz;
 
 	static int[] ans;
-	static final long INF = Long.MAX_VALUE/2-10;
 
 	public static void main(String[] args) throws IOException{
 		//parse
@@ -23,6 +22,7 @@ public class P1{
 		R= Long.parseLong(st.nextToken());
 		Q= Integer.parseInt(st.nextToken());
 
+		//create edges from query depth i to query depth i+1
 		edges = new ArrayList[Q+1][26];
 		for (int i=0;i<=Q;i++) for (int j=0;j<26;j++) edges[i][j] = new ArrayList<>();
 
@@ -40,7 +40,7 @@ public class P1{
 			}
 		}
 
-		//make sz
+		//find sz of each node in each query
 		sz = new long[Q+1][26];
 		for (int i=0;i<26;i++) sz[Q][i]=1;
 		for (int i=Q-1;i>=0;i--){
@@ -66,6 +66,7 @@ public class P1{
 		//* ret
 		if (debug){
 			System.out.println(Arrays.toString(ans));
+			System.out.println("sz:"+ans.length);
 		}
 
 		for (int i : ans) out.print((char)('a'+i));
