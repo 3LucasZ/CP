@@ -31,7 +31,7 @@ public class job {
         st = new StringTokenizer(br.readLine());
         for (int i=0;i<M2;i++) B[i]=Integer.parseInt(st.nextToken());
 
-        //gen end, note they are sorted
+        //gen end, note.txt they are sorted
         int[] endA = sim(M1,A);
         int[] endB = sim(M2,B);
         if (debug){

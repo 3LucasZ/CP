@@ -1,15 +1,12 @@
-package Other.USACO.Season2022_2023.Gold;
+package Other.USACO.Season2022_2023.Dec2022.Gold;
 
 import java.io.*;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.StringTokenizer;
-
+import java.util.*;
 /*
 PROB: BribingFriends
 LANG: JAVA
 */
-public class BribingFriends {
+public class BribingFriendsSubtask {
     static boolean fileSubmission = false;
     static String fileName = "";
     
@@ -19,7 +16,7 @@ public class BribingFriends {
     static Friend[] friend; //popularity, cost, accept cones
 
 
-    static int INF = 100;
+    static int INF = Integer.MAX_VALUE;
     public static void solve() throws IOException {
         //* parse
         N = io.nextInt();
@@ -32,61 +29,50 @@ public class BribingFriends {
             int X = io.nextInt();
             friend[i] = new Friend(P,C,X);
         }
-
-        //* greedy sort by X
+        //* greedy sort on X
         friend[0] = new Friend(0,0,-1);
         Arrays.sort(friend, Comparator.comparingInt(a -> a.X));
         if (debug) io.println(Arrays.toString(friend));
-
-        //* coneDp ->
-        //init: dp[i][j] = max popularity for 1..ith cow segment, using j cones
-        int[][] coneDP = new int[N+2][B+1];
-        //for (int i=0;i<=N;i++) for (int j=0;j<=B;j++) coneDP[i][j]=-INF;
-        coneDP[0][0]=0;
-        //transitions dp[i][j] => dp[i+1][j']
+        //* dp
+        //init: dp[i][j][k] = max popularity for 1..ith cow segment, using j coins and k cones
+        int[][][] dp = new int[N+1][A+1][B+1];
+        for (int i=0;i<=N;i++) for (int j=0;j<=A;j++) for (int k=0;k<=B;k++) dp[i][j][k]=-INF;
+        dp[0][0][0]=0;
+        //transitions dp[i][j][k] => dp[i+1][j'][k']
         for (int i=0;i<N;i++){
-            for (int j=0;j<=B;j++){
-                    //dont take cow i+1
-                    coneDP[i+1][j]=Math.max(coneDP[i+1][j],coneDP[i][j]);
-                    //take cow i+1
-                    int payCones = friend[i+1].C*friend[i+1].X;
-                    if (j+payCones<=B) coneDP[i+1][j+payCones]=Math.max(coneDP[i+1][j+payCones], coneDP[i][j]+friend[i+1].P);
-            }
-        }
-        if (debug){
-            io.print2d(coneDP);
-        }
-
-        //* moneyDP <-
-        int[][] moneyDP = new int[N+2][A+1];
-        //for (int i=0;i<=N+1;i++) for (int j=0;j<=A;j++) moneyDP[i][j]=-INF;
-        moneyDP[N+1][0]=0;
-        //transitions dp[i][j] => dp[i+1][j']
-        for (int i=N+1;i>1;i--){
             for (int j=0;j<=A;j++){
-                //dont take cow i-1
-                moneyDP[i-1][j]=Math.max(moneyDP[i-1][j],moneyDP[i][j]);
-                //take cow i-1
-                int payMoney = friend[i-1].C;
-                if (j+payMoney<=A) moneyDP[i-1][j+payMoney]=Math.max(moneyDP[i-1][j+payMoney], moneyDP[i][j]+friend[i-1].P);
+                for (int k=0;k<=B;k++){
+                    //dont take cow i+1
+                    dp[i+1][j][k]=Math.max(dp[i+1][j][k],dp[i][j][k]);
+                    //take cow i+1
+                    int bribeCones = Math.min(B-k,friend[i+1].C*friend[i+1].X);
+                    int remainder = bribeCones%friend[i+1].X;
+                    bribeCones-=remainder;
+                    int bribeMoney = bribeCones/friend[i+1].X;
+
+                    int payCoins = friend[i+1].C-bribeMoney;
+                    int payCones = bribeCones;
+                    if (j+payCoins<=A && k+payCones<=B) dp[i+1][j+payCoins][k+payCones]=Math.max(dp[i+1][j+payCoins][k+payCones], dp[i][j][k]+friend[i+1].P);
+                }
             }
         }
         if (debug){
-            io.print2d(moneyDP);
+            for (int i=0;i<=N;i++){
+                for (int j=0;j<=A;j++){
+                    for (int k=0;k<=B;k++){
+                        io.println("i: "+i+", j: "+j+", k: "+k+" = "+dp[i][j][k]);
+                    }
+                }
+            }
         }
-
-        //* try every split point
-        //take 1..i-1 for cones, i for cones AND money, i+1..N for money
+        if (debug){
+            io.println(dp[1][5][6]);
+        }
+        //collect ans
         int ans = 0;
-        for (int i=1;i<=N;i++){
-            for (int cones=0;cones<=B;cones++){
-                int payCones = Math.min(B-cones,friend[i].C*friend[i].X);
-                int saveMoney = payCones/friend[i].X;
-                int payMoney = friend[i].C-saveMoney;
-                if (A-payMoney<0||A-payMoney>A) continue;
-                int l = coneDP[i-1][cones];
-                int r = moneyDP[i+1][A-payMoney];
-                ans=Math.max(ans,l+r+friend[i].P);
+        for (int j=0;j<=A;j++){
+            for (int k=0;k<=B;k++){
+                ans=Math.max(ans,dp[N][j][k]);
             }
         }
         //* ret
@@ -188,17 +174,6 @@ public class BribingFriends {
         if (debug) System.out.print(obj);
         else out.print(obj);
     }
-    void print2d(int[][] arr) {
-            for (int r = 0; r < arr.length; r++) {
-                for (int c = 0; c < arr[r].length; c++) {
-                    String str = "" + arr[r][c];
-                    while (str.length() < 5) str += " ";
-                    System.out.print(str);
-                }
-                System.out.println();
-            }
-            System.out.println();
-        }
     void close(){
         out.close();
     }

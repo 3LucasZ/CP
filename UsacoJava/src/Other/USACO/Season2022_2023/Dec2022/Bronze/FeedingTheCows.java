@@ -1,66 +1,76 @@
-package Other.USACO.Season2022_2023.Bronze;
+package Other.USACO.Season2022_2023.Dec2022.Bronze;
 
 import java.io.*;
 import java.util.*;
-/*
-PROB: CowCollege
-LANG: JAVA
-*/
-public class CowCollege {
-    static boolean fileSubmission = false;
-    static String fileName = "";
-    
-    static boolean debug = true;
+
+public class FeedingTheCows {
+    static boolean debug = false;
 
     static int N;
-    static Integer[] A;
-    public static void solve() throws IOException {
+    static int R;
+    static char[] breed;
+    static char[] ans;
+    public static void solve(int tcs) throws IOException {
+        if (debug) io.println("Case: "+tcs);
         //* parse
         N = io.nextInt();
-        A = new Integer[N];
-        for (int i=0;i<N;i++) A[i] = io.nextInt();
-        Arrays.sort(A);
-        long min =A[N-1];
-        long ans = 0;
-        long tuition = 0;
-        for (int i=N-1;i>=0;i--){
-            min=Math.min(min,A[i]);
-            long cost = min*(N-i);
-            if (cost>ans){
-                ans=cost;
-                tuition=min;
-            }
-            else if (cost==ans){
-                tuition=Math.min(tuition,min);
-            }
-        }
-        io.println(ans+" "+tuition);
+        R = io.nextInt();
+        String str = io.nextLine();
+        breed = new char[N];
+        ans = new char[N]; for (int i=0;i<N;i++) ans[i]='.';
+        for (int i=0;i<N;i++) breed[i]=str.charAt(i);
+
+        //* solve
+        int t = 0;
+        t+=solveBreed('G');
+        t+=solveBreed('H');
+        io.println(t);
+        for (int i=0;i<N;i++)io.print(ans[i]);
+        io.println();
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    public static void main(String[] args) throws IOException {
-        if (fileSubmission){
-            io = new IO(fileName, debug);
-        } else {
-            io = new IO(debug);
+    public static int solveBreed(char b){
+        int ret = 0;
+        for (int i=0;i<N;i++){
+            if (breed[i]!=b) continue;
+            int last = 0;
+            for (int j=i;j<=Math.min(N-1,i+2*R);j++){
+                if (breed[j]==b) last=j;
+            }
+            ret++;
+            int pos = Math.min(i+R,N-1);
+            if (ans[pos]!='.') pos--;
+            ans[pos]=b;
+            i=last;
         }
-        solve();
+        return ret;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    static IO io;
+    public static void main(String[] args) throws IOException {
+        io = new IO(debug);
+        int T = io.nextInt();
+        for (int i=1;i<=T;i++) solve(i);
         io.close();
     }
-    static IO io;
     private static class IO {
     BufferedReader br;
     StringTokenizer st;
@@ -121,5 +131,4 @@ public class CowCollege {
     void close(){
         out.close();
     }
-};;
-}
+};}

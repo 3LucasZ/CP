@@ -8,7 +8,7 @@ Shortest Routes I
 USACO Gold Guide - Shortest Paths (Non-neg edge weights) - Easy
 Thoughts:
 First ever Djikstra!!
-Things to note: INF is 1e15 to prevent overflow at MAXLONG
+Things to note.txt: INF is 1e15 to prevent overflow at MAXLONG
 2 custom classes: Edge and Pair
 nodes are only processed ONCE (greedy)
 keep distances as longs!

@@ -1,54 +1,108 @@
-package Other.USACO.Season2022_2023.Silver;
+package Other.USACO.Season2022_2023.Jan2023.FindAndReplace;
 
 import java.io.*;
 import java.util.*;
 /*
-PROB: RangeReconstruction
+PROB: FindAndReplace2
 LANG: JAVA
 */
-public class RangeReconstruction {
+public class FindAndReplace2 {
     static boolean fileSubmission = false;
     static String fileName = "";
     
     static boolean debug = true;
-    
+
+    static long L,R;
+    static int Q;
+
+    static int[] opsChr;
+    static ArrayList<Integer>[] opsStr;
+
+    static long[][] sz;
+    static int[][] head;
+    static int[][] next;
+
+    static char[] ans;
+
+    static int cnt = 0;
+
+    static int ops = 0;
+
     public static void solve() throws IOException {
         //* parse
-        int N = io.nextInt();
-        int[][] r = new int[N][N];
-        for (int i=0;i<N;i++){
-            for (int j=i;j<N;j++){
-                r[i][j]=io.nextInt();
-            }
-        }
-        int[] a = new int[N];
-        boolean[] added = new boolean[N];
-        a[0]=0;
-        added[0]=true;
-        if (N>1) {
-            a[1] = a[0] + r[0][1];
-        }
-        for (int i=2;i<N;i++){
-            int max = a[i-1]+r[i-1][i];
-            int min = a[i-1]-r[i-1][i];
+        L = io.nextLong()-1;
+        R = io.nextLong()-1;
+        Q = io.nextInt();
 
-            a[i]=max;
-            boolean good = true;
-            for (int l=0;l<=i-2;l++){
-                int amin = Integer.MAX_VALUE;
-                int amax = Integer.MIN_VALUE;
-                for (int j=l;j<=i;j++){
-                    amin=Math.min(amin,a[j]);
-                    amax=Math.max(amax,a[j]);
+        opsChr = new int[Q];
+        opsStr = new ArrayList[Q];
+        for (int i=0;i<Q;i++){
+            opsChr[i]=io.next().charAt(0)-'a';
+            String str = io.next();
+            opsStr[i]=new ArrayList<>();
+            for (int c=0;c<str.length();c++)opsStr[i].add(str.charAt(c)-'a');
+        }
+
+        //head: the new head for node after transport
+        //next: the next important operation for node
+        //sz: the size of the node's subtree
+        sz = new long[Q+1][26];
+        next = new int[Q+1][26];
+        head = new int[Q+1][26];
+
+        for (int i=0;i<26;i++){
+            sz[Q][i]=1;
+            next[Q][i]=Q;
+            head[Q][i]=i;
+        }
+
+        for (int level=Q-1;level>=0;level--){
+            for (int x=0;x<26;x++){
+                if (opsChr[level]==x){
+                    if(opsStr[level].size()==1){
+                        sz[level][x]=sz[level+1][opsStr[level].get(0)];
+                    } else {
+                        next[level][x]=level;
+                        head[level][x]=x;
+                        for (int c : opsStr[level]){
+                            sz[level][x]+=sz[level+1][c];
+                            if (sz[level][x]>R) break;
+                        }
+                    }
                 }
-                if (amax-amin!=r[l][i])good=false;
+                else {
+                    sz[level][x]=sz[level+1][x];
+                    next[level][x]=next[level+1][x];
+                    head[level][x]=head[level+1][x];
+                }
             }
-
-            if (!good) a[i]=min;
         }
-        //* ret
-        for (int i=0;i<N-1;i++) io.print(a[i]+" ");
-        io.print(a[N-1]);
+
+        //* traverse the tree
+        ans = new char[(int)(R-L+1)];
+        search(0,0,0);
+        for (char i:ans)io.print(i);
+        io.println();
+        io.println(ops);
+    }
+    static void search(long lb, int cur, int level){
+        ops++;
+        if (lb+sz[level][cur]<=L || lb>R) return;
+        if (level==Q){
+            ans[cnt]=(char)('a'+cur);
+            cnt++;
+            return;
+        }
+        if (next[level][cur]==Q){
+            ans[cnt]=(char)('a'+head[level][cur]);
+            cnt++;
+            return;
+        }
+        for (int c : opsStr[next[level][cur]]){
+            search(lb,c,next[level][cur]+1);
+            lb+=sz[next[level][cur]+1][c];
+            if (lb>R) break;
+        }
     }
     
     

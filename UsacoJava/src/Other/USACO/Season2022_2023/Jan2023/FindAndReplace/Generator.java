@@ -1,17 +1,20 @@
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+package Other.USACO.Season2022_2023.Jan2023.FindAndReplace;
+
+import java.io.*;
 
 public class Generator{
 	public static void generate() {
-		int q = 1000;
-		int n = 10;
-		out.println(q+" "+n);
+		int len = 3000;
+		long l = randLong(LL1/2,LL1);
+		long r = l+len;
+		int q = 500;
+		out.println(l+" "+r+" "+q);
 		for (int i=0;i<q;i++){
-			String lights = toBin(randInt(0,1<<n),n);
-			String buttons = toBin(randInt(0,1<<n),n);
-			out.println(lights+" "+buttons);
+			char node = randChar();
+			String str = randStr(randInt(1,100));
+			out.println(node+" "+str);
 		}
+		System.out.println("Check:"+l);
 	}
 
 
@@ -41,14 +44,6 @@ public class Generator{
 		StringBuilder ret = new StringBuilder();
 		for (int i=0;i<len;i++){
 			ret.append(randChar());
-		}
-		return ret.toString();
-	}
-	static String toBin(int bin, int len){
-		StringBuilder ret =new StringBuilder();
-		for (int i=0;i<len;i++){
-			ret.append(bin%2);
-			bin/=2;
 		}
 		return ret.toString();
 	}

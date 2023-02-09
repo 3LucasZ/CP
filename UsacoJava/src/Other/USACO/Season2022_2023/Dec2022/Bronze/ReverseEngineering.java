@@ -1,4 +1,4 @@
-package Other.USACO.Season2022_2023.Bronze;
+package Other.USACO.Season2022_2023.Dec2022.Bronze;
 
 import java.io.*;
 import java.util.*;

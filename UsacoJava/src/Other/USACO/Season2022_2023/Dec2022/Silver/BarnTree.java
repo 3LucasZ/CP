@@ -1,99 +1,84 @@
-package Other.USACO.Season2022_2023.Gold;
+package Other.USACO.Season2022_2023.Dec2022.Silver;
 
 import java.io.*;
 import java.util.*;
 /*
-PROB: StrongestFriendshipGroupSubtask
+PROB: BarnTree
 LANG: JAVA
 */
-public class StrongestFriendshipGroupSubtask {
+public class BarnTree {
     static boolean fileSubmission = false;
     static String fileName = "";
     
     static boolean debug = false;
 
+    static ArrayList<Integer>[] tree;
     static int N;
-    static int M;
-    static HashSet<Integer>[] graph;
-    static PriorityQueue<Integer> pq;
+    static long[] h;
+
+    static long tar;
+
+    static ArrayList<Op> up = new ArrayList<>();
+    static ArrayList<Op> down = new ArrayList<>();
     public static void solve() throws IOException {
         //* parse
         N = io.nextInt();
-        M = io.nextInt();
-        graph = new HashSet[N+1]; for (int i=1;i<=N;i++) graph[i] = new HashSet<>();
-        for (int i=0;i<M;i++){
+        h = new long[N+1];
+        tree = new ArrayList[N+1]; for (int i=1;i<=N;i++) tree[i] = new ArrayList<>();
+        for (int i=1;i<=N;i++) h[i]=io.nextInt();
+        for (int i=0;i<N-1;i++){
             int u = io.nextInt();
             int v = io.nextInt();
-            graph[u].add(v);
-            graph[v].add(u);
+            tree[u].add(v);
+            tree[v].add(u);
         }
 
-        //* setup
-        long ans = 0;
-        pq = new PriorityQueue<>((a,b)->{
-            if (graph[a].size()==graph[b].size()) return a-b;
-            return graph[a].size()-graph[b].size();
-        });
-        for (int i=1;i<=N;i++) pq.add(i);
+        //* precomp tar
+        long sum = 0; for (int i=1;i<=N;i++) sum+=h[i];
+        tar = sum/N;
 
-        //* unit tests
+        //* DFS
+        DFS(1,0);
         if (debug){
-            io.println("graph: "+Arrays.toString(graph));
-            io.println("max component size: "+ maxComponent());
-            io.println("pq: "+pq);
-            trim(2);
-            io.println("graph: "+Arrays.toString(graph));
-            io.println("max component size: "+ maxComponent());
-            io.println("pq: "+pq);
+            System.out.println("final h: "+Arrays.toString(h));
         }
+        //* ret
+        //#x
+        io.println(up.size()+down.size());
+        //up ops first
+        for (Op x : up){
+            io.println(x.u+" "+x.v+" "+x.cost);
+        }
+        //down ops first (reversed)
+        Collections.reverse(down);
+        for (Op x : down){
+            io.println(x.u+" "+x.v+" "+x.cost);
+        }
+    }
 
-        //* slowly increase min num edges, and count max component size
-        for (int minDeg=0;minDeg<=M;minDeg++){
-            Integer next = pq.peek();
-            if (next==null) continue;
-            if (graph[next].size()<minDeg) {
-                trim(minDeg);
-                maxComponent();
-            }
-            ans=Math.max(ans, (long)(minDeg)*maxComponent);
+    public static void DFS(int node, int par){
+        for (int child : tree[node]){
+            if (child==par) continue;
+            DFS(child,node);
         }
-        io.println(ans);
+        //op
+        long d = tar-h[node];
+        if (d>0) down.add(new Op(par,node,d));
+        else if (d<0) up.add(new Op(node,par,-d));
+        //upd par
+        h[par]-=d;
+        h[node]+=d;
     }
-    static boolean[] vis;
-    static int maxComponent = 0;
-    static int component = 0;
-    public static int maxComponent(){
-        maxComponent = 0;
-        vis = new boolean[N+1];
-        for (int i=1;i<=N;i++){
-            component = 0;
-            DFS(i);
-            maxComponent = Math.max(maxComponent,component);
-        }
-        return maxComponent;
-    }
-    public static void DFS(int node){
-        if (vis[node] || graph[node].size()==0) return;
-        vis[node]=true;
-        component++;
-        for (int child : graph[node]){
-            DFS(child);
+    private static class Op {
+        int u;
+        int v;
+        long cost;
+        public Op(int u, int v, long cost){
+            this.u=u;
+            this.v=v;
+            this.cost=cost;
         }
     }
-    public static void trim(int deg){
-        while (true){
-            Integer lo = pq.peek();
-            if (lo==null || graph[lo].size()>=deg) break;
-            pq.poll();
-            for (int child : graph[lo]){
-                pq.remove(child);
-                graph[child].remove(lo);
-                pq.add(child);
-            }
-            graph[lo] = new HashSet<>();
-        }
-    }
-    
     
     
     
@@ -174,6 +159,17 @@ public class StrongestFriendshipGroupSubtask {
     void print(Object obj){
         if (debug) System.out.print(obj);
         else out.print(obj);
+    }
+    public static void print(int[][] arr) {
+        for (int r = 0; r < arr.length; r++) {
+            for (int c = 0; c < arr[r].length; c++) {
+                String str = "" + arr[r][c];
+                while (str.length() < 5) str += " ";
+                System.out.print(str);
+            }
+            System.out.println();
+        }
+        System.out.println();
     }
     void close(){
         out.close();
