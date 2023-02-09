@@ -7,7 +7,7 @@ echo "CP:" $CP
 echo "A:" $A
 
 echo "Running your code"
-cat $CP/io/in.txt | java $A/LightsOff.java > $CP/io/out.txt
+cat $CP/io/in.txt | java $A/FindAndReplace.java > $CP/io/out.txt
 
 #echo "Running their code"
 #cat $CP/io/in.txt | java $A/Sol.java > $CP/io/cmp.txt
