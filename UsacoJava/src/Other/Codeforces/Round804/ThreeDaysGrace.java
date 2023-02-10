@@ -1,35 +1,68 @@
-
+package Other.Codeforces.Round804;
 
 import java.io.*;
 import java.util.*;
-/*
-PROB: MooRoute
-LANG: JAVA
-*/
-public class MooRoute {
-    static boolean fileSubmission = false;
-    static String fileName = "";
-    
+
+public class ThreeDaysGrace {
     static boolean debug = false;
-
-    static long mod =(long)((1e9)+7);
-
-    public static void solve() throws IOException{
+    
+    public static void solve(int tcs) throws IOException {
+        if (debug) io.println("Case: "+tcs);
         //* parse
-        int N=io.nextInt();
-        int[] A=new int[N+2];
-        for(int i=1;i<=N;i++){
-            A[i]=io.nextInt()/2;
+        int n = io.nextInt();
+        int m = io.nextInt();
+        int[] a = new int[n];
+        boolean[] inSet = new boolean[m+1];
+        for (int i=0;i<n;i++){
+            int j = io.nextInt();
+            inSet[j]=true;
+            a[i]=j;
         }
-        NT nt = new NT(1000000,mod);
-
-        //* get ans
-        long ans = 1;
-        for (int i=1;i<N;i++){
-            if (A[i+1]>A[i]){
-                ans = (ans * nt.choose(A[i+1]-1,A[i]-1))%mod;
-            } else {
-                ans = (ans * nt.choose(A[i],A[i+1]))%mod;
+        if(debug){
+            io.println("a:"+Arrays.toString(a));
+        }
+        //* precomp
+        int min = Integer.MAX_VALUE;
+        for (int i=0;i<n;i++){
+            min=Math.min(min,a[i]);
+        }
+        //* dp
+        int ans = m;
+        int max = m;
+        int[] dp = new int[m+1]; for (int i=1;i<=m;i++) dp[i]=i;
+        int[] freq = new int[m+1]; for (int i=1;i<=m;i++) if (inSet[i]) freq[i]++;
+        for (int L=m;L>=1;L--){
+            if (debug){
+                io.println("min:"+L);
+            }
+            int old = dp[L];
+            dp[L]=L;
+            int next = dp[L];
+            if (inSet[L]){
+                freq[old]--;
+                freq[next]++;
+            }
+            if ((long)L*L<=m){
+                for(int mult=L*L;mult<=m;mult+=L){
+                    old=dp[mult];
+                    dp[mult]=Math.min(dp[mult],dp[mult/L]);
+                    next=dp[mult];
+                    if(inSet[mult]){
+                        freq[old]--;
+                        freq[next]++;
+                    }
+                }
+            }
+            //search new max
+            while (freq[max]==0){
+                if (debug){
+                    io.println("max:"+max);
+                }
+                max--;
+            }
+            //update ans
+            if (L<=min){
+                ans=Math.min(ans,max-L);
             }
         }
 
@@ -38,69 +71,31 @@ public class MooRoute {
     }
 
 
-    private static class NT {
-        //* pow, inv
-        long MOD;
-        public long inv(long x) {
-            return pow(x,MOD-2);
-        }
-        public long pow(long x, long p) {
-            if (x==0) return 0;
-            if (p == 0) return 1;
-            if (p % 2 == 1) return (x * pow(x, p - 1)) % MOD;
-            else return pow((x * x) % MOD, p / 2);
-        }
-        public NT(long MOD) {
-            this.MOD=MOD;
-        }
-        //* choose, factorials, factorial inverses
-        long[] f;
-        long[] i;
-        int MAXF;
-        public NT(int MAXF, long MOD) {
-            //gen factorials (1...N)!
-            this.MAXF=MAXF;
-            this.MOD=MOD;
-            f = new long[MAXF + 1];
-            f[0] = 1;
-            for (int i = 1; i <= MAXF; i++) f[i] = (f[i - 1] * i) % MOD;
-            //gen inverses (1...N)!^-1
-            i = new long[MAXF + 1];
-            i[MAXF]=inv(f[MAXF]);
-            for (int A = MAXF; A > 0; A--) {
-                i[A-1]=i[A]*A%MOD;
-            }
-        }
-        public long choose(int n, int k) {
-            if (k == n || k == 0) return 1;
-            return ((f[n] * i[k] % MOD) * i[n - k]) % MOD;
-        }
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    static IO io;
     public static void main(String[] args) throws IOException {
-        if (fileSubmission){
-            io = new IO(fileName, debug);
-        } else {
-            io = new IO(debug);
-        }
-        solve();
+        io = new IO(debug);
+        int T = io.nextInt();
+        for (int i=1;i<=T;i++) solve(i);
         io.close();
     }
-    static IO io;
     private static class IO {
     BufferedReader br;
     StringTokenizer st;
@@ -172,5 +167,4 @@ public class MooRoute {
     void close(){
         out.close();
     }
-};;
-}
+};}

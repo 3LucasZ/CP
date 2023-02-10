@@ -1,5 +1,3 @@
-package Other.USACO.Season2022_2023.Jan2023;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
