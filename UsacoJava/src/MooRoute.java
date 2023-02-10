@@ -1,3 +1,5 @@
+
+
 import java.io.*;
 import java.util.*;
 /*
@@ -8,24 +10,33 @@ public class MooRoute {
     static boolean fileSubmission = false;
     static String fileName = "";
     
-    static boolean debug = true;
+    static boolean debug = false;
 
     static long mod =(long)((1e9)+7);
-    public static void solve() throws IOException {
+
+    public static void solve() throws IOException{
         //* parse
-        int N = io.nextInt();
-        int[] A = new int[N];
-        for (int i=0;i<N;i++){
-            A[i]=io.nextInt();
+        int N=io.nextInt();
+        int[] A=new int[N+2];
+        for(int i=1;i<=N;i++){
+            A[i]=io.nextInt()/2;
+        }
+        NT nt = new NT(1000000,mod);
+
+        //* get ans
+        long ans = 1;
+        for (int i=1;i<N;i++){
+            if (A[i+1]>A[i]){
+                ans = (ans * nt.choose(A[i+1]-1,A[i]-1))%mod;
+            } else {
+                ans = (ans * nt.choose(A[i],A[i+1]))%mod;
+            }
         }
 
-        int containers = Math.min(A[0],A[1])/2;
-        int extras = Math.max(A[0],A[1])/2-containers;
-
-        NT nt = new NT(2000000, mod);
-        io.println(nt.choose(containers-1+extras,extras));
-
+        //* ret
+        io.println(ans);
     }
+
 
     private static class NT {
         //* pow, inv

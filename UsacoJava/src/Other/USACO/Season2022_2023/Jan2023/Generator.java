@@ -1,17 +1,17 @@
+package Other.USACO.Season2022_2023.Jan2023;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
 public class Generator{
 	public static void generate() {
-		int q = 1000;
-		int n = 10;
-		out.println(q+" "+n);
-		for (int i=0;i<q;i++){
-			String lights = toBin(randInt(0,1<<n),n);
-			String buttons = toBin(randInt(0,1<<n),n);
-			out.println(lights+" "+buttons);
+		int n = 1000;
+		io.println(n);
+		for (int i=0;i<n;i++){
+			io.print(2*randInt(1,1000)+" ");
 		}
+		io.println();
 	}
 
 
@@ -57,14 +57,14 @@ public class Generator{
 	static final long LL1 = (long)(1e18);
 	static final long LL2 = (long)(2e18);
 
-	static PrintWriter out;
+	static PrintWriter io;
 	public static void main(String[] args) throws IOException{
 		if (System.getenv("CP")==null){
-			out = new PrintWriter(new FileWriter("io/in.txt"));
+			io= new PrintWriter(new FileWriter("io/in.txt"));
 		} else{
-			out=new PrintWriter(new FileWriter(System.getenv("CP")+"/io/in.txt"));
+			io=new PrintWriter(new FileWriter(System.getenv("CP")+"/io/in.txt"));
 		}
 		generate();
-		out.close();
+		io.close();
 	}
 }
