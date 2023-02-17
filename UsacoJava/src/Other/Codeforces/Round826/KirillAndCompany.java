@@ -1,3 +1,5 @@
+package Other.Codeforces.Round826;
+
 import java.io.*;
 import java.util.*;
 
@@ -17,7 +19,7 @@ public class KirillAndCompany {
             graph[u].add(v);
             graph[v].add(u);
         }
-        
+
         int friends = io.nextInt();
         int[] home = new int[friends+1];
         for (int i=1;i<=friends;i++) home[i]=io.nextInt();
