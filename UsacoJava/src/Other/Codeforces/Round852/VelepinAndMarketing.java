@@ -1,46 +1,98 @@
+package Other.Codeforces.Round852;
+
 import java.io.*;
 import java.util.*;
-
-public class YetAnotherPromotion {
-    static boolean debug = false;
+/*
+PROB: VelepinAndMarketing
+LANG: JAVA
+*/
+public class VelepinAndMarketing {
+    static boolean fileSubmission = false;
+    static String fileName = "";
     
-    public static void solve(int tcs) throws IOException {
-        if (debug) io.println("Case: "+tcs);
+    static boolean debug = false;
+
+    static int INF = Integer.MAX_VALUE;
+    public static void solve() throws IOException {
         //* parse
-        long a = io.nextInt();
-        long b = io.nextInt();
-        long n = io.nextInt();
-        long m = io.nextInt();
+        int N = io.nextInt();
+        Integer[] A = new Integer[N+1];
+        for (int i=1;i<=N;i++){
+            A[i]=io.nextInt();
+        }
+        A[0]=0;
 
-        io.println(Math.min(b*n, n/(m+1)*a*m+Math.min(a,b)*(n%(m+1))));
+        //* sort
+        Arrays.sort(A);
+        if (debug){
+            io.println("A:"+Arrays.toString(A));
+        }
+
+        //* dp - best partitioning for prefix i
+        int[] dp = new int[N+1];
+        int[] dpMax = new int[N+1];
+        for (int i=1;i<=N;i++){
+            if (i<A[i]) dp[i]=-INF;
+            else dp[i]=dpMax[i-A[i]]+1;
+            dpMax[i]=Math.max(dp[i],dpMax[i-1]);
+        }
+        if (debug){
+            io.println("dp:"+Arrays.toString(dp));
+        }
+
+        //* fix the dp
+        for (int i=0;i<=N;i++){
+            if (dp[i]==-INF){
+                dp[i]=N-A[i]+1;
+            } else {
+                dp[i]+=N-i;
+            }
+        }
+        if (debug){
+            io.println("dpFix:"+Arrays.toString(dp));
+        }
+
+        //* answer queries
+        int Q = io.nextInt();
+        for (int i=0;i<Q;i++){
+            int k = io.nextInt();
+            // binary search largest prefix i where k<=dp[i]
+            int lo = 0;
+            int hi = N;
+            while (lo<hi){
+                int mid = (lo+hi+1)/2;
+                if (dp[mid]>=k) lo=mid;
+                else hi=mid-1;
+            }
+            // ret
+            io.println(lo);
+        }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    static IO io;
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     public static void main(String[] args) throws IOException {
-        io = new IO(debug);
-        int T = io.nextInt();
-        for (int i=1;i<=T;i++) solve(i);
+        if (fileSubmission){
+            io = new IO(fileName, debug);
+        } else {
+            io = new IO(debug);
+        }
+        solve();
         io.close();
     }
+    static IO io;
     private static class IO {
     BufferedReader br;
     StringTokenizer st;
@@ -112,4 +164,5 @@ public class YetAnotherPromotion {
     void close(){
         out.close();
     }
-};}
+};;
+}

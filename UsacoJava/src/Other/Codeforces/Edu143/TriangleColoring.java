@@ -1,88 +1,78 @@
+package Other.Codeforces.Edu143;
+
 import java.io.*;
 import java.util.*;
 /*
-PROB: MoscowGorillas
+PROB: TriangleColoring
 LANG: JAVA
 */
-public class MoscowGorillas {
+public class TriangleColoring {
     static boolean fileSubmission = false;
     static String fileName = "";
     
-    static boolean debug = false;
-    
+    static boolean debug = true;
+
+    static long MOD = 998244353;
     public static void solve() throws IOException {
         //* parse
         int N = io.nextInt();
-        int[] A = new int[N+1];
-        int[] B = new int[N+1];
-        for (int i=1;i<=N;i++){
-            A[i]=io.nextInt();
-        }
-        for (int i=1;i<=N;i++){
-            B[i]=io.nextInt();
-        }
-        int[] Aindex = new int[N+1];
-        int[] Bindex = new int[N+1];
-        for (int i=1;i<=N;i++){
-            Aindex[A[i]]=i;
-            Bindex[B[i]]=i;
-        }
-        if (debug){
-            io.println("Aindex:"+Arrays.toString(Aindex));
-            io.println("Bindex:"+Arrays.toString(Bindex));
-        }
+        NT nt = new NT(N,MOD);
+        long ans = nt.choose(N/3,N/6);
 
-        //* precomp min, max
-        int[] min = new int[N+1]; Arrays.fill(min,Integer.MAX_VALUE);
-        int[] max = new int[N+1];
-        for (int i=1;i<=N;i++){
-            min[i]=Math.min(min[i-1],Math.min(Aindex[i],Bindex[i]));
-            max[i]=Math.max(max[i-1],Math.max(Aindex[i],Bindex[i]));
+        //* set distribution
+        for (int i=0;i<N/3;i++){
+            int[] A = new int[3];
+            for (int j=0;j<3;j++) A[j]=io.nextInt();
+            int[] B = new int[3];
+            for (int j=0;j<3;j++) B[j]=A[j]+A[(j+1)%3];
+            int mx = Math.max(B[0],Math.max(B[1],B[2]));
+            int mult = 0;
+            for (int j=0;j<3;j++) if (B[j]==mx) mult++;
+            ans = (ans*mult)%MOD;
         }
-        if (debug){
-            io.println("min:"+Arrays.toString(min));
-            io.println("max:"+Arrays.toString(max));
-        }
-
-        //* bash sets
-        long ans = 1; //the full set is always good
-        for (int MX=2;MX<=N;MX++){
-            int set = MX-1;
-            int lA = 1;
-            int lB = 1;
-            int rA = N;
-            int rB = N;
-            if (Aindex[MX]<min[set]){
-                lA = Aindex[MX]+1;
-            } else if (Aindex[MX]>max[set]){
-                rA = Aindex[MX]-1;
-            } else {
-                continue;
-            }
-
-            if (Bindex[MX]<min[set]){
-                lB = Bindex[MX]+1;
-            } else if (Bindex[MX]>max[set]){
-                rB = Bindex[MX]-1;
-            } else {
-                continue;
-            }
-
-            int finL = Math.max(lA,lB);
-            int finR = Math.min(rA,rB);
-            ans +=(long)(min[set]-finL+1)*(finR-max[set]+1);
-        }
-        int l = Math.min(Aindex[1],Bindex[1]);
-        int r = Math.max(Aindex[1],Bindex[1]);
-        ans+=cut(l-1)+cut(N-r)+cut(r-l-1);
 
         //* ret
         io.println(ans);
     }
-    static long cut(int x){
-        return (long)x*(x+1)/2;
+
+    private static class NT {
+        //* pow, inv
+        long MOD;
+        public long inv(long x) {
+            return pow(x,MOD-2);
+        }
+        public long pow(long x, long p) {
+            if (x==0) return 0;
+            if (p == 0) return 1;
+            if (p % 2 == 1) return (x * pow(x, p - 1)) % MOD;
+            else return pow((x * x) % MOD, p / 2);
+        }
+        public NT(long MOD) {
+            this.MOD=MOD;
+        }
+        //* choose, factorials, factorial inverses
+        long[] f;
+        long[] i;
+        int MAXF;
+        public NT(int MAXF, long MOD) {
+            //gen factorials (1...N)!
+            this.MAXF=MAXF;
+            this.MOD=MOD;
+            f = new long[MAXF + 1];
+            f[0] = 1;
+            for (int i = 1; i <= MAXF; i++) f[i] = (f[i - 1] * i) % MOD;
+            //gen inverses (1...N)!^-1
+            i = new long[MAXF + 1];
+            i[MAXF]=inv(f[MAXF]);
+            for (int A = MAXF; A > 0; A--) {
+                i[A-1]=i[A]*A%MOD;
+            }
+        }
+        public long choose(int n, int k) {
+            if (k == n || k == 0) return 1;
+            return ((f[n] * i[k] % MOD) * i[n - k]) % MOD;
+        }
     }
-    
     
     
     

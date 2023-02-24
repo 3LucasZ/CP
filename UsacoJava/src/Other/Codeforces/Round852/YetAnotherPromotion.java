@@ -1,40 +1,20 @@
+package Other.Codeforces.Round852;
+
 import java.io.*;
 import java.util.*;
 
-public class DoraAndSearch {
+public class YetAnotherPromotion {
     static boolean debug = false;
     
     public static void solve(int tcs) throws IOException {
         if (debug) io.println("Case: "+tcs);
         //* parse
-        int N = io.nextInt();
-        int[] A = new int[N+1];
-        for (int i=1;i<=N;i++) A[i]=io.nextInt();
-        int min = 1; int l = 1;
-        int max = N; int r = N;
-        for (int i=1;i<=N;i++){
-            if (A[l]==min){
-                min++;
-                l++;
-            }
-            else if (A[l]==max){
-                max--;
-                l++;
-            }
-            else if (A[r]==min){
-                min++;
-                r--;
-            }
-            else if (A[r]==max){
-                max--;
-                r--;
-            }
-            else {
-                io.println(l+" "+r);
-                return;
-            }
-        }
-        io.println(-1);
+        long a = io.nextInt();
+        long b = io.nextInt();
+        long n = io.nextInt();
+        long m = io.nextInt();
+
+        io.println(Math.min(b*n, n/(m+1)*a*m+Math.min(a,b)*(n%(m+1))));
     }
 
 
