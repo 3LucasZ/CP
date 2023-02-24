@@ -51,9 +51,9 @@ public class SegmentTreePURS {
             else out.println(seg.sum(a, b));
         }
     }
+    //1-indexed
+    //range is []
     private static class SegTree {
-        //1-indexed
-        //range is []
         int size;
         long[] tree;
         long[] val;
@@ -83,13 +83,10 @@ public class SegmentTreePURS {
             val[k]=x;
             k+=size-1;
             tree[k]=x;
-            for (k/=2;k>=1;k/=2){
-                tree[k]=tree[2*k]+tree[2*k+1];
-            }
+            for (k/=2;k>=1;k/=2) tree[k]=tree[2*k]+tree[2*k+1];
         }
         long sum(int a, int b) {
-            a+=size-1;
-            b+=size-1;
+            a+=size-1; b+=size-1;
             long ret = 0;
             while (a<=b){
                 if (a%2==1) ret+=tree[a++];
