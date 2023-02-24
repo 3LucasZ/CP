@@ -3,12 +3,11 @@ package Helper;
 import java.util.*;
 //TODO: Make it into an interface so that Int, Long, Char can be used interchangeably
 public class MultisetWrapper {
+    /*
+        Overloaded TreeMap functioning as Sorted Multiset
+    */
     private static class Multiset {
-        /*
-        Overloaded TreeMap functioning as Multiset
-        TreeMap private
-         */
-        private TreeMap<Integer, Integer> ms = new TreeMap<>();
+        public TreeMap<Integer, Integer> ms = new TreeMap<>();
         private int sz = 0;
         public boolean contains(int x){
             return ms.containsKey(x);
@@ -30,7 +29,8 @@ public class MultisetWrapper {
             ms.remove(x);
         }
         public int get(int x){
-            return ms.get(x);
+            if (ms.containsKey(x)) return ms.get(x);
+            return 0;
         }
         public Iterator<Integer> iterator(){
             return ms.keySet().iterator();

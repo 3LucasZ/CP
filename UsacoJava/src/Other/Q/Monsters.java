@@ -1,76 +1,34 @@
+package Other.Q;
+
 import java.io.*;
 import java.util.*;
 
-public class LetterExchange {
+public class Monsters {
     static boolean debug = true;
-    //w = 0, i = 1, n = 2 and for our pairs of wanted,needed assume wanted is smaller and needed x3
+
     static int N;
-    static Stack[][] stack;
+    static int[] A;
     public static void solve(int tcs) throws IOException {
         if (debug) io.println("Case: "+tcs);
-        stack = new Stack[3][3]; for (int i=0;i<3;i++) for (int j=0;j<3;j++) stack[i][j] = new Stack();
         //* parse
-        for (int i=0;i<N;i++){
-            String str = io.next();
-            Multiset ms = new Multiset();
-            for (int j=0;j<3;j++){
-                char s = str.charAt(j);
-                if (s=='w') s=0;
-                else if (s=='i') s=1;
-                else s=2;
-                ms.add(s);
+        N = io.nextInt();
+        A = new int[N+1];
+        for (int i=1;i<=N;i++) A[i]=io.nextInt();
+        //* dp
+        int[] cap = new int[N+1];
+        int[] cost = new int[N+1];
+        for (int i=1;i<=N;i++){
+            if (A[i]<=cap[i-1]){
+                cap[i]=cap[i-1];
+                cost[i]=cost[i-1];
+            } else {
+                cap[i]=cap[i-1]+1;
+                cost[i]=cost[i-1]+A[i]-cap[i];
             }
         }
-        //* brute force
-        
-        for (int i=0;i<3;i++){
-            for (int j=0;j<3;j++){
-
-            }
-        }
-    }
-
-    private static class Multiset {
-        /*
-        Overloaded TreeMap functioning as Multiset
-        TreeMap private
-         */
-        private TreeMap<Integer, Integer> ms = new TreeMap<>();
-        private int sz = 0;
-        public boolean contains(int x){
-            return ms.containsKey(x);
-        }
-        public void add(int x){add(x,1);}
-        public void add(int x, int freq){
-            if (!ms.containsKey(x))ms.put(x,0);
-            ms.put(x,ms.get(x)+freq);
-            sz+=freq;
-        }
-        public void remove(int x){
-            remove(x,1);}
-        public void remove(int x, int freq){
-            ms.put(x,ms.get(x)-freq);
-            if (ms.get(x)<=0) ms.remove(x);
-            sz-=freq;
-        }
-        public void removeKey(int x){
-            ms.remove(x);
-        }
-        public int get(int x){
-            return ms.get(x);
-        }
-        public Iterator<Integer> iterator(){
-            return ms.keySet().iterator();
-        }
-        public int size(){
-            return sz;
-        }
-        public Set<Integer> keySet(){
-            return ms.keySet();
-        }
-        public String toString(){
-            return ms.toString();
-        }
+        //* ret
+        for (int i=1;i<=N;i++) io.print(cost[i]+" ");
+        io.println();
     }
 
 
@@ -156,18 +114,48 @@ public class LetterExchange {
         if (debug) System.out.print(obj);
         else out.print(obj);
     }
-    public static void print(int[][] arr) {
+    void print2d(int[][] arr) {
         for (int r = 0; r < arr.length; r++) {
             for (int c = 0; c < arr[r].length; c++) {
                 String str = "" + arr[r][c];
-                while (str.length() < 5) str += " ";
-                System.out.print(str);
+                while (str.length() < 4) str += " ";
+                print(str);
             }
-            System.out.println();
+           println();
         }
-        System.out.println();
+        println();
+    }
+    void print2d(char[][] arr) {
+        for (int r = 0; r < arr.length; r++) {
+            for (int c = 0; c < arr[r].length; c++) {
+                String str = "" + arr[r][c];
+                while (str.length() < 4) str += " ";
+                print(str);
+            }
+            println();
+        }
+        println();
+    }
+    void print2d(boolean[][] arr) {
+        for (int r = 0; r < arr.length; r++) {
+            for (int c = 0; c < arr[r].length; c++) {
+                String str = "" + (arr[r][c]?"1":"0");
+                while (str.length() < 4) str += " ";
+                print(str);
+            }
+            println();
+        }
+        println();
+    }
+    void printBin(int bin,int len){
+        String ret = "";
+        for (int i=0;i<len;i++){
+            ret+=bin%2;
+            bin/=2;
+        }
+        println(ret);
     }
     void close(){
         out.close();
     }
-};}
+}}
