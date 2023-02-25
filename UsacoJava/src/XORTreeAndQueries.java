@@ -19,7 +19,7 @@ public class XORTreeAndQueries {
     static int specialOn;
     static int specialOff;
 
-    static int[][] pbit; //pbit[node][bit] = 0/1
+    static int[] pbit; //pbit[node] = 0/1
     static int[] p; //p[node] = 0111001010
     static int[] ans; //ans[edge] = p[i]^p[j]
     static boolean working = true;
@@ -62,18 +62,12 @@ public class XORTreeAndQueries {
             io.println("graph:"+Arrays.toString(graph));
         }
         //* setup
-        pbit= new int[N+1][bits];
+        pbit= new int[N+1];
+        p = new int[N+1];
         vis = new boolean[N+1];
         //* floodfill connected components and solve each component separately
         for (int i=1;i<=N;i++) {
             if (!vis[i]) solve(i);
-        }
-        //* construct p from pbit
-        p = new int[N+1];
-        for (int i=1;i<=N;i++){
-            for (int bit=0;bit<bits;bit++){
-                p[i]+=pbit[i][bit]*(1<<bit);
-            }
         }
         //* construct ans from p
         ans = new int[N-1];
@@ -95,26 +89,29 @@ public class XORTreeAndQueries {
         }
     }
     public static void solve(int head){
+        //get component
+        component = new ArrayList<>();
+        DFS(head,0,true);
         for (int bit=0;bit<30;bit++){
-            //reset component
-            component = new ArrayList<>();
+            //reset init
             specialOn = 0;
             specialOff = 0;
-            //dfs0
-            pbit[head][bit]=0;
-            DFS(head, bit);
-            //reset vis
             for (int node : component) vis[node]=false;
+            //dfs0
+            pbit[head]=0;
+            DFS(head, bit,false);
             //dfs1 if necessary (flip all component)
-            if (specialOn%2<specialOff%2) for (int node : component) pbit[node][bit]=1-pbit[node][bit];
+            if (specialOn%2<specialOff%2) for (int node : component) pbit[node]=1-pbit[node];
+            //update p
+            for (int node : component) p[node]+=pbit[node]*(1<<bit);
         }
     }
-    public static void DFS(int node, int bit){
+    public static void DFS(int node, int bit, boolean trackComponent){
         vis[node]=true;
-        component.add(node);
+        if (trackComponent) component.add(node);
         //special node
         if (tree[node].size()%2==1){
-            if (pbit[node][bit]==0) specialOff++;
+            if (pbit[node]==0) specialOff++;
             else specialOn++;
         }
         //propagation
@@ -122,10 +119,10 @@ public class XORTreeAndQueries {
             int child = childEdge.v;
             int cost = ((1<<bit)&childEdge.cost)==0?0:1;
             if (vis[child]){
-                if ((pbit[node][bit]^pbit[child][bit])!=cost) working=false;
+                if ((pbit[node]^pbit[child])!=cost) working=false;
             } else {
-                pbit[child][bit] = pbit[node][bit]^cost;
-                DFS(child,bit);
+                pbit[child] = pbit[node]^cost;
+                DFS(child,bit,trackComponent);
             }
         }
     }
