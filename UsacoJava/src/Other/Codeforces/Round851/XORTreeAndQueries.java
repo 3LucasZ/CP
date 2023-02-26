@@ -1,12 +1,12 @@
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
+package Other.Codeforces.Round851;
 
+import java.io.*;
+import java.util.*;
 /*
 PROB: XORTreeAndQueries
 LANG: JAVA
 */
-public class XORTreeAndQueriesBetter{
+public class XORTreeAndQueries {
     static boolean fileSubmission = false;
     static String fileName = "";
     
@@ -17,14 +17,16 @@ public class XORTreeAndQueriesBetter{
     static ArrayList<Edge>[] graph; //graph of constraints
 
     static ArrayList<Integer> component; //current DFS component
-    static ArrayList<Integer> specialComponent; //some special current DFS component
-    static int constant;
     static boolean[] vis; //node vis yet in flood fill?
+    static int specialOn;
+    static int specialOff;
 
+    static int[] pbit; //pbit[node] = 0/1
     static int[] p; //p[node] = 0111001010
     static int[] ans; //ans[edge] = p[i]^p[j]
     static boolean working = true;
-    static int special;
+
+    static final int bits = 30;
 
     public static void solve() throws IOException {
         //* parse
@@ -62,20 +64,12 @@ public class XORTreeAndQueriesBetter{
             io.println("graph:"+Arrays.toString(graph));
         }
         //* setup
+        pbit= new int[N+1];
         p = new int[N+1];
         vis = new boolean[N+1];
         //* floodfill connected components and solve each component separately
         for (int i=1;i<=N;i++) {
-            if (!vis[i]){
-                component = new ArrayList<>();
-                special = 0;
-                DFS(i);
-                if (special%2==1) specialComponent = component;
-            }
-        }
-        //* change p based on c if necessary
-        if (specialComponent!=null){
-            for (int i : specialComponent) p[i]^=constant;
+            if (!vis[i]) solve(i);
         }
         //* construct ans from p
         ans = new int[N-1];
@@ -96,24 +90,41 @@ public class XORTreeAndQueriesBetter{
             finalDFS(child,node);
         }
     }
-    public static void DFS(int node){
+    public static void solve(int head){
+        //get component
+        component = new ArrayList<>();
+        DFS(head,0,true);
+        for (int bit=0;bit<30;bit++){
+            //reset init
+            specialOn = 0;
+            specialOff = 0;
+            for (int node : component) vis[node]=false;
+            //dfs0
+            //pbit[head]=0;
+            DFS(head, bit,false);
+            //dfs1 if necessary (flip all component)
+            if (specialOn%2<specialOff%2) for (int node : component) pbit[node]=1-pbit[node];
+            //update p
+            for (int node : component) p[node]+=pbit[node]*(1<<bit);
+        }
+    }
+    public static void DFS(int node, int bit, boolean trackComponent){
         vis[node]=true;
-        component.add(node);
-        //update constant for special node
-        if (tree[node].size()%2==1) {
-            constant^=p[node];
-            special++;
+        if (trackComponent) component.add(node);
+        //special node
+        if (tree[node].size()%2==1){
+            if (pbit[node]==0) specialOff++;
+            else specialOn++;
         }
         //propagation
         for (Edge childEdge : graph[node]){
             int child = childEdge.v;
-            int cost = childEdge.cost;
+            int cost = ((1<<bit)&childEdge.cost)==0?0:1;
             if (vis[child]){
-                if((p[node]^p[child])!=cost) working=false;
-            }
-            else {
-                p[child] = p[node]^cost;
-                DFS(child);
+                if ((pbit[node]^pbit[child])!=cost) working=false;
+            } else {
+                pbit[child] = pbit[node]^cost;
+                DFS(child,bit,trackComponent);
             }
         }
     }
