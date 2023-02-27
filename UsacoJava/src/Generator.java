@@ -2,12 +2,24 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/**
+Make sure the input you provide is correct:
+ * Constraints
+ * Magnitude
+ * Quantity
+ * Quality
+ */
 public class Generator{
 	public static void generate() {
-		int n = 1000;
+		int t = 1;
+		io.println(t);
+		int n = 100000;
 		io.println(n);
 		for (int i=0;i<n;i++){
-			io.print(2*randInt(1,1000)+" ");
+			io.print(randInt(1,1<<30)+" ");
+		}
+		for (int i=0;i<n;i++){
+			io.print(randInt(1,1<<30)+" ");
 		}
 		io.println();
 	}

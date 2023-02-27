@@ -32,25 +32,25 @@ public class SuperFastIO {
 
 
 
-    static Reader io;
+    static IO io;
     public static void main(String[] args) throws IOException {
         if (fileSubmission) {
-            io = new Reader(fileName);
+            io = new IO(fileName);
         }
         else {
-            io = new Reader();
+            io = new IO();
         }
         solve();
         io.close();
     }
-    static class Reader {
+    static class IO{
         final private int BUFFER_SIZE = 1 << 16;
         private DataInputStream din;
         private byte[] buffer;
         private int bufferPointer, bytesRead;
         PrintWriter out;
 
-        public Reader()
+        public IO()
         {
             din = new DataInputStream(System.in);
             out = new PrintWriter(System.out);
@@ -58,7 +58,7 @@ public class SuperFastIO {
             bufferPointer = bytesRead = 0;
         }
 
-        public Reader(String file_name) throws IOException
+        public IO(String file_name) throws IOException
         {
             din = new DataInputStream(
                     new FileInputStream(file_name+".in"));
