@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.*;
 
 public class EqualSumSubarrays{
-	static boolean debug=true;
+	static boolean debug=false;
 
     static int N;
     static long[] A;
@@ -50,6 +50,7 @@ public class EqualSumSubarrays{
             }
         }
         //* Brute force
+
         for (int i=1;i<=N;i++){
             for (int r=i;r<=N;r++){
                 vis.remove(rank[i][r]);

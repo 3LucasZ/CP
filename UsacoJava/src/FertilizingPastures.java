@@ -11,18 +11,18 @@ public class FertilizingPastures{
 
 	static long[] asum;
 	static int[] edgesum;
+	static int[] height;
+
 	static long[] cost;
 	static long[] lastCost;
+
+	static final long INF = Long.MAX_VALUE/2;
 
 	public static void solve() throws IOException{
 		//* parse
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		N = Integer.parseInt(st.nextToken());
 		T = Integer.parseInt(st.nextToken());
-		if (T==1) {
-			out.println("6 29");
-			return;
-		}
 		tree = new ArrayList[N+1]; for (int i=1;i<=N;i++) tree[i] = new ArrayList<>();
 		a = new int[N+1];
 		for (int i=2;i<=N;i++){
@@ -39,10 +39,12 @@ public class FertilizingPastures{
 		//* precomp asum, edgesum
 		asum = new long[N+1];
 		edgesum = new int[N+1];
+		height = new int[N+1];
 		DFSprecomp(1);
 		if (debug){
 			out.println("asum:"+Arrays.toString(asum));
 			out.println("edgesum:"+Arrays.toString(edgesum));
+			out.println("height:"+Arrays.toString(height));
 		}
 
 		//* solve
@@ -53,7 +55,11 @@ public class FertilizingPastures{
 			out.println("cost:"+Arrays.toString(cost));
 		}
 		//* ret
-		out.println((N-1)*2+" "+cost[1]);
+		if (T==0){
+			out.println((N-1)*2+" "+cost[1]);
+		} else {
+			out.println((N-1)*2-height[1]+" "+lastCost[1]);
+		}
 	}
 
 	public static void DFSsolve(int node){
@@ -65,8 +71,7 @@ public class FertilizingPastures{
 		for (int child : tree[node]) {
 			items.add(child);
 		}
-		Collections.sort(items, (a,b)->-Long.compare((1+edgesum[a])*(asum[b]),(1+edgesum[b])*(asum[a])));
-		Collections.reverse(items);
+		Collections.sort(items, (a,b)->Long.compare((1+edgesum[a])*(asum[b]),(1+edgesum[b])*(asum[a])));
 		int time = 1;
 		for (int next : items){
 			int child = next;
@@ -76,10 +81,35 @@ public class FertilizingPastures{
 			time += 2*(edgesum[child]+1);
 		}
 
+		//solve lastCost
+		ArrayList<Integer> lastItems = new ArrayList<>();
+		for (int child : tree[node]){
+			if (height[child]==height[1]) lastItems.add(child);
+		}
+		if (tree[node].size()==0){
+			return;
+		}
+		else if (lastItems.size()==0){
+			lastCost[node]=INF;
+			return;
+		}
+		Collections.sort(lastItems, (a,b)->Long.compare((1+edgesum[a])*(asum[b])+lastCost[a],(1+edgesum[b])*(asum[a])+lastCost[b]));
+		Integer last = lastItems.get(lastItems.size()-1);
+		items.remove(last);
+		time = 1;
+		for (int next : items){
+			int child = next;
+			long childCost = cost[child];
+			childCost += asum[child]*time;
+			lastCost[node] += childCost;
+			time += 2*(edgesum[child]+1);
+		}
+		lastCost[node] += (lastCost[last] + asum[last]*time);
 	}
 
 	public static void DFSprecomp(int node){
 		for (int child : tree[node]){
+			height[child]=height[node]+1;
 			DFSprecomp(child);
 		}
 		asum[node]=a[node];
@@ -87,6 +117,7 @@ public class FertilizingPastures{
 		for (int child : tree[node]){
 			asum[node]+=asum[child];
 			edgesum[node]+=edgesum[child];
+			height[node]=Math.max(height[node],height[child]);
 		}
 	}
 

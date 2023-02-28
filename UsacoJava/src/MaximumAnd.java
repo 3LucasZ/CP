@@ -1,5 +1,3 @@
-package Other.Q;
-
 import java.io.*;
 import java.util.*;
 
