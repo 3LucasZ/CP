@@ -1,3 +1,5 @@
+package Other.Codeforces.Hello2023;
+
 import java.io.*;
 import java.util.*;
 /*

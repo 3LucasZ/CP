@@ -1,106 +1,101 @@
 import java.io.*;
 import java.util.*;
 
-public class BlockingChips {
+public class RectangleShrinking{
     static boolean debug = false;
 
     static int N;
-    static ArrayList<Integer>[] tree;
-    static int K;
-    static boolean[] black;
-    static int[] id;
-
+    static R[] A;
 
     public static void solve(int tcs) throws IOException {
         if (debug) io.println("Case: "+tcs);
         //* parse
         N = io.nextInt();
-        tree = new ArrayList[N+1]; for (int i=1;i<=N;i++) tree[i] = new ArrayList<>();
-        for (int i=0;i<N-1;i++){
+        A = new R[N];
+        R[] B = new R[N];
+        for (int i=0;i<N;i++){
             int u = io.nextInt();
-            int v = io.nextInt();
-            tree[u].add(v);
-            tree[v].add(u);
+            int l = io.nextInt();
+            int d = io.nextInt();
+            int r = io.nextInt();
+            R rect = new R(i+1,u,l,d,r);
+            A[i]=rect;
+            B[i]=rect;
         }
-        black = new boolean[N+1];
-        id = new int[N+1];
-        K = io.nextInt();
-        for (int i=0;i<K;i++){
-            int u = io.nextInt();
-            black[u]=true;
-            id[u]=i+1;
-        }
-        if (debug){
-            io.println("id:"+Arrays.toString(id));
-        }
-        //* BS
-        int lo=0;
-        int hi=N;
-        while (lo<hi){
-            int mid = (lo+hi+1)/2;
-            if (tryMoves(mid)){
-                lo=mid;
-            } else {
-                hi=mid-1;
+        //* sort to processing order (smallest l first)
+        Arrays.sort(A,Comparator.comparingInt(a->a.l));
+        //* construction
+        //trackers
+        PriorityQueue<R> pq = new PriorityQueue<>(Comparator.comparingInt(a->a.r));
+        int p1 = 0;
+        int p2 = 0;
+        for (int i=0;i<N;i++){
+            if (debug) io.println("processing:"+A[i].id);
+            //flatten doubles to singles
+            if (A[i].u!=A[i].d){
+                if (A[i].r<=p1) A[i].u=A[i].d;
+                if (A[i].r<=p2) A[i].d=A[i].u;
             }
-        }
-        //* ret
-        io.println(lo);
-    }
-    static boolean tryMoves(int mvs){
-        if (debug){
-            io.println("mvs:"+mvs);
-        }
-        ok=true;
-        dp = new int[N+1];
-        DFS(1,0,mvs);
-        boolean res = dp[1]>=0&&ok;
-        if (debug){
-            io.println("dp:"+Arrays.toString(dp));
-            io.println("res:"+res);
-        }
-        return res;
-    }
+            //handle still doubles
+            if (A[i].u!=A[i].d){
 
-    static int[] dp;
-    static boolean ok;
-    static void DFS(int node, int par, int mvs){
-        int badChildren = 0;
-        int mostFreedom = 0;
-        int leastFreedom = 0;
-
-        for (int child : tree[node]){
-            if (child==par) continue;
-            DFS(child,node,mvs);
-            if (dp[child]<0) badChildren++;
-            mostFreedom=Math.max(mostFreedom,dp[child]);
-            leastFreedom=Math.min(leastFreedom,dp[child]);
-        }
-
-        if (black[node]){
-            if (badChildren > 0) {
-                ok=false;
-            }
-            int mv = mvs/K + ((mvs%K>=id[node])?1:0);
-            if (debug){
-                io.println("node:"+node+" mv:"+mv);
-            }
-            if (mv > mostFreedom) {
-                dp[node]=-mv;
-            } else{
-                dp[node]=0;
-            }
-        }
-        //white node
-        else {
-            if (badChildren > 1) ok=false;
-            if (badChildren == 1) {
-                if (mostFreedom+1+leastFreedom>=0) dp[node]=0;
-                else {
-                    dp[node]=leastFreedom+1;
+                while (true){
+                    R top = pq.peek();
+                    if (top==null) break;
+                    if (top.r>=A[i].l) top.r=A[i].l-1;
+                    pq.remove(top);
                 }
+                p1=A[i].r;
+                p2=A[i].r;
+            }
+            //handle singles
+            else if(A[i].u==1){
+                A[i].l=Math.max(A[i].l,p1+1);
+                p1=Math.max(p1,A[i].r);
             } else {
-                dp[node]=mostFreedom+1;
+                A[i].l=Math.max(A[i].l,p2+1);
+                p2=Math.max(p2,A[i].r);
+            }
+            //add to pq
+            pq.add(A[i]);
+        }
+
+        //* ret
+        int ans = 0;
+        for (int i=0;i<N;i++){
+            ans+=A[i].area();
+        }
+        io.println(ans);
+
+        for (int i=0;i<N;i++){
+            io.println(B[i].toString());
+        }
+    }
+    private static class R{
+        int id;
+        int u;
+        int d;
+        int l;
+        int r;
+        public R(int id, int u,int l,int d,int r){
+            this.id=id;
+            this.u=u;
+            this.l=l;
+            this.d=d;
+            this.r=r;
+        }
+        public boolean bad(){
+            return l>r;
+        }
+        public int area() {
+            if (bad()) return 0;
+            return (d-u+1)*(r-l+1);
+        }
+        public String toString(){
+            if (bad()){
+                return "0 0 0 0";
+            } else {
+                return u+" "+l+" "+d+" "+r;
             }
         }
     }
