@@ -1,103 +1,87 @@
+package Other.Codeforces.Round853;
+
 import java.io.*;
 import java.util.*;
 
-public class RectangleShrinking{
+public class ServalAndShiftShiftShift {
     static boolean debug = false;
 
     static int N;
-    static R[] A;
-
+    static int[] A;
+    static int[] B;
     public static void solve(int tcs) throws IOException {
         if (debug) io.println("Case: "+tcs);
         //* parse
         N = io.nextInt();
-        A = new R[N];
-        R[] B = new R[N];
-        for (int i=0;i<N;i++){
-            int u = io.nextInt();
-            int l = io.nextInt();
-            int d = io.nextInt();
-            int r = io.nextInt();
-            R rect = new R(i+1,u,l,d,r);
-            A[i]=rect;
-            B[i]=rect;
+        String strA = io.nextLine();
+        A = new int[N];
+        for (int i=0;i<N;i++) A[i]=strA.charAt(i)-'0';
+        String strB = io.nextLine();
+        B = new int[N];
+        for (int i=0;i<N;i++) B[i]=strB.charAt(i)-'0';
+        //* edge case
+        if (Arrays.equals(A,B)) {
+            io.println(0);
+            return;
         }
-        //* sort to processing order (smallest l first)
-        Arrays.sort(A,Comparator.comparingInt(a->a.l));
-        //* construction
-        //trackers
-        PriorityQueue<R> pq = new PriorityQueue<>(Comparator.comparingInt(a->a.r));
-        int p1 = 0;
-        int p2 = 0;
-        for (int i=0;i<N;i++){
-            if (debug) io.println("processing:"+A[i].id);
-            //flatten doubles to singles
-            if (A[i].u!=A[i].d){
-                if (A[i].r<=p1) A[i].u=A[i].d;
-                if (A[i].r<=p2) A[i].d=A[i].u;
+        if (lb(A)==-1) {
+            io.println(-1);
+            return;
+        }
+        if (lb(B)==-1) {
+            io.println(-1);
+            return;
+        }
+        ArrayList<Integer> ops = new ArrayList<>();
+        if (hb(A)<lb(B)){
+            int shift = -(lb(B)-hb(A));
+            ops.add(shift);
+            shift(shift);
+        }
+        for (int i=lb(B)-1;i>=0;i--){
+            if (A[i]==1){
+                int shift = (hb(A)-i);
+                ops.add(shift);
+                shift(shift);
             }
-            //handle still doubles
-            if (A[i].u!=A[i].d){
-
-                while (true){
-                    R top = pq.peek();
-                    if (top==null) break;
-                    if (top.r>=A[i].l) top.r=A[i].l-1;
-                    pq.remove(top);
-                }
-                p1=A[i].r;
-                p2=A[i].r;
+        }
+        if (lb(A)>lb(B)){
+            int shift = (lb(A)-lb(B));
+            ops.add(shift);
+            shift(shift);
+        }
+        for (int i=lb(B)+1;i<N;i++){
+            if (A[i]!=B[i]){
+                int shift = -(i-lb(A));
+                shift(shift);
+                ops.add(shift);
             }
-            //handle singles
-            else if(A[i].u==1){
-                A[i].l=Math.max(A[i].l,p1+1);
-                p1=Math.max(p1,A[i].r);
-            } else {
-                A[i].l=Math.max(A[i].l,p2+1);
-                p2=Math.max(p2,A[i].r);
-            }
-            //add to pq
-            pq.add(A[i]);
         }
 
         //* ret
-        int ans = 0;
-        for (int i=0;i<N;i++){
-            ans+=A[i].area();
-        }
-        io.println(ans);
-
-        for (int i=0;i<N;i++){
-            io.println(B[i].toString());
+        io.println(ops.size());
+        if (ops.size()>0){
+            for (int i : ops)io.print(i+" ");
+            io.println();
         }
     }
-    private static class R{
-        int id;
-        int u;
-        int d;
-        int l;
-        int r;
-        public R(int id, int u,int l,int d,int r){
-            this.id=id;
-            this.u=u;
-            this.l=l;
-            this.d=d;
-            this.r=r;
+    static void shift(int shift){
+        int[] Axor = new int[N];
+        for(int j=0;j<N;j++){
+            if(j-shift<0 || j-shift>=N) continue;
+            Axor[j-shift]=A[j];
         }
-        public boolean bad(){
-            return l>r;
+        for (int j=0;j<N;j++){
+            A[j]=A[j]^Axor[j];
         }
-        public int area() {
-            if (bad()) return 0;
-            return (d-u+1)*(r-l+1);
-        }
-        public String toString(){
-            if (bad()){
-                return "0 0 0 0";
-            } else {
-                return u+" "+l+" "+d+" "+r;
-            }
-        }
+    }
+    static int lb(int[] arr) {
+        for (int i=0;i<N;i++) if (arr[i]==1) return i;
+        return -1;
+    }
+    static int hb(int[] arr){
+        for (int i=N-1;i>=0;i--) if (arr[i]==1) return i;
+        return -1;
     }
 
 
@@ -223,6 +207,13 @@ public class RectangleShrinking{
             bin/=2;
         }
         println(ret);
+    }
+    void reverse(int[] arr){
+        for (int i=0;i<arr.length/2;i++){
+            int tmp = arr[i];
+            arr[i]=arr[arr.length-1-i];
+            arr[arr.length-1-i]=tmp;
+        }
     }
     void close(){
         out.close();
