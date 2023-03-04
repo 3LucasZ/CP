@@ -11,17 +11,13 @@ Make sure the input you provide is correct:
  */
 public class Generator{
 	public static void generate() {
-		int t = 1;
-		io.println(t);
-		int n = 100000;
+		int n = 300000;
 		io.println(n);
 		for (int i=0;i<n;i++){
-			io.print(randInt(1,1<<30)+" ");
+			int l = randInt(0,n);
+			int r = randInt(l,n);
+			io.println(l+" "+r);
 		}
-		for (int i=0;i<n;i++){
-			io.print(randInt(1,1<<30)+" ");
-		}
-		io.println();
 	}
 
 
@@ -69,11 +65,7 @@ public class Generator{
 
 	static PrintWriter io;
 	public static void main(String[] args) throws IOException{
-		if (System.getenv("CP")==null){
-			io= new PrintWriter(new FileWriter("io/in.txt"));
-		} else{
-			io=new PrintWriter(new FileWriter(System.getenv("CP")+"/io/in.txt"));
-		}
+		io = new PrintWriter(System.out);
 		generate();
 		io.close();
 	}

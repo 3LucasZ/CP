@@ -8,7 +8,7 @@ public class IntersectionAndUnion {
     static boolean fileSubmission = false;
     static String fileName = "";
     
-    static boolean debug = true;
+    static boolean debug = false;
 
     static int[] l;
     static int[] r;
@@ -63,9 +63,7 @@ public class IntersectionAndUnion {
         int cA = A[0].length;
         int rB = B.length;
         int cB = B[0].length;
-        if (rB!=cA){
-            throw new RuntimeException("ILLEGAL MATRIX MULT rA:"+rA+", cA:"+cA+", rB:"+rB+", cB:"+cB);
-        }
+        if (rB!=cA) throw new RuntimeException("ILLEGAL MATRIX MULT rA:"+rA+", cA:"+cA+", rB:"+rB+", cB:"+cB);
         long[][] ret = new long[rA][cB];
         for (int i=0;i<rA;i++){
             for (int j=0;j<cB;j++){
@@ -101,137 +99,182 @@ public class IntersectionAndUnion {
             return tree[1];
         }
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+    static IO io;
     public static void main(String[] args) throws IOException {
-        if (fileSubmission){
-            io = new IO(fileName, debug);
-        } else {
-            io = new IO(debug);
+        if (fileSubmission) {
+            io = new IO(fileName);
+        }
+        else {
+            io = new IO();
         }
         solve();
         io.close();
     }
-    static IO io;
-    private static class IO {
-    BufferedReader br;
-    StringTokenizer st;
-    PrintWriter out;
-    boolean debug;
-    public IO(boolean dbg)  {
-        br = new BufferedReader(new InputStreamReader(System.in));
-        out = new PrintWriter(System.out);
-        debug=dbg;
-    }
-    public IO(String fileName, boolean dbg) throws IOException {
-        br = new BufferedReader(new FileReader(fileName+".in"));
-        out = new PrintWriter(new FileWriter(fileName+".out"));
-        debug=dbg;
-    }
-    String next()
-    {
-        while (st == null || !st.hasMoreElements()) {
-            try {
-                st = new StringTokenizer(br.readLine());
-            }
-            catch (IOException e) {
-                e.printStackTrace();
-            }
+    static class IO{
+        final private int BUFFER_SIZE = 1 << 16;
+        private DataInputStream din;
+        private byte[] buffer;
+        private int bufferPointer, bytesRead;
+        PrintWriter out;
+
+        public IO()
+        {
+            din = new DataInputStream(System.in);
+            out = new PrintWriter(System.out);
+            buffer = new byte[BUFFER_SIZE];
+            bufferPointer = bytesRead = 0;
         }
-        return st.nextToken();
-    }
-    int nextInt() { return Integer.parseInt(next()); }
-    long nextLong() { return Long.parseLong(next()); }
-    double nextDouble() {return Double.parseDouble(next());}
-    String nextLine() {
-        String str = "";
-        try {
-            if(st.hasMoreTokens()){
-                str = st.nextToken("\n");
+
+        public IO(String file_name) throws IOException
+        {
+            din = new DataInputStream(
+                    new FileInputStream(file_name+".in"));
+            out = new PrintWriter(new FileWriter(file_name+".out"));
+            buffer = new byte[BUFFER_SIZE];
+            bufferPointer = bytesRead = 0;
+        }
+
+        public String readLine() throws IOException
+        {
+            byte[] buf = new byte[64]; // IMPORTANT: read line length
+            int cnt = 0, c;
+            while ((c = read()) != -1) {
+                if (c == '\n') {
+                    if (cnt != 0) {
+                        break;
+                    }
+                    else {
+                        continue;
+                    }
+                }
+                buf[cnt++] = (byte)c;
             }
-            else{
-                str = br.readLine();
+            return new String(buf, 0, cnt);
+        }
+
+        public String readLine(int len) throws IOException{
+            byte[] buf=new byte[len]; // IMPORTANT: read line length
+            int cnt=0, c;
+            while((c=read())!=-1){
+                if(c=='\n'){
+                    if(cnt!=0){
+                        break;
+                    }else{
+                        continue;
+                    }
+                }
+                buf[cnt++]=(byte)c;
             }
+            return new String(buf,0,cnt);
         }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-        return str;
-    }
-    void println(){
-        if (debug) System.out.println();
-        else out.println();
-    }
-    void println(Object obj){
-        if (debug) System.out.println(obj);
-        else out.println(obj);
-    }
-    void print(Object obj){
-        if (debug) System.out.print(obj);
-        else out.print(obj);
-    }
-    void print2d(int[][] arr) {
-        for (int r = 0; r < arr.length; r++) {
-            for (int c = 0; c < arr[r].length; c++) {
-                String str = "" + arr[r][c];
-                while (str.length() < 4) str += " ";
-                print(str);
+
+        public int nextInt() throws IOException
+        {
+            int ret = 0;
+            byte c = read();
+            while (c <= ' ') {
+                c = read();
             }
-           println();
+            boolean neg = (c == '-');
+            if (neg)
+                c = read();
+            do {
+                ret = ret * 10 + c - '0';
+            } while ((c = read()) >= '0' && c <= '9');
+
+            if (neg)
+                return -ret;
+            return ret;
         }
-        println();
-    }
-    void print2d(char[][] arr) {
-        for (int r = 0; r < arr.length; r++) {
-            for (int c = 0; c < arr[r].length; c++) {
-                String str = "" + arr[r][c];
-                while (str.length() < 4) str += " ";
-                print(str);
+
+        public long nextLong() throws IOException
+        {
+            long ret = 0;
+            byte c = read();
+            while (c <= ' ')
+                c = read();
+            boolean neg = (c == '-');
+            if (neg)
+                c = read();
+            do {
+                ret = ret * 10 + c - '0';
+            } while ((c = read()) >= '0' && c <= '9');
+            if (neg)
+                return -ret;
+            return ret;
+        }
+
+        public double nextDouble() throws IOException
+        {
+            double ret = 0, div = 1;
+            byte c = read();
+            while (c <= ' ')
+                c = read();
+            boolean neg = (c == '-');
+            if (neg)
+                c = read();
+
+            do {
+                ret = ret * 10 + c - '0';
+            } while ((c = read()) >= '0' && c <= '9');
+
+            if (c == '.') {
+                while ((c = read()) >= '0' && c <= '9') {
+                    ret += (c - '0') / (div *= 10);
+                }
             }
-            println();
+
+            if (neg)
+                return -ret;
+            return ret;
         }
-        println();
-    }
-    void print2d(boolean[][] arr) {
-        for (int r = 0; r < arr.length; r++) {
-            for (int c = 0; c < arr[r].length; c++) {
-                String str = "" + (arr[r][c]?"1":"0");
-                while (str.length() < 4) str += " ";
-                print(str);
-            }
-            println();
+
+        private void fillBuffer() throws IOException
+        {
+            bytesRead = din.read(buffer, bufferPointer = 0,
+                    BUFFER_SIZE);
+            if (bytesRead == -1)
+                buffer[0] = -1;
         }
-        println();
-    }
-    void printBin(int bin,int len){
-        String ret = "";
-        for (int i=0;i<len;i++){
-            ret+=bin%2;
-            bin/=2;
+
+        private byte read() throws IOException
+        {
+            if (bufferPointer == bytesRead)
+                fillBuffer();
+            return buffer[bufferPointer++];
         }
-        println(ret);
+
+        public void close() throws IOException
+        {
+            if (din == null)
+                return;
+            din.close();
+            out.close();
+        }
+        void println(){
+            if (debug) System.out.println();
+            else out.println();
+        }
+        void println(Object obj){
+            if (debug) System.out.println(obj);
+            else out.println(obj);
+        }
+        void print(Object obj){
+            if (debug) System.out.print(obj);
+            else out.print(obj);
+        }
     }
-    void reverse(int[] arr){
-		for (int i=0;i<arr.length/2;i++){
-			int tmp = arr[i];
-			arr[i]=arr[arr.length-1-i];
-			arr[arr.length-1-i]=tmp;
-		}
-	}
-    void close(){
-        out.close();
-    }
-};
 }
