@@ -1,3 +1,5 @@
+package Other.Codeforces.Pinely1;
+
 import java.io.*;
 import java.util.*;
 
@@ -66,10 +68,10 @@ public class MakeItConnected {
         Collections.sort(full,Comparator.comparingInt(ArrayList::size));
         ArrayList<Integer> smallest = full.get(0);
         if (smallest.size()==1){
-            io.println(1); io.println(smallest.get(0));
+            io.println(1); io.println(smallest.get(0)+1);
         } else{
-            io.println();
-            io.print(full.get(0).get(0)+full.get(1).get(0));
+            io.println(2);
+            io.print((full.get(0).get(0)+1)+" "+(full.get(1).get(0)+1));
             io.println();
         }
     }
