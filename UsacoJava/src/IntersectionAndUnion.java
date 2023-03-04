@@ -71,7 +71,7 @@ public class IntersectionAndUnion {
             for (int j=0;j<cB;j++){
                 for (int k=0;k<rB;k++){
                     //insert mod when necessary
-                    ret[i][j] += A[i][k]*B[k][j];
+                    ret[i][j] = (ret[i][j]+A[i][k]*B[k][j])%MOD;
                 }
             }
         }
@@ -88,20 +88,14 @@ public class IntersectionAndUnion {
             size = 1;
             while (size < n) size *= 2;
             tree = new long[2*size+1][0][0];
-            for (int i=1;i<=n;i++){
-                tree[i+size-1]=off;
-            }
-            for (int i=n+1;i<=size;i++){
-                tree[i+size-1]=pass;
-            }
-            for (int i=size-1;i>=1;i--){
-                tree[i]=multMatrix(tree[2*i+1],tree[2*i]);
-            }
+            for (int i=1;i<=n;i++) tree[i+size-1]=off;
+            for (int i=n+1;i<=size;i++) tree[i+size-1]=pass;
+            for (int i=size-1;i>=1;i--) tree[i]=multMatrix(tree[2*i+1],tree[2*i]);
         }
-        void set(int k, long[][] x){
-            k+=size-1;
-            tree[k]=x;
-            for (k/=2;k>=1;k/=2) tree[k]=multMatrix(tree[2*k+1],tree[2*k]);
+        void set(int i, long[][] x){
+            i+=size-1;
+            tree[i]=x;
+            for (i/=2;i>=1;i/=2) tree[i]=multMatrix(tree[2*i+1],tree[2*i]);
         }
         long[][] sum() {
             return tree[1];
