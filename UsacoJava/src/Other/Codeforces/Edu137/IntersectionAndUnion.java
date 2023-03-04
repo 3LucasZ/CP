@@ -1,8 +1,11 @@
+package Other.Codeforces.Edu137;
+
 import java.io.*;
 import java.util.*;
 /*
 PROB: IntersectionAndUnion
 LANG: JAVA
+Editorial: Insane segtree where operations are on matrix composition. Learned to multiply matrices (carefully)
 */
 public class IntersectionAndUnion {
     static boolean fileSubmission = false;

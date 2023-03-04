@@ -1,6 +1,6 @@
 package Helper;
 
-public class RotateMatrix45{
+public class Rotate45{
 	/*
 	1. rotate an array element by 45 degrees CCW/CW (without overflow)
 	2. rotate a point by 45 degrees CCW/CW (around origin)
