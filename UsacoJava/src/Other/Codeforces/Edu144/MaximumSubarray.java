@@ -1,8 +1,10 @@
+package Other.Codeforces.Edu144;
+
 import java.io.*;
 import java.util.*;
 
 public class MaximumSubarray {
-    static boolean debug = true;
+    static boolean debug = false;
 
     static int N;
     static int K;
@@ -35,7 +37,12 @@ public class MaximumSubarray {
 
         //* ret
         long ans = 0;
-        for (int i=1;i<=N;i++) ans=Math.max(ans,dp[i][K]);
+        for (int i=1;i<=N;i++) {
+            for (int j=0;j<=K;j++){
+                if (N-i<K-j) continue;
+                ans=Math.max(ans,dp[i][j]);
+            }
+        }
         io.println(ans);
     }
 
