@@ -48,73 +48,70 @@ public class PilingPapers {
             given/=10;
         }
         if (debug) io.println("dig:"+Arrays.toString(dig));
-        //dp
-        long[][][][][] dp = new long[N+2][N+2][digits+2][digits+2][3];
-        //base case
+        //real stuff
+        long[][] ans = new long[N+2][N+2];
         for (int l=1;l<=N;l++){
+            //range dp
+            long[][][][] dp = new long[2][digits+2][digits+2][3];
             for (int r=l;r<=N;r++){
+                //move
+                dp[0]=dp[1];
+                dp[1]=new long[digits+2][digits+2][3];
+
+                //add base case
                 for(int Al=1;Al<=digits;Al++){
-                    dp[l][r][Al][Al][comp(C[r],dig[Al])]+=2;
+                    dp[0][Al][Al][comp(C[r],dig[Al])]+=2;
                 }
-            }
-        }
-        //transitions
-        for (int l=1;l<=N;l++){
-            for (int r=l;r<=N;r++){
+
+                //stash ans
+                for (int x=1;x<=digits;x++){
+                    ans[l][r]+=dp[0][x][digits][0];
+                    ans[l][r]+=dp[0][x][digits][1];
+                    if (x!=1) ans[l][r]+=dp[0][x][digits][2];
+                }
+                ans[l][r]%=MOD;
+
+                //transitions
                 for(int x=digits;x>=1;x--){
                     for(int y=x;y<=digits;y++){
-                        for (int q=0;q<=2;q++) {
-                            //resolve
-                            dp[l][r][x][y][q]%=MOD;
-                            //throwaway
-                            for (int q=0;q<=2;q++) dp[l][r+1][x][y][q]+=dp[l][r][x][y][q];
-                        }
                         //1 top
-                        if (C[r+1]==dig[y+1]) dp[l][r+1][x][y+1][1]+=dp[l][r][x][y][1];
+                        if (C[r+1]==dig[y+1]) dp[1][x][y+1][1]+=dp[0][x][y][1];
                         //1 bottom
-                        if (C[r+1]==dig[x-1]) dp[l][r+1][x-1][y][1]+=dp[l][r][x][y][1];
+                        if (C[r+1]==dig[x-1]) dp[1][x-1][y][1]+=dp[0][x][y][1];
 
                         //0 top
-                        dp[l][r+1][x][y+1][0]+=dp[l][r][x][y][0];
-                        if (C[r+1]<dig[y+1]) dp[l][r+1][x][y+1][0]+=dp[l][r][x][y][1];
+                        dp[1][x][y+1][0]+=dp[0][x][y][0];
+                        if (C[r+1]<dig[y+1]) dp[1][x][y+1][0]+=dp[0][x][y][1];
                         //2 top
-                        dp[l][r+1][x][y+1][2]+=dp[l][r][x][y][2];
-                        if (C[r+1]>dig[y+1]) dp[l][r+1][x][y+1][2]+=dp[l][r][x][y][1];
+                        dp[1][x][y+1][2]+=dp[0][x][y][2];
+                        if (C[r+1]>dig[y+1]) dp[1][x][y+1][2]+=dp[0][x][y][0];
 
                         //0 bottom
                         if (C[r+1]<dig[x-1]){
-                            for (int q=0;q<=2;q++) dp[l][r+1][x-1][y][0]+=dp[l][r][x][y][q];
+                            for (int q=0;q<=2;q++) dp[1][x-1][y][0]+=dp[0][x][y][q];
                         }
-                        if (C[r+1]==dig[x-1]) dp[l][r+1][x-1][y][0]+=dp[l][r][x][y][0];
+                        if (C[r+1]==dig[x-1]) dp[1][x-1][y][0]+=dp[0][x][y][0];
                         //2 bottom
                         if (C[r+1]>dig[x-1]){
-                            for (int q=0;q<=2;q++) dp[l][r+1][x-1][y][2]+=dp[l][r][x][y][q];
+                            for (int q=0;q<=2;q++) dp[1][x-1][y][2]+=dp[0][x][y][q];
                         }
-                        if (C[r+1]==dig[x-1]) dp[l][r+1][x-1][y][2]+=dp[l][r][x][y][2];
+                        if (C[r+1]==dig[x-1]) dp[1][x-1][y][2]+=dp[0][x][y][2];
+
+                        //throwaway
+                        for (int q=0;q<=2;q++) {
+                            dp[1][x][y][q]+=dp[0][x][y][q];
+                        }
+
                         if (debug){
                             for (int q=0;q<=2;q++){
-                                io.println(l+" "+r+" "+x+" "+y+" "+q+":"+dp[l][r][x][y][q]);
+                                io.println(l+" "+r+" "+x+" "+y+" "+q+":"+dp[0][x][y][q]);
                             }
                         }
                     }
                 }
             }
         }
-        long[][] ret = new long[N+1][N+1];
-        for (int l=1;l<=N;l++){
-            for (int r=l;r<=N;r++){
-                for (int x=1;x<=digits;x++){
-                    ret[l][r]+=dp[l][r][x][digits][0];
-                    ret[l][r]+=dp[l][r][x][digits][1];
-                    if (x!=1) ret[l][r]+= dp[l][r][x][digits][2];
-                    ret[l][r]%=MOD;
-                }
-            }
-        }
-        if (debug){
-            io.print2d(ret);
-        }
-        return ret;
+        return ans;
     }
     static int comp(int a, int b){
         if (a<b) return 0;
