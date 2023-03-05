@@ -1,3 +1,5 @@
+package Other.Codeforces.Edu131;
+
 import java.io.*;
 import java.util.*;
 
@@ -13,26 +15,26 @@ public class PermutationRestoration {
         B = new int[N+1];
         for (int i=1;i<=N;i++) B[i]=io.nextInt();
         //* find l,r
-        ArrayList<Range> ranges = new ArrayList<>();
+        PriorityQueue<Range> ranges = new PriorityQueue<>(Comparator.comparingInt(a->a.l));
         for (int i=1;i<=N;i++){
             ranges.add(new Range(i,firstEq(i,B[i]),firstEq(i,B[i]-1)-1));
         }
-        if (debug){
-            io.println(ranges);
-        }
-        Collections.sort(ranges,(a,b)->{
-            if (a.l==b.l){
-                return a.r-b.r;
-            }
-            return a.l-b.l;
-        });
-        //* ret
+        //* simulate
+        PriorityQueue<Range> active = new PriorityQueue<>(Comparator.comparingInt(a->a.r));
         int[] ans = new int[N+1];
-        int x = 1;
-        for (Range r :ranges){
-            ans[r.id]=x;
-            x++;
+        for (int i=1;i<=N;i++){
+            //add from ranges to active
+            while (true){
+                Range top = ranges.peek();
+                if (top==null || top.l>i) break;
+                active.add(ranges.poll());
+            }
+            //process from active
+            Range next = active.poll();
+            ans[next.id]=i;
         }
+
+        //* ret
         for (int i=1;i<=N;i++){
             io.print(ans[i]+" ");
         }
