@@ -35,7 +35,7 @@ public class PilingPapers {
         for (int i=0;i<Q;i++){
             int l = io.nextInt();
             int r = io.nextInt();
-            io.println(((dpB[l][r]-dpA[l][r])%MOD+MOD)%MOD);
+            io.println((dpB[l][r]-dpA[l][r]+MOD)%MOD);
         }
     }
     static long[][] dpGen(long given){
@@ -69,6 +69,8 @@ public class PilingPapers {
                         if (C[r]==lim[Al]) dp[Al][Ar][0]+=dp[Al+1][Ar][0];
                         if (C[r]<lim[Ar]) dp[Al][Ar][0]+=dp[Al][Ar-1][1];
                         dp[Al][Ar][0]+=dp[Al][Ar-1][0];
+                        //clean
+                        for (int q=0;q<=2;q++) dp[Al][Ar][q]%=MOD;
                     }
                 }
                 //single item
@@ -81,6 +83,7 @@ public class PilingPapers {
                     ans[l][r]+=dp[1][d][1];
                     if (d!=dig) ans[l][r]+=dp[1][d][2];
                 }
+                ans[l][r]%=MOD;
             }
         }
         return ans;

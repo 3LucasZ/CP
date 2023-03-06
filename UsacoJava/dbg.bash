@@ -6,7 +6,7 @@ fileName=PilingPapers.java
 gen=false
 cmp=true
 
-echo Starting FULL DEBUG Script
+echo Starting Script...
 A=$CP/UsacoJava/src
 echo CP: $CP
 echo A: $A
