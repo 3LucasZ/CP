@@ -20,7 +20,7 @@ public class PilingPapers {
     public static void solve() throws IOException {
         //* parse
         N =io.nextInt(); A = io.nextLong()-1; B = io.nextLong();
-        C = new int[N+2];
+        C= new int[N+2];
         for (int i=1;i<=N;i++) C[i]=io.nextInt();
         if (debug){
             io.println("C:"+Arrays.toString(C));
@@ -40,80 +40,52 @@ public class PilingPapers {
     }
     static long[][] dpGen(long given){
         if (debug) io.println("running dpGen on:"+given);
-        //comp dig[i]
-        int digits = digits(given);
-        int[] dig = new int[digits+2];
-        for (int i=digits;i>=1;i--){
-            dig[i]=(int)(given%10);
+        //comp lim[i]
+        int dig = digits(given);
+        int[] lim = new int[dig+2];
+        for (int i=dig;i>=1;i--){
+            lim[i]=(int)(given%10);
             given/=10;
         }
-        if (debug) io.println("dig:"+Arrays.toString(dig));
-        //real stuff
-        long[][] ans = new long[N+2][N+2];
+        if (debug) io.println("lim:"+Arrays.toString(lim));
+
+        //dp
+        long[][] ans = new long[N+1][N+1];
         for (int l=1;l<=N;l++){
-            //range dp
-            long[][][][] dp = new long[2][digits+2][digits+2][3];
+            long[][][] dp = new long[dig+1][dig+1][3];
             for (int r=l;r<=N;r++){
-                //move
-                dp[0]=dp[1];
-                dp[1]=new long[digits+2][digits+2][3];
-
-                //add base case
-                for(int Al=1;Al<=digits;Al++){
-                    dp[0][Al][Al][comp(C[r],dig[Al])]+=2;
-                }
-
-                //stash ans
-                for (int x=1;x<=digits;x++){
-                    ans[l][r]+=dp[0][x][digits][0];
-                    ans[l][r]+=dp[0][x][digits][1];
-                    if (x!=1) ans[l][r]+=dp[0][x][digits][2];
-                }
-                ans[l][r]%=MOD;
-
-                //transitions
-                for(int x=digits;x>=1;x--){
-                    for(int y=x;y<=digits;y++){
-                        //1 top
-                        if (C[r+1]==dig[y+1]) dp[1][x][y+1][1]+=dp[0][x][y][1];
-                        //1 bottom
-                        if (C[r+1]==dig[x-1]) dp[1][x-1][y][1]+=dp[0][x][y][1];
-
-                        //0 top
-                        dp[1][x][y+1][0]+=dp[0][x][y][0];
-                        if (C[r+1]<dig[y+1]) dp[1][x][y+1][0]+=dp[0][x][y][1];
-                        //2 top
-                        dp[1][x][y+1][2]+=dp[0][x][y][2];
-                        if (C[r+1]>dig[y+1]) dp[1][x][y+1][2]+=dp[0][x][y][0];
-
-                        //0 bottom
-                        if (C[r+1]<dig[x-1]){
-                            for (int q=0;q<=2;q++) dp[1][x-1][y][0]+=dp[0][x][y][q];
-                        }
-                        if (C[r+1]==dig[x-1]) dp[1][x-1][y][0]+=dp[0][x][y][0];
-                        //2 bottom
-                        if (C[r+1]>dig[x-1]){
-                            for (int q=0;q<=2;q++) dp[1][x-1][y][2]+=dp[0][x][y][q];
-                        }
-                        if (C[r+1]==dig[x-1]) dp[1][x-1][y][2]+=dp[0][x][y][2];
-
-                        //throwaway
-                        for (int q=0;q<=2;q++) {
-                            dp[1][x][y][q]+=dp[0][x][y][q];
-                        }
-
-                        if (debug){
-                            for (int q=0;q<=2;q++){
-                                io.println(l+" "+r+" "+x+" "+y+" "+q+":"+dp[0][x][y][q]);
-                            }
-                        }
+                for (int Al=1;Al<=dig;Al++){
+                    for (int Ar=dig;Ar>=Al+1;Ar--){
+                        // eq
+                        if (C[r]==lim[Ar]) dp[Al][Ar][1]+=dp[Al][Ar-1][1];
+                        if (C[r]==lim[Al]) dp[Al][Ar][1]+=dp[Al+1][Ar][1];
+                        // g
+                        if (C[r]>lim[Al]) for(int q=0;q<=2;q++) dp[Al][Ar][2]+=dp[Al+1][Ar][q];
+                        if (C[r]==lim[Al]) dp[Al][Ar][2]+=dp[Al+1][Ar][2];
+                        if (C[r]>lim[Ar]) dp[Al][Ar][2]+=dp[Al][Ar-1][1];
+                        dp[Al][Ar][2]+=dp[Al][Ar-1][2];
+                        // l
+                        if (C[r]<lim[Al]) for(int q=0;q<=2;q++) dp[Al][Ar][0]+=dp[Al+1][Ar][q];
+                        if (C[r]==lim[Al]) dp[Al][Ar][0]+=dp[Al+1][Ar][0];
+                        if (C[r]<lim[Ar]) dp[Al][Ar][0]+=dp[Al][Ar-1][1];
+                        dp[Al][Ar][0]+=dp[Al][Ar-1][0];
                     }
+                }
+                //single item
+                for (int Al=1;Al<=dig;Al++){
+                    dp[Al][Al][cmp(C[r],lim[Al])]+=2;
+                }
+                //stash
+                for (int d=1;d<=dig;d++){
+                    ans[l][r]+=dp[1][d][0];
+                    ans[l][r]+=dp[1][d][1];
+                    if (d!=dig) ans[l][r]+=dp[1][d][2];
                 }
             }
         }
         return ans;
     }
-    static int comp(int a, int b){
+    static int cmp(int a,int b){
         if (a<b) return 0;
         else if (a==b) return 1;
         else return 2;
