@@ -1,3 +1,5 @@
+package Other.USACO.Season2022_2023.Feb2023.Gold;
+
 import java.io.*;
 import java.util.*;
 
@@ -13,8 +15,8 @@ public class FertilizingPastures{
 	static int[] edgesum;
 	static int[] height;
 
-	static long[] cost;
-	static long[] lastCost;
+	static long[] dp;
+	static long[] dpLast;
 
 	static final long INF = Long.MAX_VALUE/2;
 
@@ -48,63 +50,59 @@ public class FertilizingPastures{
 		}
 
 		//* solve
-		cost = new long[N+1];
-		lastCost = new long[N+1];
+		dp= new long[N+1];
+		dpLast= new long[N+1]; Arrays.fill(dpLast,INF);
 		DFSsolve(1);
-		if (debug) {
-			out.println("cost:"+Arrays.toString(cost));
+		if (debug)  {
+			out.println("dp:"+Arrays.toString(dp));
+			out.println("dpLast:"+Arrays.toString(dpLast));
 		}
 		//* ret
 		if (T==0){
-			out.println((N-1)*2+" "+cost[1]);
+			out.println((N-1)*2+" "+dp[1]);
 		} else {
-			out.println((N-1)*2-height[1]+" "+lastCost[1]);
+			out.println((N-1)*2-height[1]+" "+dpLast[1]);
 		}
 	}
 
 	public static void DFSsolve(int node){
+		//child first
 		for (int child : tree[node]){
 			DFSsolve(child);
 		}
 
+		//DP
+		//sort children based on which is optimal to process first
 		ArrayList<Integer> items = new ArrayList<>();
-		for (int child : tree[node]) {
-			items.add(child);
-		}
+		for (int child : tree[node]) items.add(child);
 		Collections.sort(items, (a,b)->Long.compare((1+edgesum[a])*(asum[b]),(1+edgesum[b])*(asum[a])));
+		//add/simulate children based on this order
 		int time = 1;
 		for (int next : items){
-			int child = next;
-			long childCost = cost[child];
-			childCost += asum[child]*time;
-			cost[node] += childCost;
-			time += 2*(edgesum[child]+1);
+			long childCost = dp[next] + asum[next]*time;
+			dp[node] += childCost;
+			time += 2*(edgesum[next]+1);
 		}
 
-		//solve lastCost
-		ArrayList<Integer> lastItems = new ArrayList<>();
-		for (int child : tree[node]){
-			if (height[child]==height[1]) lastItems.add(child);
+		//lastDP
+		//find which children can be visited last, and try removing it and stash its effect, take the min time
+		long asumFront = 0;
+		long edgesumFront = 0;
+		for (int c=tree[node].size()-1;c>=0;c--){
+			int next = items.get(c);
+			if (height[next]==height[1]){
+				dpLast[node]=Math.min(dpLast[node],
+						dp[node]
+								-asumFront*2L*(edgesum[next]+1)-dp[next]//rem old
+								+asum[next]*edgesumFront+dpLast[next]); //add new
+			}
+			asumFront+=asum[next];
+			edgesumFront+=2L*(edgesum[next]+1);
 		}
+		//root case
 		if (tree[node].size()==0){
-			return;
+			dpLast[node]=0;
 		}
-		else if (lastItems.size()==0){
-			lastCost[node]=INF;
-			return;
-		}
-		Collections.sort(lastItems, (a,b)->Long.compare((1+edgesum[a])*(asum[b])+lastCost[a],(1+edgesum[b])*(asum[a])+lastCost[b]));
-		Integer last = lastItems.get(lastItems.size()-1);
-		items.remove(last);
-		time = 1;
-		for (int next : items){
-			int child = next;
-			long childCost = cost[child];
-			childCost += asum[child]*time;
-			lastCost[node] += childCost;
-			time += 2*(edgesum[child]+1);
-		}
-		lastCost[node] += (lastCost[last] + asum[last]*time);
 	}
 
 	public static void DFSprecomp(int node){
