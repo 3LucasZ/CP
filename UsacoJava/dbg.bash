@@ -2,7 +2,7 @@
 source ~/.zshrc
 
 #only change these lines
-fileName=PilingPapers.java
+fileName=Odometer.java
 gen=false
 cmp=true
 
@@ -14,8 +14,8 @@ echo A: $A
 if [ "$gen" = true ] ; then
   echo Running the generator
   java $A/Generator.java > $CP/io/in.txt
-  head -n 1000 $CP/io/in.txt > $CP/io/in_less.txt
 fi
+head -n 1000 $CP/io/in.txt > $CP/io/in_less.txt
 
 echo Running your code against in.txt
 ms0=$(getms)

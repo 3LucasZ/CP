@@ -11,13 +11,10 @@ Make sure the input you provide is correct:
  */
 public class Generator{
 	public static void generate() {
-		int n = 300000;
-		io.println(n);
-		for (int i=0;i<n;i++){
-			int l = randInt(0,n);
-			int r = randInt(l,n);
-			io.println(l+" "+r);
-		}
+		int A = randInt(1,1000);
+		int B = randInt(A+1,A+100000);
+		io.println(A);
+		io.println(B);
 	}
 
 
