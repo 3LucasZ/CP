@@ -1,3 +1,5 @@
+package Solutions.USACO.SeasonOld.March2014.Silver;
+
 import java.io.*;
 import java.util.*;
 /*

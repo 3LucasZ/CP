@@ -15,29 +15,29 @@ public class DSUWrapper {
         union and get operations
         sz is the size of the component
          */
-        int[] parent;
+        int[] par;
         int[] sz;
 
         public DSU(int num){
             sz = new int[num+1];
-            parent = new int[num+1];
+            par = new int[num+1];
             Arrays.fill(sz, 1);
-            Arrays.fill(parent, -1);
+            Arrays.fill(par, -1);
         }
 
         //return parent
-        public int get(int v){
-            if (parent[v] == -1) {
+        public int getPar(int v){
+            if (par[v] == -1) {
                 return v;
             }
-            parent[v] = get(parent[v]);
-            return parent[v];
+            par[v] = getPar(par[v]);
+            return par[v];
         }
 
         //add edge
         public void union(int u, int v){
-            int U = get(u);
-            int V = get(v);
+            int U = getPar(u);
+            int V = getPar(v);
             //same component, do nothing
             if (U == V) return;
             //enforce sz[V]<sz[U]
@@ -47,12 +47,12 @@ public class DSUWrapper {
                 V=tmp;
             }
             //op
-            parent[V] = U;
+            par[V] = U;
             sz[U] += sz[V];
         }
         //check CC
         public boolean connected(int u, int v){
-            return get(u)==get(v);
+            return getPar(u)==getPar(v);
         }
     }
 }
