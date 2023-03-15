@@ -2,7 +2,7 @@ package Helpers;
 
 import java.util.ArrayList;
 
-public class BinaryWrapper{
+public class BinaryWrapperAndTester{
 	public static void main(String[] args){
 		int x = 100;
 		System.out.println("Original:"+Binary.toStr(x, 8));
@@ -12,6 +12,9 @@ public class BinaryWrapper{
 		System.out.println("Toggle bit 3:"+Binary.toStr(x,8));
 		x = Binary.set(x,7);
 		System.out.println("Set bit 7:"+Binary.toStr(x,8));
+		x = 512;
+		System.out.println("Original:"+Binary.toStr(x,10));
+		System.out.println("Lowest bit:"+(int)(Math.log(Integer.lowestOneBit(x))/Math.log(2)));
 	}
 
 	/**
