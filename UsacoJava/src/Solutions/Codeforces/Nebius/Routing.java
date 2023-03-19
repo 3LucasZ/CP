@@ -1,3 +1,5 @@
+package Solutions.Codeforces.Nebius;
+
 import java.io.*;
 import java.util.*;
 

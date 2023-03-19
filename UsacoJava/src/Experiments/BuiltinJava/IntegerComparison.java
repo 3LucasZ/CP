@@ -1,4 +1,4 @@
-package Experiments.BuiltinDS;
+package Experiments.BuiltinJava;
 
 public class IntegerComparison{
 	public static void main(String[] args){

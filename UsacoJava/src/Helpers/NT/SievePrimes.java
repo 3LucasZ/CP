@@ -3,13 +3,17 @@ package Helpers.NT;
 import java.util.ArrayList;
 
 public class SievePrimes {
+    //Testing:
     public static void main(String[] args){
         ArrayList<Integer> primes = primesLEQ(5000);
         System.out.println(primes);
     }
+
     /*
-    Returns list of all primes <= n (not including 1)
-    O(Nlog(log(N))) time and O(N) space
+    About: Returns list of all primes <= n (not including 1)
+    Complexity: O(Nlog(log(N))) time and O(N) space
+    Well tested: yes
+    Required: none
     */
     public static ArrayList<Integer> primesLEQ(int n){
         //is prime boolean array

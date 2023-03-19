@@ -6,21 +6,22 @@ public class MultisetWrapper {
     /*
         Overloaded TreeMap functioning as Sorted Multiset
     */
-    private static class Multiset {
-        public TreeMap<Integer, Integer> ms = new TreeMap<>();
+    private static class Multiset <T> {
+        public TreeMap<T, Integer> ms = new TreeMap<>();
         private int sz = 0;
-        public boolean contains(int x){
+        public boolean contains(T x){
             return ms.containsKey(x);
         }
-        public void add(int x){add(x,1);}
-        public void add(int x, int freq){
+        public void add(T x){add(x,1);}
+        public void add(T x, int freq){
             if (!ms.containsKey(x))ms.put(x,0);
             ms.put(x,ms.get(x)+freq);
             sz+=freq;
         }
-        public void remove(int x){
-            remove(x,1);}
-        public void remove(int x, int freq){
+        public void remove(T x){
+            remove(x,1);
+        }
+        public void remove(T x, int freq){
             ms.put(x,ms.get(x)-freq);
             if (ms.get(x)<=0) ms.remove(x);
             sz-=freq;
@@ -32,13 +33,13 @@ public class MultisetWrapper {
             if (ms.containsKey(x)) return ms.get(x);
             return 0;
         }
-        public Iterator<Integer> iterator(){
+        public Iterator<T> iterator(){
             return ms.keySet().iterator();
         }
         public int size(){
             return sz;
         }
-        public Set<Integer> keySet(){
+        public Set<T> keySet(){
             return ms.keySet();
         }
         public String toString(){

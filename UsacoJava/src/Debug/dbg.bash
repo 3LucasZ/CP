@@ -2,9 +2,9 @@
 source ~/.zshrc
 
 #only change these lines
-fileName=Odometer.java
-gen=false
-cmp=true
+fileName=ComfortablyNumb.java
+gen=true
+cmp=false
 
 #Setup
 echo Starting Script...

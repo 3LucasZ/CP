@@ -12,8 +12,9 @@ Lib Checker: Two Edge Connected Components
 Time: O(V+E)
 Param: 0 indexed graph with self loops, multi edges
 Find: All Biconnected components
+Paper available: false
  */
-public class TwoEdgeCC {
+public class BiConnectedComponents{
     static boolean fileSubmission = false;
     static String fileName = "";
     
@@ -40,7 +41,7 @@ public class TwoEdgeCC {
 
         //* DFS
         vis = new boolean[N];
-        tin = new int[N];
+        timeIn= new int[N];
         lo = new int[N];
         nodes = new Stack<>();
         biCC = new ArrayList<>();
@@ -52,7 +53,7 @@ public class TwoEdgeCC {
             DFS(i,-1);
         }
         if (debug){
-            io.println("tin: "+Arrays.toString(tin));
+            io.println("tin: "+Arrays.toString(timeIn));
             io.println("lo: "+Arrays.toString(lo));
             io.println("nodes: "+nodes);
         }
@@ -67,7 +68,7 @@ public class TwoEdgeCC {
             io.println();
         }
     }
-    static int[] tin;
+    static int[] timeIn;
     static int[] lo;
     static int timer=0;
     static Stack<Integer> nodes;
@@ -78,8 +79,8 @@ public class TwoEdgeCC {
             io.println("DFS: "+node);
         }
         vis[node]=true;
-        tin[node]=timer++;
-        lo[node]=tin[node];
+        timeIn[node]=timer++;
+        lo[node]=timeIn[node];
         nodes.add(node);
         boolean seenPar = false;
 
@@ -92,12 +93,11 @@ public class TwoEdgeCC {
             //back edge
             else{
                 if (child==par && !seenPar) seenPar = true;
-                else lo[node]=Math.min(lo[node],tin[child]);
+                else lo[node]=Math.min(lo[node],timeIn[child]);
             }
         }
-
         //handle when articulation point
-        if (lo[node]==tin[node]){
+        if (lo[node]==timeIn[node]){
             ArrayList<Integer> newCC = new ArrayList<>();
             while (nodes.peek()!=node) newCC.add(nodes.pop());
             newCC.add(nodes.pop());

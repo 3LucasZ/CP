@@ -3,9 +3,10 @@ package Helpers.NT;
 import java.util.ArrayList;
 
 public class PrimeFactorizer{
-	//O(sqrt(sqrt(N))) primeFactorizer
-	//Well tested to work: PotionBrewingClass
-	//run SievePrimes first to feed the primes
+	//About: Prime factorize any number given primes list with dupes
+	//Complexity: O(sqrt(sqrt(N))) time and O(log(N)) space
+	//Well tested: PotionBrewingClass
+	//Required: run SievePrimes first to feed the primes
 
 	static ArrayList<Integer> primeFactorize(int val,ArrayList<Integer> primes){
 		ArrayList<Integer> ret = new ArrayList<>();
