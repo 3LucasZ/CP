@@ -1,4 +1,4 @@
-package Helpers.Debug;
+package Helpers.Logging;
 
 public class print2d {
     private static class Printer {

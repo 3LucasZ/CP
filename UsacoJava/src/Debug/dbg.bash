@@ -1,13 +1,13 @@
 #!/bin/zsh
 source ~/.zshrc
 
-#only change these lines
+#Only change these lines
 fileName=ComfortablyNumb.java
 gen=true
 cmp=false
 
 #Setup
-echo Starting Script...
+echo Starting Debug
 A=$CP/UsacoJava/src
 echo CP: $CP
 echo A: $A
