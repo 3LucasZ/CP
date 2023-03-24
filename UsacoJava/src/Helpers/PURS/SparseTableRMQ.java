@@ -15,6 +15,7 @@ public class SparseTableRMQ {
     Arguments: [any array]
     Time Complexity: O(NlgN+Q)
     Space Complexity: O(NlgN)
+    CSES Data set (verified 3/23): https://cses.fi/problemset/task/1688/
      */
     private static class RMQ{
         int lgSz;
