@@ -1,9 +1,11 @@
 package Helpers.Graph;
 import java.util.*;
 public class LCAForestMaxPathEdge {
+    /*
+    Goal: Find the maximum cost of an edge between 2 nodes in a weighted forest
+    Conditions: 1-indexed weighted forest
+     */
     private static class LCA {
-        //precondition: 1-indexed parForest
-
         int size;
         ArrayList<Edge>[] forest;
         boolean[] visited;

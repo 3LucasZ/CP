@@ -35,10 +35,10 @@ public class SuperFastIO {
     static IO io;
     public static void main(String[] args) throws IOException {
         if (fileSubmission) {
-            io = new IO(fileName);
+            io = new IO(fileName,debug);
         }
         else {
-            io = new IO();
+            io = new IO(debug);
         }
         solve();
         io.close();
@@ -48,23 +48,26 @@ public class SuperFastIO {
         private DataInputStream din;
         private byte[] buffer;
         private int bufferPointer, bytesRead;
-        PrintWriter out;
+        private PrintWriter out;
+        private boolean debug;
 
-        public IO()
+        public IO(boolean debug)
         {
             din = new DataInputStream(System.in);
             out = new PrintWriter(System.out);
             buffer = new byte[BUFFER_SIZE];
             bufferPointer = bytesRead = 0;
+            this.debug=debug;
         }
 
-        public IO(String file_name) throws IOException
+        public IO(String file_name, boolean debug) throws IOException
         {
             din = new DataInputStream(
                     new FileInputStream(file_name+".in"));
             out = new PrintWriter(new FileWriter(file_name+".out"));
             buffer = new byte[BUFFER_SIZE];
             bufferPointer = bytesRead = 0;
+            this.debug=debug;
         }
 
         public String readLine() throws IOException

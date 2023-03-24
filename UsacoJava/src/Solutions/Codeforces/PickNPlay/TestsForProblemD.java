@@ -1,6 +1,10 @@
+package Solutions.Codeforces.PickNPlay;
+
 import java.io.*;
 import java.util.*;
-
+/*
+Works, but TLE. Its okay tho, I'll take it as a win! :)
+ */
 public class TestsForProblemD{
 	static boolean debug=true;
 
@@ -21,31 +25,34 @@ public class TestsForProblemD{
 		}
 		//* DFS1
 		ArrayList<Integer> ret = DFS(1,0).toList();
-		String[] ans = new String[N+1]; Arrays.fill(ans,"");
+		int[] l = new int[N+1];
+		int[] r = new int[N+1];
 		for (int i = 0;i<2*N;i++){
-			ans[ret.get(i)]+=(i+1)+" ";
+			if (l[ret.get(i)]==0) l[ret.get(i)]=i+1;
+			else r[ret.get(i)]=i+1;
 		}
 		for (int i=1;i<=N;i++){
-			io.println(ans[i]);
+			io.println(l[i]+" "+r[i]);
 		}
 	}
-
+	static int[] l;
+	static int[] r;
 	static DoublyLinkedList<Integer> DFS(int node, int par){
-		ArrayList<Integer> fin = new ArrayList<>();
 		DoublyLinkedList<Integer> u = new DoublyLinkedList<>();
 		for (int child : tree[node]){
 			if (child==par) continue;
 			DoublyLinkedList<Integer> v = DFS(child,node);
-			fin.add(v.popFirst());
 			u.append(v);
 		}
 		u.addFirst(node);
-		for (int i : fin) u.addFirst(i);
-		u.addFirst(node);
+		for (int i : tree[node]) if (i!=par) u.addFirst(i);
+		if (node==1) u.addFirst(node);
 		return u;
 	}
+
+
 	public static void main(String[] args) throws IOException{
-		io=new IO(debug);
+		io=new IO();
 		solve();
 		io.close();
 	}
@@ -102,20 +109,14 @@ public class TestsForProblemD{
 			}
 		}
 		public T1 popFirst() {
-			if (first==null) return null;
-			else {
 				T1 ret = first.value;
 				first=first.after;
 				return ret;
-			}
 		}
 		public T1 popLast() {
-			if (last==null) return null;
-			else {
 				T1 ret = last.value;
 				last=last.before;
 				return ret;
-			}
 		}
 		public ArrayList<T1> toList() {
 			ArrayList<T1> ret = new ArrayList<>();
@@ -197,114 +198,158 @@ public class TestsForProblemD{
 		}
 	}
 
-	private static class IO{
-		BufferedReader br;
-		StringTokenizer st;
+	static class IO{
+		final private int BUFFER_SIZE = 1 << 16;
+		private DataInputStream din;
+		private byte[] buffer;
+		private int bufferPointer, bytesRead;
 		PrintWriter out;
-		boolean debug;
 
-		public IO(boolean dbg){
-			br=new BufferedReader(new InputStreamReader(System.in));
-			out=new PrintWriter(System.out);
-			debug=dbg;
+		public IO()
+		{
+			din = new DataInputStream(System.in);
+			out = new PrintWriter(System.out);
+			buffer = new byte[BUFFER_SIZE];
+			bufferPointer = bytesRead = 0;
 		}
 
-		public IO(String fileName,boolean dbg) throws IOException{
-			br=new BufferedReader(new FileReader(fileName+".in"));
-			out=new PrintWriter(new FileWriter(fileName+".out"));
-			debug=dbg;
+		public IO(String file_name) throws IOException
+		{
+			din = new DataInputStream(
+					new FileInputStream(file_name+".in"));
+			out = new PrintWriter(new FileWriter(file_name+".out"));
+			buffer = new byte[BUFFER_SIZE];
+			bufferPointer = bytesRead = 0;
 		}
 
-		String next(){
-			while(st==null||!st.hasMoreElements()){
-				try{
-					st=new StringTokenizer(br.readLine());
-				}catch(IOException e){
-					e.printStackTrace();
+		public String readLine() throws IOException
+		{
+			byte[] buf = new byte[64]; // IMPORTANT: read line length
+			int cnt = 0, c;
+			while ((c = read()) != -1) {
+				if (c == '\n') {
+					if (cnt != 0) {
+						break;
+					}
+					else {
+						continue;
+					}
+				}
+				buf[cnt++] = (byte)c;
+			}
+			return new String(buf, 0, cnt);
+		}
+
+		public String readLine(int len) throws IOException{
+			byte[] buf=new byte[len]; // IMPORTANT: read line length
+			int cnt=0, c;
+			while((c=read())!=-1){
+				if(c=='\n'){
+					if(cnt!=0){
+						break;
+					}else{
+						continue;
+					}
+				}
+				buf[cnt++]=(byte)c;
+			}
+			return new String(buf,0,cnt);
+		}
+
+		public int nextInt() throws IOException
+		{
+			int ret = 0;
+			byte c = read();
+			while (c <= ' ') {
+				c = read();
+			}
+			boolean neg = (c == '-');
+			if (neg)
+				c = read();
+			do {
+				ret = ret * 10 + c - '0';
+			} while ((c = read()) >= '0' && c <= '9');
+
+			if (neg)
+				return -ret;
+			return ret;
+		}
+
+		public long nextLong() throws IOException
+		{
+			long ret = 0;
+			byte c = read();
+			while (c <= ' ')
+				c = read();
+			boolean neg = (c == '-');
+			if (neg)
+				c = read();
+			do {
+				ret = ret * 10 + c - '0';
+			} while ((c = read()) >= '0' && c <= '9');
+			if (neg)
+				return -ret;
+			return ret;
+		}
+
+		public double nextDouble() throws IOException
+		{
+			double ret = 0, div = 1;
+			byte c = read();
+			while (c <= ' ')
+				c = read();
+			boolean neg = (c == '-');
+			if (neg)
+				c = read();
+
+			do {
+				ret = ret * 10 + c - '0';
+			} while ((c = read()) >= '0' && c <= '9');
+
+			if (c == '.') {
+				while ((c = read()) >= '0' && c <= '9') {
+					ret += (c - '0') / (div *= 10);
 				}
 			}
-			return st.nextToken();
+
+			if (neg)
+				return -ret;
+			return ret;
 		}
 
-		int nextInt(){
-			return Integer.parseInt(next());
+		private void fillBuffer() throws IOException
+		{
+			bytesRead = din.read(buffer, bufferPointer = 0,
+					BUFFER_SIZE);
+			if (bytesRead == -1)
+				buffer[0] = -1;
 		}
 
-		long nextLong(){
-			return Long.parseLong(next());
+		private byte read() throws IOException
+		{
+			if (bufferPointer == bytesRead)
+				fillBuffer();
+			return buffer[bufferPointer++];
 		}
 
-		double nextDouble(){
-			return Double.parseDouble(next());
-		}
-
-		String nextLine(){
-			String str="";
-			try{
-				if(st.hasMoreTokens()){
-					str=st.nextToken("\n");
-				}else{
-					str=br.readLine();
-				}
-			}catch(IOException e){
-				e.printStackTrace();
-			}
-			return str;
-		}
-
-		void println(){
-			if(debug) System.out.println();
-			else out.println();
-		}
-
-		void println(Object obj){
-			if(debug) System.out.println(obj);
-			else out.println(obj);
-		}
-
-		void print(Object obj){
-			if(debug) System.out.print(obj);
-			else out.print(obj);
-		}
-
-		void print2d(int[][] arr){
-			for(int r=0;r<arr.length;r++){
-				for(int c=0;c<arr[r].length;c++){
-					String str=""+arr[r][c];
-					while(str.length()<4) str+=" ";
-					print(str);
-				}
-				println();
-			}
-			println();
-		}
-
-		void print2d(char[][] arr){
-			for(int r=0;r<arr.length;r++){
-				for(int c=0;c<arr[r].length;c++){
-					print(arr[r][c]);
-				}
-				println();
-			}
-			println();
-		}
-
-		void print2d(boolean[][] arr){
-			for(int r=0;r<arr.length;r++){
-				for(int c=0;c<arr[r].length;c++){
-					String str=""+(arr[r][c]?"1":"0");
-					while(str.length()<4) str+=" ";
-					print(str);
-				}
-				println();
-			}
-			println();
-		}
-
-		void close(){
+		public void close() throws IOException
+		{
+			if (din == null)
+				return;
+			din.close();
 			out.close();
 		}
+		void println(){
+			if (debug) System.out.println();
+			else out.println();
+		}
+		void println(Object obj){
+			if (debug) System.out.println(obj);
+			else out.println(obj);
+		}
+		void print(Object obj){
+			if (debug) System.out.print(obj);
+			else out.print(obj);
+		}
 	}
-
-	;
 }

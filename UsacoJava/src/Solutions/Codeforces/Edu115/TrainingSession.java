@@ -1,3 +1,5 @@
+package Solutions.Codeforces.Edu115;
+
 import java.io.*;
 import java.util.*;
 

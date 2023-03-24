@@ -1,4 +1,4 @@
-package Helpers.Tree;
+package Helpers.Graph;
 
 import java.util.*;
 public class CompressTreeWrapper {

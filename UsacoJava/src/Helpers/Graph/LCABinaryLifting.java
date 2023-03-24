@@ -3,9 +3,12 @@ package Helpers.Graph;
 import java.util.ArrayList;
 
 public class LCABinaryLifting {
+    /*
+    Goal: LCA (u,v)
+    Conditions:  1-indexed tree
+    Time Complexity:
+     */
     private static class LCA {
-        //precondition: 1-indexed parTree
-
         int size;
         int root;
         ArrayList<Integer>[] tree;

@@ -1,96 +1,40 @@
+package Solutions.Codeforces.PickNPlay;
+
 import java.io.*;
 import java.util.*;
 
-public class TwoArrays{
-	static boolean debug=false;
+public class VittorioPlaysWithLEGOBricks{
+	static boolean debug=true;
 
     static int N;
-    static int M;
-    static int[] A;
-    static int[] B;
-    static int[] left;
-    static int[] right;
-
+	static int H;
+	static int[] x;
+	static long INF = Long.MAX_VALUE/100;
 	public static void solve() throws IOException{
 		//* parse
-        N = io.nextInt();
-        M = io.nextInt();
-        A = new int[N];
-        B = new int[M];
-        for (int i=0;i<N;i++){
-            A[i]=io.nextInt();
-        }
-        for (int i=0;i<M;i++){
-            B[i]=io.nextInt();
-        }
-        if (debug){
-            io.println("A:"+Arrays.toString(A));
-            io.println("B:"+Arrays.toString(B));
-        }
-        //* Bi Mapping to <i, rightmost Aj>
-        HashMap<Integer,Pair<Integer,Integer>> Bset = new HashMap<>();
-        for (int i=0;i<M;i++) Bset.put(B[i],new Pair<>(i,-1));
-        for (int i=0;i<N;i++){
-            if (Bset.containsKey(A[i])) Bset.get(A[i]).second=i;
-        }
-        if (debug){
-            io.println("Bset:"+Bset);
-        }
-        //* find right
-        right = new int[N];
-        for (int i=0;i<N;i++){
-            if (Bset.containsKey(A[i])){
-                right[Bset.get(A[i]).second]=i;
-            }
-        }
-        if (debug){
-            io.println("right:"+Arrays.toString(right));
-        }
-        //* ensure possible
-        int aMin = Integer.MAX_VALUE;
-        for (int i=N-1;i>=0;i--){
-            aMin=Math.min(aMin,A[i]);
-            if (Bset.containsKey(A[i]) && Bset.get(A[i]).second == i && aMin != A[i]){
-                io.println(0);
-                return;
-            }
-        }
-        if (B[0]!=aMin){
-            io.println(0);
-            return;
-        }
-        for (int key : Bset.keySet()){
-            if (Bset.get(key).second==-1){
-                io.println(0);
-                return;
-            }
-        }
-        //* find left
-        left = new int[N];
-        Stack<Integer> s = new Stack<>();
-        for (int i=0;i<N;i++){
-            while (!s.isEmpty() && A[i]<=A[s.peek()]){
-                s.pop();
-            }
-            if (s.isEmpty()){
-                left[i]=-1;
-            } else {
-                left[i]=s.peek();
-            }
-            s.add(i);
-        }
-        if (debug){
-            io.println("left:"+Arrays.toString(left));
-        }
-        //* multiply
-        long MOD = 998244353;
-        long ans = 1;
-        for (int i=1;i<M;i++){
-            int j = Bset.get(B[i]).second;
-            ans=(ans*(right[j]-left[j]))%MOD;
-        }
-        //* ret
-        io.println(ans);
+		N = io.nextInt();
+		H = io.nextInt();
+		x = new int[N];
+		for (int i=0;i<N;i++) x[i]=io.nextInt();
+		//* dp
+		long[][] dp = new long[N][N];
+		for (int i=0;i<N;i++) for (int j=0;j<N;j++) dp[i][j]=INF;
+		//basecase
+		for (int i=0;i<N;i++) dp[i][i]=0;
+		//transition
+		for (int r=0;r<N;r++){
+			for(int l=N-1;l>=0;l--){
+				for (int m=l;m<r;m++){
+					int a = Math.min(H,(x[m]-x[l]+1)/2);
+					int b = Math.min(H,(x[r]-x[m+1]+1)/2);
+					int c = Math.min(2*H,x[r]-x[l]-1+(x[r]-x[l])%2);
+					dp[l][r]=Math.min(dp[l][m]+dp[m+1][r]+c-a-b,dp[l][r]);
+				}
+			}
+		}
+		//* ret
+		int a = H-Math.min(H,(x[N-1]-x[0]+1)/2);
+		io.println(dp[0][N-1]+a);
 	}
 
 
