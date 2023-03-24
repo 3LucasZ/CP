@@ -9,23 +9,23 @@ public class SparseTableRMQ {
         RMQ rmq = new RMQ(arr,size);
 
         System.out.println("Size: "+size);
-        System.out.println("Log: "+rmq.log);
+        System.out.println("Lg(Size): "+rmq.lgSz);
         for (int i=0;i<size;i++)System.out.println(Arrays.toString(rmq.rangeMin[i]));
         System.out.println(rmq.get(size-5,size-1));
     }
     private static class RMQ{
-        int log;
+        int lgSz;
         int size;
         int[] arr;
         int[][] rangeMin;
         public RMQ(int[] arr, int size){
             this.arr=arr;
             this.size=size;
-            this.log=(int)Math.ceil(Math.log(size)/Math.log(2))-1;
-            rangeMin = new int[size][log+1];
+            this.lgSz=(int)Math.ceil(Math.log(size)/Math.log(2))-1;
+            rangeMin = new int[size][lgSz+1];
             for (int i=0;i<size;i++) rangeMin[i][0]=arr[i];
             int range = 1;
-            for (int bin=1;bin<=log;bin++){
+            for (int bin=1;bin<=lgSz;bin++){
                 for (int i=0;i<size;i++){
                     int j=i+range;
                     if (i+2*range>size) break;
@@ -38,11 +38,7 @@ public class SparseTableRMQ {
             int len = j-i+1;
             int bits = (int)Math.ceil(Math.log(len)/Math.log(2))-1;
             int subLen = 1<<bits;
-            int a = i;
-            int b = j-subLen;
-            System.out.println("bits: "+bits);
-            System.out.println("sublen: "+subLen);
-            return Math.min(rangeMin[a][bits],rangeMin[b][bits]);
+            return Math.min(rangeMin[i][bits],rangeMin[j-subLen][bits]);
         }
     }
 }

@@ -9,7 +9,7 @@ public class LCABinaryLifting {
     Arguments:  [1-indexed tree]
     Time Complexity: O(NlgN + QlgN)
     Space Complexity: O(NlgN)
-    CSES Data set (verified): https://cses.fi/problemset/task/1688/
+    CSES Data set (verified 3/23): https://cses.fi/problemset/task/1688/
      */
     private static class LCA {
         ArrayList<Integer>[] tree;
