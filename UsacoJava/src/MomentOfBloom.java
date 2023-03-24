@@ -41,7 +41,7 @@ public class MomentOfBloom{
         tree = new ArrayList[N+1];
         for (int i=1;i<=N;i++) tree[i] = new ArrayList<>();
         DFS(1);
-
+		graph = null;
         //* handle case: not all even -> NO
         int badCounter = 0;
         for (int i=1;i<=N;i++){
@@ -75,12 +75,12 @@ public class MomentOfBloom{
 			ArrayList<Integer> second = new ArrayList<>();
 			while (u!=k){
 				first.add(u);
-				u = lca.ancestor[u][0];
+				u = lca.ancestor[u];
 			}
 			first.add(k);
 			while (v!=k){
 				second.add(v);
-				v = lca.ancestor[v][0];
+				v = lca.ancestor[v];
 			}
 			Collections.reverse(second);
 			first.addAll(second);
@@ -98,82 +98,52 @@ public class MomentOfBloom{
     Time Complexity:
      */
 	private static class LCA {
-		int size;
 		int root;
 		ArrayList<Integer>[] tree;
-
-		//[node][2^nth parent]
-		int[][] ancestor;
+		//[node]
+		int[] ancestor;
 		int[] height;
-		int maxHeight = 0;
-
-		int lg = (int) (Math.log(maxHeight)/Math.log(2));
 
 		public LCA(ArrayList<Integer>[] tree, int root){
-			this.size=tree.length-1;
 			this.root=root;
 			this.tree=tree;
-
-			height = new int[size+1];
+			height = new int[tree.length];
 			DFS_height(root, 0, 0);
-
-			ancestor = new int[size+1][maxHeight+1];
+			ancestor = new int[tree.length];
 			DFS_ancestor(root, 0);
-		}
-		public int getAncestor(int node, int a){
-			if (a > height[node]) return -1;
-			int ret = node;
-
-			int pow = 0;
-			while (a>0){
-				if (a%2==1) ret=ancestor[ret][pow];
-				a = a >> 1;
-				pow++;
+			if (debug){
+				io.println("height:"+Arrays.toString(height));
+				io.println("ancestor:"+Arrays.toString(ancestor));
 			}
-			return ret;
 		}
 		public int getLCA(int u, int v){
-			//p1 move to same level
+			//assume height[v]<height[u]
 			if (height[v]>height[u]){
 				int tmp = v;
 				v=u;
 				u=tmp;
 			}
-			u = getAncestor(u, height[u]-height[v]);
-			if (u==v) return u;
-
-			//p2 binary lifting
-
-			for (int log=lg;log>=0;log--){
-				if (ancestor[u][log]!=ancestor[v][log]){
-					u=ancestor[u][log];
-					v=ancestor[v][log];
-				}
+			//move u up until its at v
+			int num = height[u]-height[v];
+			for (int i=0;i<num;i++) u=ancestor[u];
+			//binary lifting
+			while (u!=v){
+				u=ancestor[u];
+				v=ancestor[v];
 			}
-			return ancestor[u][0];
+			return u;
 		}
 		public void DFS_height(int node, int par, int h){
 			height[node]=h;
-			maxHeight=Math.max(maxHeight,h);
-			for (int child : tree[node]){
-				if (child!=par) DFS_height(child,node,h+1);
-			}
+			for (int child : tree[node]) if (child!=par) DFS_height(child,node,h+1);
 		}
 		public void DFS_ancestor(int node, int par){
-			if (node!=root) ancestor[node][0]=par;
-			int a = 1;
-			while ((int)(Math.pow(2,a))<=height[node]){
-				ancestor[node][a]=ancestor[ancestor[node][a-1]][a-1];
-				a++;
-			}
-			for (int child : tree[node]){
-				if (child!=par)DFS_ancestor(child,node);
-			}
+			ancestor[node]=par;
+			for (int child : tree[node]) if (child!=par) DFS_ancestor(child,node);
 		}
 	}
 
     static boolean[] vis;
-
     static void DFS(int node){
         for (int child : graph[node]){
             if (!vis[child]){
