@@ -9,7 +9,7 @@ public class LCAEulerTour{
     Arguments: [1-indexed tree]
     Time Complexity: O(NlgN+Q)
     Space Complexity: O(NlgN)
-    CSES Data set (verified): https://cses.fi/problemset/task/1688/
+    CSES Data set (verified 3/23): https://cses.fi/problemset/task/1688/
     */
 
     private static class LCA{
