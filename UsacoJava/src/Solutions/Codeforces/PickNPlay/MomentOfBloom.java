@@ -1,3 +1,5 @@
+package Solutions.Codeforces.PickNPlay;
+
 import java.io.*;
 import java.util.*;
 
