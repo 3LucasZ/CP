@@ -1,3 +1,5 @@
+package Solutions.Codeforces.PickNPlay;
+
 import java.io.*;
 import java.util.*;
 
@@ -15,7 +17,7 @@ public class AnotherWineTastingEvent{
         }
         int ans = 0;
         for (int i=N;i<=2*N-1;i++){
-            ans=Math.max(ans,A[i]-A[N]);
+            ans=Math.max(ans,A[i]-A[i-N]);
         }
         io.println(ans);
 	}
