@@ -1,3 +1,5 @@
+package Solutions.Codeforces.PickNPlay;
+
 import java.io.*;
 import java.util.*;
 
@@ -36,20 +38,19 @@ public class CFPriorityQueue{
         long[][] dp = new long[N+2][N+2];
         dp[0][0]=1;
         for (int i=0;i<N;i++){
-            for (int x=0;x<=N;x++){
+            for (int x=0;x<=i;x++){
 				//relax
 				dp[i][x]%=MOD;
                 dp[i+1][x]+=dp[i][x]; // skip op
                 if (i+1==fix); // at fix
-                
                 else if (minus[i+1]){ // - op
                     if (x-1>=0 || i+1<fix){
                         dp[i+1][Math.max(0,x-1)]+=dp[i][x];
                     }
                 }
-                else if (A[i+1]<A[fix] || (A[i+1]==A[fix] && i+1>fix)){ // + less OR =
+                else if (A[i+1]<A[fix] || (A[i+1]==A[fix] && i+1>fix)){ // + less OR = after fix
                     dp[i+1][x+1]+=dp[i][x];
-                } else { // + greater
+                } else { // + greater OR = before fix
                     dp[i+1][x]+=dp[i][x];
                 }
             }
