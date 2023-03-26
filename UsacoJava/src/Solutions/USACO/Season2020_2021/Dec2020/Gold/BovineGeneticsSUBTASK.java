@@ -6,7 +6,7 @@ import java.util.*;
 PROB: BovineGenetics
 LANG: JAVA
 */
-public class BovineGenetics1 {
+public class BovineGeneticsSUBTASK{
     static boolean submission = false;
     static boolean debug = false;
 
