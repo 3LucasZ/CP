@@ -1,3 +1,5 @@
+package Solutions;
+
 import java.io.*;
 import java.util.*;
 
