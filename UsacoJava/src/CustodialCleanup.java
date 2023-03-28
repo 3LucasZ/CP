@@ -60,6 +60,7 @@ public class CustodialCleanup {
             if (visNode[v]) continue;
             visNode[v]=true;
             int newKey = S[v];
+            //new color unlocked, add all edges unlocked
             if (!visColor[newKey]){
                 for (Pair<Integer,Integer> newEdge : colorEdges[newKey]){
                     if (visNode[newEdge.first]){
@@ -69,6 +70,7 @@ public class CustodialCleanup {
                     }
                 }
             }
+            //more rooms to try
             for (int k : waitingEdges[v]){
                 toProcess.add(new Pair<>(v,k));
             }
