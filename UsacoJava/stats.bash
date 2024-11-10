@@ -2,6 +2,7 @@
 source ~/.zshrc
 
 echo Starting Script...
+CP="/Users/lucaszheng/Documents/GitHub/CP"
 A=$CP/UsacoJava/src/Solutions
 echo CP: $CP
 echo A: $A
